@@ -4,8 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +19,21 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+//    final String TAG = getClass
 
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
@@ -24,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment_ocr;
     Fragment fragment_mypage;
     Fragment fragment_bookmark;
+//    Fragment fragment_ocr_popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         fragment_ocr = new FragOcr();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
+
+//        fragment_ocr_popup = new FragOcrPopup();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -66,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.ocr:
 //                        Log.i(TAG, "group 들어옴");
-                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_ocr).commitAllowingStateLoss();
+                        Intent ocrintent = new Intent(MainActivity.this, ocrActivity.class);
+                        startActivity(ocrintent);
+//                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_ocr).commitAllowingStateLoss();
                         return true;
                     case R.id.mypage:
 //                        Log.i(TAG, "hotel 들어옴");
@@ -74,12 +98,15 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.bookmark:
 //                        Log.i(TAG, "hotel 들어옴");
-                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
+                        //getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
+                        Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
+                        startActivity(intent);
                         return true;
                 }
                 return true;
             }
         });
+
     }
 
     @Override
@@ -98,4 +125,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 }
