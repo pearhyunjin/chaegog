@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class RegisterStep1Request extends StringRequest {
 
-    final static private String URL = "http://baehosting.dothome.co.kr/VeganRegister.php";
+    final static private String URL = "http://baehosting.dothome.co.kr/VeganRegisterFi.php";
     private Map<String, String> map;
 
     public RegisterStep1Request(String userName, String userID, String userPassword, String userEmail, int userPhonenum, Response.Listener<String> listener) {

@@ -13,9 +13,6 @@
         android:theme="@style/Theme.FinalProjectVegan"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".BookmarkActivity"
-            android:exported="false" />
-        <activity
             android:name=".TitleActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">

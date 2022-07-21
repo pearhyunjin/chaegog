@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.bookmark:
 //                        Log.i(TAG, "hotel 들어옴");
-                        //getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
-                        Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
-                        startActivity(intent);
+                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
+//                        Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
+//                        startActivity(intent);
                         return true;
                 }
                 return true;
