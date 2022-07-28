@@ -10,9 +10,9 @@ public class NaverMapData {
     @SerializedName("storeCategory")
     private String storeCategory;
     @SerializedName("storeLat")
-    private String storeLat;
+    private double storeLat;
     @SerializedName("storeLnt")
-    private String storeLnt;
+    private double storeLnt;
     @SerializedName("storePhonenum")
     private String storePhonenum;
     @SerializedName("storeAddr")
@@ -32,11 +32,11 @@ public class NaverMapData {
         return storeCategory;
     }
 
-    public String getStoreLat() {
+    public double getStoreLat() {
         return storeLat;
     }
 
-    public String getStoreLnt() {
+    public double getStoreLnt() {
         return storeLnt;
     }
 

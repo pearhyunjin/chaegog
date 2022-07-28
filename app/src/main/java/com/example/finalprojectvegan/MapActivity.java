@@ -45,8 +45,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         private NaverMapItem naverMapList;
         private List<NaverMapData> naverMapInfo;
 
-        private RestaurantItem restList;
-        private List<RestaurantData> restInfo;
+        double lat;
+        double lnt;
 
         String id;
         String pw;
@@ -96,8 +96,41 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                  naverMapList = response.body();
                                  naverMapInfo = naverMapList.MAPSTOREINFO;
 
-                                 Toast.makeText(MapActivity.this, naverMapInfo.get(1).getStoreAddr(), Toast.LENGTH_SHORT).show();
+//                                 Toast.makeText(MapActivity.this, naverMapInfo.get(1).getStoreAddr(), Toast.LENGTH_SHORT).show();
+//                                 Marker marker = new Marker();
+//                                 double lat = naverMapInfo.get(0).getStoreLat();
+//                                 double lnt = naverMapInfo.get(0).getStoreLnt();
+//
+//                                 marker.setPosition(new LatLng(lat, lnt));
+//                                 marker.setMap(naverMap);
 
+                                 // 반복문 없이
+//                                 Marker[] markers = new Marker[3];
+//
+//                                 markers[0] = new Marker();
+//                                 lat = naverMapInfo.get(0).getStoreLat();
+//                                 lnt = naverMapInfo.get(0).getStoreLnt();
+//                                 markers[0].setPosition(new LatLng(lat, lnt));
+//                                 markers[0].setMap(naverMap);
+//
+//                                 markers[1] = new Marker();
+//                                 lat = naverMapInfo.get(1).getStoreLat();
+//                                 lnt = naverMapInfo.get(1).getStoreLnt();
+//                                 markers[1].setPosition(new LatLng(lat, lnt));
+//                                 markers[1].setMap(naverMap);
+
+
+                                 // 마커 여러개 찍기
+                                 for(int i=0; i < naverMapInfo.size(); i++){
+                                     Marker[] markers = new Marker[naverMapInfo.size()];
+
+                                     markers[i] = new Marker();
+                                     lat = naverMapInfo.get(i).getStoreLat();
+                                     lnt = naverMapInfo.get(i).getStoreLnt();
+                                     markers[i].setPosition(new LatLng(lat, lnt));
+                                     markers[i].setMap(naverMap);
+
+                                 }
                              }
 
                              @Override
