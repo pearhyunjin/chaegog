@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     Fragment fragment_homefeed;
-    Fragment fragment_map;
     Fragment fragment_ocr;
     Fragment fragment_mypage;
     Fragment fragment_bookmark;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         fragment_homefeed = new FragHomeFeed();
-        fragment_map = new FragMap();
         fragment_ocr = new FragOcr();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_homefeed).commitAllowingStateLoss();
                         return true;
                     case R.id.map:
-//                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_map).commitAllowingStateLoss();
+                        // 액티비티로 띄움
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
                         return true;
@@ -90,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.bookmark:
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
-//                        Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
-//                        startActivity(intent);
                         return true;
                 }
                 return true;

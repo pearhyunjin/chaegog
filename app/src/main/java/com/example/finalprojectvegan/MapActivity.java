@@ -20,6 +20,7 @@ import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.io.IOException;
@@ -112,7 +113,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //                                 lnt = naverMapInfo.get(0).getStoreLnt();
 //                                 markers[0].setPosition(new LatLng(lat, lnt));
 //                                 markers[0].setMap(naverMap);
-//
+
 //                                 markers[1] = new Marker();
 //                                 lat = naverMapInfo.get(1).getStoreLat();
 //                                 lnt = naverMapInfo.get(1).getStoreLnt();
@@ -129,6 +130,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                      lnt = naverMapInfo.get(i).getStoreLnt();
                                      markers[i].setPosition(new LatLng(lat, lnt));
                                      markers[i].setMap(naverMap);
+                                     int finalI = i;
+                                     markers[i].setOnClickListener(new Overlay.OnClickListener() {
+                                         @Override
+                                         public boolean onClick(@NonNull Overlay overlay)
+                                         {
+                                             Toast.makeText(getApplication(), "마커" + finalI + "클릭", Toast.LENGTH_SHORT).show();
+                                             return false;
+                                         }
+                                     });
 
                                  }
                              }
@@ -140,7 +150,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                          });
 
 
-                // NaverMap 객체를 받아 NaverMap 객체에 위치 소스 지정
+            // NaverMap 객체를 받아 NaverMap 객체에 위치 소스 지정
             mNaverMap = naverMap;
             mNaverMap.setLocationSource(mLocationSource);
 
