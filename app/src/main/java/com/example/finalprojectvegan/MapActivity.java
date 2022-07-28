@@ -88,33 +88,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //                e.printStackTrace();
 //            }
 
-            BookmarkApiInterface bookmarkApiInterface = BookmarkRequest.getClient().create(BookmarkApiInterface.class);
-            Call<RestaurantItem> call = bookmarkApiInterface.getData();
-            call.enqueue(new Callback<RestaurantItem>() {
+            NaverMapApiInterface naverMapApiInterface = NaverMapRequest.getClient().create(NaverMapApiInterface.class);
+            Call<NaverMapItem> call = naverMapApiInterface.getMapData();
+            call.enqueue(new Callback<NaverMapItem>() {
                              @Override
-                             public void onResponse(Call<RestaurantItem> call, Response<RestaurantItem> response) {
-                                 restList = response.body();
-                                 restInfo = restList.restaurant;
+                             public void onResponse(Call<NaverMapItem> call, Response<NaverMapItem> response) {
+                                 naverMapList = response.body();
+                                 naverMapInfo = naverMapList.MAPSTOREINFO;
 
-//                                 Marker marker = new Marker();
-//                                 double lat = restInfo.get(0).getStoreLat();
-//                                 double lnt = restInfo.get(0).getStoreLnt();
-//
-//                                 marker.setPosition(new LatLng(lat, lnt));
-//                                 marker.setMap(naverMap);
-                                 Toast.makeText(MapActivity.this, restInfo.get(1).getAddress(), Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(MapActivity.this, naverMapInfo.get(1).getStoreAddr(), Toast.LENGTH_SHORT).show();
 
-//                  Marker marker = new Marker();
-//                  marker.setPosition(new LatLng(lat, lnt));
-//                  marker.setMap(naverMap);
-
-//                  String ss = lat + "";
-//                  String sss = lnt + "";
-//                  Toast.makeText(MapActivity.this, ss +", "+ sss, Toast.LENGTH_SHORT).show();
                              }
 
                              @Override
-                             public void onFailure(Call<RestaurantItem> call, Throwable t) {
+                             public void onFailure(Call<NaverMapItem> call, Throwable t) {
 
                              }
                          });

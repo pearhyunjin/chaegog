@@ -17,7 +17,7 @@ public class NaverMapData {
     private String storePhonenum;
     @SerializedName("storeAddr")
     private String storeAddr;
-    @SerializedName("storeAddr")
+    @SerializedName("storeMenu")
     private String storeMenu;
 
     public int getSerialNum() {
