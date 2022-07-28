@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.finalprojectvegan">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,6 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectVegan"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="79m1y0thya" />
+
         <activity
             android:name=".TitleActivity"
             android:exported="true"

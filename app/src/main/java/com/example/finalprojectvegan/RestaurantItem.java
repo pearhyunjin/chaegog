@@ -8,10 +8,4 @@ public class RestaurantItem {
     @SerializedName("restaurant")
     public List<RestaurantData> restaurant;
 
-    @Override
-    public String toString(){
-        return "TestItem{" +
-                "restaurant=" + restaurant +
-                '}';
-    }
 }

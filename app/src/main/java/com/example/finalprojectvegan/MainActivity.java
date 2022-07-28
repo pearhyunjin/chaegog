@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -74,23 +75,20 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.homefeed:
-//                        Log.i(TAG, "home 들어옴");
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_homefeed).commitAllowingStateLoss();
                         return true;
                     case R.id.map:
-//                        Log.i(TAG, "star 들어옴");
-                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_map).commitAllowingStateLoss();
+//                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_map).commitAllowingStateLoss();
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent);
                         return true;
                     case R.id.ocr:
-//                        Log.i(TAG, "group 들어옴");
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_ocr).commitAllowingStateLoss();
                         return true;
                     case R.id.mypage:
-//                        Log.i(TAG, "hotel 들어옴");
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_mypage).commitAllowingStateLoss();
                         return true;
                     case R.id.bookmark:
-//                        Log.i(TAG, "hotel 들어옴");
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
 //                        Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
 //                        startActivity(intent);
