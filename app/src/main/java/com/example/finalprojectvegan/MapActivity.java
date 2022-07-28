@@ -45,6 +45,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         private NaverMapItem naverMapList;
         private List<NaverMapData> naverMapInfo;
 
+        private RestaurantItem restList;
+        private List<RestaurantData> restInfo;
+
         String id;
         String pw;
         String addr;
@@ -77,34 +80,47 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //            marker.setPosition(new LatLng(37.5670135, 126.9783740));
 //            marker.setMap(naverMap);
 
-            id = "79m1y0thya";
-            pw = "SAlrMPqRmVSqVXEUEQ0wIUSBep3J0E6bSZZIhOF9";
-            try {
-                query = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode=" + URLEncoder.encode(addr,"UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+//            id = "79m1y0thya";
+//            pw = "SAlrMPqRmVSqVXEUEQ0wIUSBep3J0E6bSZZIhOF9";
+//            try {
+//                query = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode=" + URLEncoder.encode(addr,"UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
 
-            NaverMapApiInterface naverMapApiInterface = NaverMapRequest.getClient().create(NaverMapApiInterface.class);
-            Call<NaverMapItem> call = naverMapApiInterface.searchAddress(id, pw, query);
-            call.enqueue(new Callback<NaverMapItem>() {
-                @Override
-                public void onResponse(Call<NaverMapItem> call, Response<NaverMapItem> response) {
-                    naverMapList = response.body();
-                    naverMapInfo = naverMapList.mapStoreInfo;
-                    addr = naverMapInfo.get(0).getStoreAddr();
+            BookmarkApiInterface bookmarkApiInterface = BookmarkRequest.getClient().create(BookmarkApiInterface.class);
+            Call<RestaurantItem> call = bookmarkApiInterface.getData();
+            call.enqueue(new Callback<RestaurantItem>() {
+                             @Override
+                             public void onResponse(Call<RestaurantItem> call, Response<RestaurantItem> response) {
+                                 restList = response.body();
+                                 restInfo = restList.restaurant;
 
-                }
+//                                 Marker marker = new Marker();
+//                                 double lat = restInfo.get(0).getStoreLat();
+//                                 double lnt = restInfo.get(0).getStoreLnt();
+//
+//                                 marker.setPosition(new LatLng(lat, lnt));
+//                                 marker.setMap(naverMap);
+                                 Toast.makeText(MapActivity.this, restInfo.get(1).getAddress(), Toast.LENGTH_SHORT).show();
 
-                @Override
-                public void onFailure(Call<NaverMapItem> call, Throwable t) {
-                    Log.d(TAG, t.toString());
-                }
+//                  Marker marker = new Marker();
+//                  marker.setPosition(new LatLng(lat, lnt));
+//                  marker.setMap(naverMap);
 
-            });
+//                  String ss = lat + "";
+//                  String sss = lnt + "";
+//                  Toast.makeText(MapActivity.this, ss +", "+ sss, Toast.LENGTH_SHORT).show();
+                             }
+
+                             @Override
+                             public void onFailure(Call<RestaurantItem> call, Throwable t) {
+
+                             }
+                         });
 
 
-            // NaverMap 객체를 받아 NaverMap 객체에 위치 소스 지정
+                // NaverMap 객체를 받아 NaverMap 객체에 위치 소스 지정
             mNaverMap = naverMap;
             mNaverMap.setLocationSource(mLocationSource);
 

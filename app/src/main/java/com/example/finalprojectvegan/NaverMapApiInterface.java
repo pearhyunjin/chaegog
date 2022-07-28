@@ -8,9 +8,9 @@ import retrofit2.http.Query;
 
 public interface NaverMapApiInterface {
     @GET("VeganMapStoreFi.php")
-    public Call<NaverMapItem> searchAddress(
-            @Header("X-NCP-APIGW-API-KEY-ID") String id,
-            @Header("X-NCP-APIGW-API-KEY") String pw,
-            @Query("query") String query
+    Call<NaverMapItem> getData(
+//            @Header("X-NCP-APIGW-API-KEY-ID") String id,
+//            @Header("X-NCP-APIGW-API-KEY") String pw,
+//            @Query("query") String query
     );
 }
