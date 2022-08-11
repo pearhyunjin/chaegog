@@ -1,19 +1,30 @@
 package com.example.finalprojectvegan;
 
+import static java.lang.Math.round;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.View;
+import android.view.WindowMetrics;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
@@ -22,11 +33,6 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,16 +54,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         double lat;
         double lnt;
+        String mapInfoName;
+        String mapInfoAddr;
 
-        String id;
-        String pw;
-        String addr;
-        String query;
+        TextView getMapInfoName;
+        TextView getMapInfoAddr;
+        LinearLayout mapInfoLayout;
 
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_map);
+
 
             FragmentManager fm = getSupportFragmentManager();
             MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map_fragment);
@@ -76,18 +84,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         public void onMapReady (@NonNull NaverMap naverMap){
             Log.d(TAG, "onMapReady");
 
-            // 지도에 마커 표시
-//            Marker marker = new Marker();
-//            marker.setPosition(new LatLng(37.5670135, 126.9783740));
-//            marker.setMap(naverMap);
-
-//            id = "79m1y0thya";
-//            pw = "SAlrMPqRmVSqVXEUEQ0wIUSBep3J0E6bSZZIhOF9";
-//            try {
-//                query = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode=" + URLEncoder.encode(addr,"UTF-8");
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
+            mapInfoLayout = findViewById(R.id.map_info_layout);
 
             NaverMapApiInterface naverMapApiInterface = NaverMapRequest.getClient().create(NaverMapApiInterface.class);
             Call<NaverMapItem> call = naverMapApiInterface.getMapData();
@@ -97,29 +94,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                  naverMapList = response.body();
                                  naverMapInfo = naverMapList.MAPSTOREINFO;
 
-//                                 Toast.makeText(MapActivity.this, naverMapInfo.get(1).getStoreAddr(), Toast.LENGTH_SHORT).show();
-//                                 Marker marker = new Marker();
-//                                 double lat = naverMapInfo.get(0).getStoreLat();
-//                                 double lnt = naverMapInfo.get(0).getStoreLnt();
-//
-//                                 marker.setPosition(new LatLng(lat, lnt));
-//                                 marker.setMap(naverMap);
-
-                                 // 반복문 없이
-//                                 Marker[] markers = new Marker[3];
-//
-//                                 markers[0] = new Marker();
-//                                 lat = naverMapInfo.get(0).getStoreLat();
-//                                 lnt = naverMapInfo.get(0).getStoreLnt();
-//                                 markers[0].setPosition(new LatLng(lat, lnt));
-//                                 markers[0].setMap(naverMap);
-
-//                                 markers[1] = new Marker();
-//                                 lat = naverMapInfo.get(1).getStoreLat();
-//                                 lnt = naverMapInfo.get(1).getStoreLnt();
-//                                 markers[1].setPosition(new LatLng(lat, lnt));
-//                                 markers[1].setMap(naverMap);
-
+                                 // 식당 정보가 출력되는 곳
+                                 getMapInfoName = findViewById(R.id.map_info_name);
+                                 getMapInfoAddr = findViewById(R.id.map_info_addr);
 
                                  // 마커 여러개 찍기
                                  for(int i=0; i < naverMapInfo.size(); i++){
@@ -129,14 +106,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                      lat = naverMapInfo.get(i).getStoreLat();
                                      lnt = naverMapInfo.get(i).getStoreLnt();
                                      markers[i].setPosition(new LatLng(lat, lnt));
+                                     markers[i].setCaptionText(naverMapInfo.get(i).getStoreName());
                                      markers[i].setMap(naverMap);
+
                                      int finalI = i;
                                      markers[i].setOnClickListener(new Overlay.OnClickListener() {
                                          @Override
                                          public boolean onClick(@NonNull Overlay overlay)
                                          {
-                                             Toast.makeText(getApplication(), "마커" + finalI + "클릭", Toast.LENGTH_SHORT).show();
+                                             // DB에서 차례대로 정보 받아오기
+                                             mapInfoName = naverMapInfo.get(finalI).getStoreName();
+                                             mapInfoAddr = naverMapInfo.get(finalI).getStoreAddr();
+
+                                             // 받아온 데이터로 TextView 내용 변경
+                                             getMapInfoName.setText(mapInfoName);
+                                            getMapInfoAddr.setText(mapInfoAddr);
+
+                                            // visibility가 gone으로 되어있던 정보창 레이아웃을 visible로 변경
+                                             mapInfoLayout.setVisibility(View.VISIBLE);
                                              return false;
+
                                          }
                                      });
 
