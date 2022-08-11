@@ -51,14 +51,14 @@
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/map_info_hour"
+                    android:id="@+id/map_info_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="영업시간"
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/map_info_break"
+                    android:id="@+id/map_info_day_off"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="휴무일"
