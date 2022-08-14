@@ -19,6 +19,12 @@ public class NaverMapData {
     private String storeAddr;
     @SerializedName("storeMenu")
     private String storeMenu;
+    @SerializedName("storeImage")
+    private String storeImage;
+    @SerializedName("storeTime")
+    private String storeTime;
+    @SerializedName("storeDayoff")
+    private String storeDayoff;
 
     public int getSerialNum() {
         return serialNum;
@@ -50,5 +56,17 @@ public class NaverMapData {
 
     public String getStoreMenu() {
         return storeMenu;
+    }
+
+    public String getStoreImage() {
+        return storeImage;
+    }
+
+    public String getStoreTime() {
+        return storeTime;
+    }
+
+    public String getStoreDayoff() {
+        return storeDayoff;
     }
 }

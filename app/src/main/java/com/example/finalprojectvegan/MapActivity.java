@@ -20,10 +20,15 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowMetrics;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
@@ -56,9 +61,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         double lnt;
         String mapInfoName;
         String mapInfoAddr;
+        String mapInfoTime;
+        String mapInfoDayoff;
+        String mapInfoImage;
 
         TextView getMapInfoName;
         TextView getMapInfoAddr;
+        TextView getMapInfoTime;
+        TextView getMapInfoDayoff;
+        ImageView getMapInfoImage;
         LinearLayout mapInfoLayout;
 
         @Override
@@ -97,6 +108,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                  // 식당 정보가 출력되는 곳
                                  getMapInfoName = findViewById(R.id.map_info_name);
                                  getMapInfoAddr = findViewById(R.id.map_info_addr);
+                                 getMapInfoTime = findViewById(R.id.map_info_time);
+                                 getMapInfoDayoff = findViewById(R.id.map_info_day_off);
+                                 getMapInfoImage = findViewById(R.id.map_info_image);
 
                                  // 마커 여러개 찍기
                                  for(int i=0; i < naverMapInfo.size(); i++){
@@ -117,12 +131,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                              // DB에서 차례대로 정보 받아오기
                                              mapInfoName = naverMapInfo.get(finalI).getStoreName();
                                              mapInfoAddr = naverMapInfo.get(finalI).getStoreAddr();
+                                             mapInfoTime = naverMapInfo.get(finalI).getStoreTime();
+                                             mapInfoDayoff = naverMapInfo.get(finalI).getStoreDayoff();
+                                             mapInfoImage = naverMapInfo.get(finalI).getStoreImage();
 
                                              // 받아온 데이터로 TextView 내용 변경
                                              getMapInfoName.setText(mapInfoName);
-                                            getMapInfoAddr.setText(mapInfoAddr);
+                                             getMapInfoAddr.setText(mapInfoAddr);
+                                             getMapInfoTime.setText(mapInfoTime);
+                                             getMapInfoDayoff.setText(mapInfoDayoff);
+                                             startLoadingImage();
 
-                                            // visibility가 gone으로 되어있던 정보창 레이아웃을 visible로 변경
+
+                                             // visibility가 gone으로 되어있던 정보창 레이아웃을 visible로 변경
                                              mapInfoLayout.setVisibility(View.VISIBLE);
                                              return false;
 
@@ -145,6 +166,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             // 권한 확인, onRequestPermissionsResult 콜백 메서드 호출
             ActivityCompat.requestPermissions(this, PERMISSION, PERMISSION_REQUEST_CODE);
+        }
+
+        private void startLoadingImage() {
+            Glide.with(this)
+                    .load(mapInfoImage)
+                    .override(300,400)
+                    .apply(new RequestOptions().transform(new CenterCrop(),
+                            new RoundedCorners(20)))
+                    .into(getMapInfoImage);
         }
 
         @Override
