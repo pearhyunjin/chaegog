@@ -20,6 +20,8 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowMetrics;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,19 +59,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         private NaverMapItem naverMapList;
         private List<NaverMapData> naverMapInfo;
 
-        double lat;
-        double lnt;
-        String mapInfoName;
-        String mapInfoAddr;
-        String mapInfoTime;
-        String mapInfoDayoff;
-        String mapInfoImage;
+        double lat, lnt;
+        String mapInfoName, mapInfoAddr, mapInfoTime, mapInfoDayoff, mapInfoImage, mapInfoCategory, mapInfoMenu;
 
-        TextView getMapInfoName;
-        TextView getMapInfoAddr;
-        TextView getMapInfoTime;
-        TextView getMapInfoDayoff;
+        TextView getMapInfoName, getMapInfoAddr, getMapInfoTime, getMapInfoDayoff;
         ImageView getMapInfoImage;
+        ImageButton mapInfoButton;
         LinearLayout mapInfoLayout;
 
         @Override
@@ -112,6 +107,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                  getMapInfoDayoff = findViewById(R.id.map_info_day_off);
                                  getMapInfoImage = findViewById(R.id.map_info_image);
 
+                                 mapInfoButton = findViewById(R.id.map_info_button);
+
                                  // 마커 여러개 찍기
                                  for(int i=0; i < naverMapInfo.size(); i++){
                                      Marker[] markers = new Marker[naverMapInfo.size()];
@@ -134,6 +131,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                              mapInfoTime = naverMapInfo.get(finalI).getStoreTime();
                                              mapInfoDayoff = naverMapInfo.get(finalI).getStoreDayoff();
                                              mapInfoImage = naverMapInfo.get(finalI).getStoreImage();
+                                             mapInfoCategory = naverMapInfo.get(finalI).getStoreCategory();
+                                             mapInfoMenu = naverMapInfo.get(finalI).getStoreMenu();
+
+                                             mapInfoButton.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    Intent intent = new Intent(MapActivity.this, MapInfoActivity.class);
+                                                    intent.putExtra("name", mapInfoName);
+                                                    intent.putExtra("addr", mapInfoAddr);
+                                                    intent.putExtra("time", mapInfoTime);
+                                                    intent.putExtra("category", mapInfoCategory);
+                                                    intent.putExtra("menu", mapInfoMenu);
+                                                    startActivity(intent);
+                                                }
+                                             });
 
                                              // 받아온 데이터로 TextView 내용 변경
                                              getMapInfoName.setText(mapInfoName);
@@ -145,6 +157,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                              // visibility가 gone으로 되어있던 정보창 레이아웃을 visible로 변경
                                              mapInfoLayout.setVisibility(View.VISIBLE);
+
                                              return false;
 
                                          }
@@ -168,10 +181,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this, PERMISSION, PERMISSION_REQUEST_CODE);
         }
 
+        // 이미지 가져오기
         private void startLoadingImage() {
             Glide.with(this)
                     .load(mapInfoImage)
-                    .override(300,400)
+                    .override(400,400)
                     .apply(new RequestOptions().transform(new CenterCrop(),
                             new RoundedCorners(20)))
                     .into(getMapInfoImage);
