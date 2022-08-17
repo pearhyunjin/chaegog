@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".ocrActivity">
+    tools:context=".OcrActivity">
 
     <TextView
         android:layout_width="match_parent"
