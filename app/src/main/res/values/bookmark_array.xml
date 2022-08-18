@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="bookmark">
-        <item>식당</item>
-        <item>제품</item>
-        <item>레시피</item>
-    </string-array>
-</resources>
