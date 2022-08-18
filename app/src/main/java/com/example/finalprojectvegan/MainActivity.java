@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         fragment_homefeed = new FragHomeFeed();
-        fragment_map = new FragMap();
-        fragment_ocr = new FragOcr();
+//        fragment_map = new FragMap();
+//        fragment_ocr = new FragOcr();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.ocr:
 //                        Log.i(TAG, "group 들어옴");
-                        Intent ocrintent = new Intent(MainActivity.this, ocrActivity.class);
+                        Intent ocrintent = new Intent(MainActivity.this, OcrActivity.class);
                         startActivity(ocrintent);
 //                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_ocr).commitAllowingStateLoss();
                         return true;
