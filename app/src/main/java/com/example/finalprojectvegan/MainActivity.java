@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,8 +34,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-//    final String TAG = getClass
-
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
 
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment_ocr;
     Fragment fragment_mypage;
     Fragment fragment_bookmark;
-//    Fragment fragment_ocr_popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
         fragment_ocr = new FragOcr();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
-
-//        fragment_ocr_popup = new FragOcrPopup();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -83,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_homefeed).commitAllowingStateLoss();
                         return true;
                     case R.id.map:
-//                        Log.i(TAG, "star 들어옴");
-                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_map).commitAllowingStateLoss();
+                        // 액티비티로 띄움
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent);
                         return true;
                     case R.id.ocr:
 //                        Log.i(TAG, "group 들어옴");
@@ -97,10 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_mypage).commitAllowingStateLoss();
                         return true;
                     case R.id.bookmark:
-//                        Log.i(TAG, "hotel 들어옴");
-                        //getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
-                        Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
-                        startActivity(intent);
+                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
                         return true;
                 }
                 return true;
@@ -125,6 +119,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 }

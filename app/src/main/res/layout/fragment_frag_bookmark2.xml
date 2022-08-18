@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragMap">
+    android:background="#ffff00"
+    tools:context=".FragBookmark2">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Map Page" />
+        android:textSize="32dp"
+        android:text="제품 북마크" />
 
 </FrameLayout>

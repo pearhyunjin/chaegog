@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class LoginRequest extends StringRequest {
 
-    final static private String URL = "http://baehosting.dothome.co.kr/VeganLogin.php";
+    final static private String URL = "http://baehosting.dothome.co.kr/VeganLoginFi.php";
     private Map<String, String> map;
 
     public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {

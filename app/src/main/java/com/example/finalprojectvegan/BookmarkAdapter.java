@@ -1,5 +1,6 @@
 package com.example.finalprojectvegan;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,75 +14,56 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHolder>{
-    ArrayList<RestaurantArrayList> items = new ArrayList<RestaurantArrayList>();
+    private Context context;
+    private List<RestaurantData> restList;
 
-//    public BookmarkAdapter(ArrayList<RestaurantArrayList> items){
-//        this.items = items;
-//    }
-//
-//    @NonNull
-//    @Override
-//    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-//        View view = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.fragment_frag_bookmark, parent, false);
-//        return new ViewHolder(view);
-//    }
-//    @Override
-//    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.onBind(items.get(position));
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return items.size();
-//    }
-
+    public BookmarkAdapter(Context context, List<RestaurantData> restList) {
+        this.context = context;
+        this.restList = restList;
+    }
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.bookmark_item, parent, false);
+    public BookmarkAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new ViewHolder(itemView);
+        View view = LayoutInflater.from(context).inflate(R.layout.bookmark1_item, parent, false);
+        return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(items.get(position));
+//        holder.onBind(dataList.get(position));
+        holder.name.setText(restList.get(position).getName());
+        holder.address.setText("" + restList.get(position).getAddress());
+
+        String imgURL = restList.get(position).getImageUrl();
+        Glide.with(holder.itemView)
+                .load(imgURL)
+                .override(300,400)
+                .apply(new RequestOptions().transform(new CenterCrop(),
+                        new RoundedCorners(20)))
+                .into(holder.image);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+
+        return restList.size();
     }
 
-    public void addItem(RestaurantArrayList item) {
-        items.add(item);
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView nameTv;
-        private TextView addrTv;
-        private ImageView imageView;
+        TextView name;
+        TextView address;
+        ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTv = itemView.findViewById(R.id.bookmarkNameTv);
-            addrTv = itemView.findViewById(R.id.bookmarkAddrTv);
-            imageView = itemView.findViewById(R.id.bookmarkImageView);
-        }
-        public void onBind(RestaurantArrayList item) {
-            nameTv.setText(item.getName());
-            addrTv.setText(item.getAddress());
-            String imgURL= item.getImage();
-            Glide.with(itemView)
-                    .load(imgURL)
-                    .override(300,400)
-                    .apply(new RequestOptions().transform(new CenterCrop(),
-                            new RoundedCorners(20)))
-                    .into(imageView);
+
+            name = (TextView)itemView.findViewById(R.id.bookmarkNameTv);
+            address = (TextView)itemView.findViewById(R.id.bookmarkAddrTv);
+            image = (ImageView)itemView.findViewById(R.id.bookmarkImageView);
         }
     }
 }
