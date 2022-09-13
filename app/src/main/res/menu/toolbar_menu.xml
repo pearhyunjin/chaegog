@@ -6,6 +6,7 @@
         android:id="@+id/action_search"
         android:title="검색"
         android:icon="@drawable/search"
+        android:gravity="center_vertical"
         app:showAsAction="ifRoom" />
 
 </menu>

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.finalprojectvegan" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.finalprojectvegan">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
@@ -18,7 +21,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectVegan"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".PostActivity"
+            android:exported="false" />
         <activity
             android:name=".OcrActivity"
             android:exported="false" />
@@ -28,20 +34,20 @@
         <activity
             android:name=".MapActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="79m1y0thya" />
+
         <activity
             android:name=".TitleActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme" >
-
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".RegisterStep4Activity"
@@ -61,6 +67,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"-->
+<!--            android:theme="@style/Base.Theme.AppCompat" />-->
     </application>
 
 </manifest>

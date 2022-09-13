@@ -14,15 +14,15 @@ public class RegisterStep1Request extends StringRequest {
     final static private String URL = "http://baehosting.dothome.co.kr/VeganRegisterFi.php";
     private Map<String, String> map;
 
-    public RegisterStep1Request(String userName, String userID, String userPassword, String userEmail, int userPhonenum, Response.Listener<String> listener) {
+    public RegisterStep1Request(String userName, String userEmail, String userPassword, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("userName", userName);
-        map.put("userID", userID);
+//        map.put("userID", userID);
         map.put("userPassword", userPassword);
         map.put("userEmail", userEmail);
-        map.put("userPhonenum", userPhonenum + "");
+//        map.put("userPhonenum", userPhonenum + "");
     }
 
     @Nullable

@@ -23,4 +23,6 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
+    <style name="Theme.MaterialExam" parent="Theme.MaterialComponents.Light.DarkActionBar" />
 </resources>

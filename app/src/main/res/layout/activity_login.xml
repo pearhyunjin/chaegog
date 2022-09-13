@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/edit_login_id"
+        android:id="@+id/edit_login_email"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -80,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_login_id" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_login_email" />
 
     <Button
         android:id="@+id/Btn_Login"

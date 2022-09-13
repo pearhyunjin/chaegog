@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,9 +17,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +38,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // 객체 선언
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
 
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment_ocr;
     Fragment fragment_mypage;
     Fragment fragment_bookmark;
+    Fragment fragment_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +62,22 @@ public class MainActivity extends AppCompatActivity {
 //        fragment_ocr = new FragOcr();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
+        fragment_search = new UserSearchFragment();
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        FloatingActionButton fb = findViewById(R.id.flatingbtn);
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent postintent = new Intent(MainActivity.this, PostActivity.class);
+                startActivity(postintent);
+            }
+        });
+
+
+//        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         // 초기 플래그먼트 설정
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment_homefeed).commitAllowingStateLoss();
-
 
         // 바텀 네비게이션
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -77,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.homefeed:
 //                        Log.i(TAG, "home 들어옴");
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_homefeed).commitAllowingStateLoss();
+//                        Intent postintent = new Intent(MainActivity.this, PostActivity.class);
+//                        startActivity(postintent);
                         return true;
                     case R.id.map:
                         // 액티비티로 띄움
@@ -91,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.mypage:
 //                        Log.i(TAG, "hotel 들어옴");
+                        SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                        editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        editor.apply();
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_mypage).commitAllowingStateLoss();
                         return true;
                     case R.id.bookmark:
@@ -115,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_search:
                 Toast.makeText(getApplicationContext(), "검색창 클릭됨", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_search).commitAllowingStateLoss();
                 return true;
         }
         return true;

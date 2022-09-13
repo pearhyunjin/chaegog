@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# 게시물에서 cropimage 사용 위함
+-keep class androidx.appcompat.widget.** { *; }
