@@ -4,8 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class RestaurantItem {
-    @SerializedName("restaurant")
-    public List<RestaurantData> restaurant;
-
+public class FoodIngreItem {
+    @SerializedName("FoodIngredient")
+    public List<FoodIngreData> FoodIngredient;
 }

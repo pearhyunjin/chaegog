@@ -3,55 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#00ff00"
     tools:context=".FragHomeFeed">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabs">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tab_home"
-                android:text="홈" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tab_recipe"
-                android:text="레시피" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tab_product"
-                android:text="제품" />
-        </com.google.android.material.tabs.TabLayout>
-</LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/tabContents"
-        android:background="#94D7FF">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="홈 탭"
             android:gravity="center"
             android:textSize="30dp"/>
-    </FrameLayout>
-<!--    <androidx.viewpager2.widget.ViewPager2-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/tabContents">-->
-<!--    </androidx.viewpager2.widget.ViewPager2>-->
-
 
 </LinearLayout>

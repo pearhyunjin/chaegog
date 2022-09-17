@@ -1,21 +1,31 @@
 package com.example.finalprojectvegan;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import androidx.annotation.Nullable;
 
-public class BookmarkRequest {
-    // Base URL
-    public static String BASE_URL = "http://mygomhosting.dothome.co.kr/";
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 
-    private static Retrofit retrofit;
-    public static Retrofit getClient(){
+import java.util.HashMap;
+import java.util.Map;
 
-        if(retrofit == null){
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
+public class BookmarkRequest extends StringRequest {
+    final static private String URL = "http://baehosting.dothome.co.kr/VeganUserBookmark.php";
+    private Map<String, String> map;
+
+    public BookmarkRequest(String userPk, String userID, String storeName, String storeAddr,Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
+
+        map = new HashMap<>();
+        map.put("userPk", userPk);
+        map.put("userID", userID);
+        map.put("storeName", storeName);
+        map.put("storeAddr", storeAddr);
+    }
+
+    @Nullable
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return map;
     }
 }

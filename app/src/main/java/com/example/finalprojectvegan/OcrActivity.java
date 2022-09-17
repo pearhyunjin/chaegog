@@ -42,6 +42,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OcrActivity extends AppCompatActivity {
 
@@ -56,6 +61,11 @@ public class OcrActivity extends AppCompatActivity {
     ImageView ocrImage;
     Intent intent;
     InputImage image;
+
+    FoodIngreItem foodList;
+    List<FoodIngreData>  foodInfo;
+    String foodInfoGroup;
+    String foodInfoName;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
 
@@ -176,7 +186,6 @@ public class OcrActivity extends AppCompatActivity {
                                 String.valueOf(resultText),
                                 "확인", "", "");
 
-//                        text_info.setText(resultText);  // 인식한 텍스트를 TextView에 세팅
                     }
                 })
                 // 이미지 인식에 실패하면 실행되는 리스너
@@ -226,5 +235,32 @@ public class OcrActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    // 비교
+    public void compare(){
+        FoodIngreApiInterface apiInterface = NaverMapRequest.getClient().create(FoodIngreApiInterface.class);
+        Call<FoodIngreItem> call = apiInterface.getFoodIngredientData();
+        call.enqueue(new Callback<FoodIngreItem>(){
+            @Override
+            public void onResponse(Call<FoodIngreItem> call, Response<FoodIngreItem> response) {
+                foodList = response.body();
+                foodInfo = foodList.FoodIngredient;
+
+                for(int i=0; i < foodInfo.size(); i++){
+                    foodInfoGroup = foodInfo.get(i).getFoodGroup();
+                    if(foodInfoGroup.equals("육류 및 그 제품")){
+
+                    }
+                }
+                Log.d("OCR","");
+
+            }
+
+            @Override
+            public void onFailure(Call<FoodIngreItem> call, Throwable t) {
+                Log.d("FoodIngreItem", t.toString());
+            }
+        });
     }
 }

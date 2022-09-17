@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +30,14 @@ import retrofit2.Response;
 public class FragBookmark1 extends Fragment {
     RecyclerView recyclerView;
     BookmarkAdapter adapter;
-    RestaurantItem restList;
-    List<RestaurantData> restInfo;
+
+    private BookmarkItem bookmarkList;
+    private List<BookmarkData> bookmarkInfo;
+    String loginID;
+
+    CheckBox BookmarkCheckbox;
+    TextView BmNameTv, BmAddrTv;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,27 +83,35 @@ public class FragBookmark1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frag_bookmark1, container, false);
+        BookmarkCheckbox = view.findViewById(R.id.bookmarkFavorite);
+        BmNameTv = view.findViewById(R.id.bookmarkNameTv);
 
-        restInfo = new ArrayList<>();
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            loginID = bundle.getString("id");
+        }
+
+        bookmarkInfo = new ArrayList<>();
         recyclerView = view.findViewById(R.id.bookmark1_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        BookmarkApiInterface bookmarkApiInterface = BookmarkRequest.getClient().create(BookmarkApiInterface.class);
-        Call<RestaurantItem> call = bookmarkApiInterface.getData();
-        call.enqueue(new Callback<RestaurantItem>() {
+
+        BookmarkApiInterface bookmarkApiInterface = NaverMapRequest.getClient().create(BookmarkApiInterface.class);
+        Call<BookmarkItem> call = bookmarkApiInterface.getBookmarkData();
+        call.enqueue(new Callback<BookmarkItem>() {
             @Override
-            public void onResponse(Call<RestaurantItem> call, Response<RestaurantItem> response) {
-                restList = response.body();
-                Log.d("bookmark1Fragment", restList.toString());
+            public void onResponse(Call<BookmarkItem> call, Response<BookmarkItem> response) {
+                bookmarkList = response.body();
+                bookmarkInfo = bookmarkList.USER_BOOKMARK;
+                Log.d("bookmark1Fragment", loginID);
 
-                restInfo = restList.restaurant;
 
-                adapter = new BookmarkAdapter(getContext(), restInfo);
+                adapter = new BookmarkAdapter(getContext(), bookmarkInfo, loginID);
                 recyclerView.setAdapter(adapter);
             }
 
             @Override
-            public void onFailure(Call<RestaurantItem> call, Throwable t) {
+            public void onFailure(Call<BookmarkItem> call, Throwable t) {
                 Log.d("bookmark1Fragment", t.toString());
             }
 
