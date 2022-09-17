@@ -20,16 +20,17 @@
         android:enabled="true" />
 
     <item
+        android:id="@+id/bookmark"
+        android:icon="@drawable/bookmark"
+        android:title="북마크"
+        android:enabled="true" />
+
+    <item
         android:id="@+id/mypage"
         android:icon="@drawable/mypage"
         android:title="마이페이지"
         android:enabled="true" />
 
-    <item
-        android:id="@+id/bookmark"
-        android:icon="@drawable/bookmark"
-        android:title="북마크"
-        android:enabled="true" />
 
 
 </menu>

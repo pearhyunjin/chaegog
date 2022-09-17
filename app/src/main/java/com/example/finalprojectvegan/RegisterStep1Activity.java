@@ -31,11 +31,11 @@ import java.util.HashMap;
 public class RegisterStep1Activity extends AppCompatActivity {
 
     // 변수 선언
-    private EditText edit_register_name, edit_register_id, edit_register_password, edit_register_email, edit_register_phonenum;
+    private EditText edit_register_name, edit_register_id, edit_register_password, edit_register_email, edit_register_phonenum, edit_password_check;
     private Button Btn_RegisterFirstToSecond;
 
     // Firebase 인증, Database 접근, 처리중 화면
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     DatabaseReference reference;
     ProgressDialog pd;
 
@@ -49,10 +49,11 @@ public class RegisterStep1Activity extends AppCompatActivity {
         edit_register_password = findViewById(R.id.edit_register_password);
         edit_register_email = findViewById(R.id.edit_register_email);
 //        edit_register_phonenum = findViewById(R.id.edit_register_phonenum);
+        edit_password_check = findViewById(R.id.edit_password_check);
         Btn_RegisterFirstToSecond = findViewById(R.id.Btn_RegisterFirstToSecond);
 
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance(); // 초기화
 
         Btn_RegisterFirstToSecond.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,16 +68,23 @@ public class RegisterStep1Activity extends AppCompatActivity {
                 String userName = edit_register_name.getText().toString();
 //                String userID = edit_register_id.getText().toString();
                 String userPassword = edit_register_password.getText().toString();
+                String passwordCheck = edit_password_check.getText().toString();
                 String userEmail = edit_register_email.getText().toString();
 //                int userPhonenum = Integer.parseInt(edit_register_phonenum.getText().toString());
 
-                // EditText 작성 여부 확인
-                if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPassword)){
+
+                if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPassword) || TextUtils.isEmpty(passwordCheck)){
                     Toast.makeText(RegisterStep1Activity.this, "모든 양식을 채워주세요!", Toast.LENGTH_SHORT).show();
-                } else if (userPassword.length() < 6){
-                    Toast.makeText(RegisterStep1Activity.this, "비밀번호는 최소 6자리 이상으로 해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
-                    register(userName, userEmail, userPassword);
+                    if (userPassword.length() < 6){
+                        Toast.makeText(RegisterStep1Activity.this, "비밀번호는 최소 6자리 이상으로 해주세요!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (userPassword.equals(passwordCheck)) {
+                            register(userName, userEmail, userPassword);
+                        } else {
+                            Toast.makeText(RegisterStep1Activity.this, "비밀번호를 다시 확인해주세요", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
 
 
@@ -147,6 +155,7 @@ public class RegisterStep1Activity extends AppCompatActivity {
                                     }
                                 }
                             });
+
                         } else {
 
                             // 유저입력 정보가 유효하지 않을경우

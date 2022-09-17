@@ -73,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_register_email" />
 
-<!--    <EditText-->
+    <!--    <EditText-->
 <!--    android:id="@+id/edit_register_email"-->
 <!--    android:layout_width="300dp"-->
 <!--    android:layout_height="wrap_content"-->
@@ -98,6 +98,20 @@
 <!--        app:layout_constraintHorizontal_bias="0.495"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/edit_register_password" />-->
+
+
+    <EditText
+        android:id="@+id/edit_password_check"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="비밀번호 확인"
+        android:textSize="15dp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_register_password" />
 
     <Button
         android:id="@+id/Btn_RegisterFirstToSecond"
