@@ -1,5 +1,7 @@
 package com.example.finalprojectvegan;
 
+import android.widget.Toast;
+
 import com.google.gson.annotations.SerializedName;
 
 public class NaverMapData {
@@ -25,6 +27,8 @@ public class NaverMapData {
     private String storeTime;
     @SerializedName("storeDayoff")
     private String storeDayoff;
+    @SerializedName("storeBookmark")
+    private boolean storeBookmark;
 
     public int getSerialNum() {
         return serialNum;
@@ -68,5 +72,9 @@ public class NaverMapData {
 
     public String getStoreDayoff() {
         return storeDayoff;
+    }
+
+    public boolean getStoreBookmark() {
+        return storeBookmark;
     }
 }

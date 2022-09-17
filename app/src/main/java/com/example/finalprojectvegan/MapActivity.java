@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowMetrics;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +50,7 @@ import retrofit2.Response;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
         private static final String TAG = "MapActivity";
         private static final int PERMISSION_REQUEST_CODE = 100;
+        private static final int REQUEST_MAP = 200;
         private static final String[] PERMISSION = {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -60,18 +62,33 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         private List<NaverMapData> naverMapInfo;
 
         double lat, lnt;
-        String mapInfoName, mapInfoAddr, mapInfoTime, mapInfoDayoff, mapInfoImage, mapInfoCategory, mapInfoMenu;
+        String mapInfoName, mapInfoAddr, mapInfoTime, mapInfoDayoff,
+                mapInfoImage, mapInfoCategory, mapInfoMenu, userID, userPk;
+        boolean mapInfoBookmark;
 
         TextView getMapInfoName, getMapInfoAddr, getMapInfoTime, getMapInfoDayoff;
         ImageView getMapInfoImage;
         ImageButton mapInfoButton;
         LinearLayout mapInfoLayout;
+        CheckBox getMapInfoBookmark;
 
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_map);
 
+            // 식당 정보가 출력되는 곳
+            getMapInfoName = findViewById(R.id.map_info_name);
+            getMapInfoAddr = findViewById(R.id.map_info_addr);
+            getMapInfoTime = findViewById(R.id.map_info_time);
+            getMapInfoDayoff = findViewById(R.id.map_info_day_off);
+            getMapInfoImage = findViewById(R.id.map_info_image);
+            getMapInfoBookmark = findViewById(R.id.favorite_checkbox);
+            mapInfoButton = findViewById(R.id.map_info_button);
+
+
+            Intent intent = getIntent();
+            userID = intent.getStringExtra("userID");
 
             FragmentManager fm = getSupportFragmentManager();
             MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map_fragment);
@@ -100,15 +117,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                  naverMapList = response.body();
                                  naverMapInfo = naverMapList.MAPSTOREINFO;
 
-                                 // 식당 정보가 출력되는 곳
-                                 getMapInfoName = findViewById(R.id.map_info_name);
-                                 getMapInfoAddr = findViewById(R.id.map_info_addr);
-                                 getMapInfoTime = findViewById(R.id.map_info_time);
-                                 getMapInfoDayoff = findViewById(R.id.map_info_day_off);
-                                 getMapInfoImage = findViewById(R.id.map_info_image);
-
-                                 mapInfoButton = findViewById(R.id.map_info_button);
-
                                  // 마커 여러개 찍기
                                  for(int i=0; i < naverMapInfo.size(); i++){
                                      Marker[] markers = new Marker[naverMapInfo.size()];
@@ -133,6 +141,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                              mapInfoImage = naverMapInfo.get(finalI).getStoreImage();
                                              mapInfoCategory = naverMapInfo.get(finalI).getStoreCategory();
                                              mapInfoMenu = naverMapInfo.get(finalI).getStoreMenu();
+                                             mapInfoBookmark = naverMapInfo.get(finalI).getStoreBookmark();
+                                             userPk = userID + finalI;
 
                                              mapInfoButton.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -143,6 +153,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                     intent.putExtra("time", mapInfoTime);
                                                     intent.putExtra("category", mapInfoCategory);
                                                     intent.putExtra("menu", mapInfoMenu);
+                                                    intent.putExtra("bookmark", mapInfoBookmark);
+                                                    intent.putExtra("userID", userID);
+                                                    intent.putExtra("userPk", userPk);
+
                                                     startActivity(intent);
                                                 }
                                              });
@@ -153,7 +167,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                              getMapInfoTime.setText(mapInfoTime);
                                              getMapInfoDayoff.setText(mapInfoDayoff);
                                              startLoadingImage();
-
 
                                              // visibility가 gone으로 되어있던 정보창 레이아웃을 visible로 변경
                                              mapInfoLayout.setVisibility(View.VISIBLE);
@@ -177,6 +190,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mNaverMap = naverMap;
             mNaverMap.setLocationSource(mLocationSource);
 
+            naverMap.addOnLocationChangeListener(location ->
+                    Toast.makeText(this,
+                            location.getLatitude() + ", " + location.getLongitude(),
+                            Toast.LENGTH_SHORT).show());
+
             // 권한 확인, onRequestPermissionsResult 콜백 메서드 호출
             ActivityCompat.requestPermissions(this, PERMISSION, PERMISSION_REQUEST_CODE);
         }
@@ -196,11 +214,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
             // request code와 권한획득 여부 확인
-            if (requestCode == PERMISSION_REQUEST_CODE) {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+//            if (requestCode == PERMISSION_REQUEST_CODE) {
+//                if (grantResults.length > 0
+//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+//                }
+//            }
+            if (mLocationSource.onRequestPermissionsResult(
+                    requestCode, permissions, grantResults)) {
+                if (!mLocationSource.isActivated()) { // 권한 거부됨
+                    mNaverMap.setLocationTrackingMode(LocationTrackingMode.None);
                 }
+                return;
             }
+            super.onRequestPermissionsResult(
+                    requestCode, permissions, grantResults);
         }
     }

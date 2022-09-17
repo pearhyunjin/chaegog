@@ -2,19 +2,31 @@ package com.example.finalprojectvegan;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class FragHomeFeed extends Fragment {
-    TabLayout tabs;
-    FragmentTransaction transaction;
+    public static final String ARG_OBJECT = "object";
+//    TabLayout tabs;
+//    FragmentTransaction transaction;
+//    TabLayout mTabLayout;
+//    ViewPager2 pager;
+//    VPAdapter vpAdapter;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -49,49 +61,52 @@ public class FragHomeFeed extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frag_home_feed, container, false);
-        tabs = view.findViewById(R.id.tabs);
-        Fragment fragment_homefeed = new FragHomeFeed();
-        Fragment fragment_recipe = new FragHomeRecipe();
-        Fragment fragment_product = new FragHomeProduct();
-
-        //getChildFragmentManager().beginTransaction().add(R.id.tabContents, fragment_homefeed).commit();
-
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                //transaction = getChildFragmentManager().beginTransaction();
-//                switch (tab.getId()){
-//                    case R.id.tab_home:
-//                        transaction.replace(R.id.tabContents, fragment_homefeed).commit();
-//
-//                    case R.id.tab_recipe:
-//                        transaction.replace(R.id.tabContents, fragment_recipe).commit();
-//
-//                    case R.id.tab_product:
-//                        transaction.replace(R.id.tabContents, fragment_product).commit();
-//                }
-
-//                transaction.commit();
-
-                int position = tab.getPosition();
-                Fragment selected = null;
-                if(position == 1)
-                    selected = fragment_recipe;
-                else if(position == 2)
-                    selected = fragment_product;
-                getChildFragmentManager().beginTransaction().replace(R.id.tabContents, selected).commit();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
         return view;
+//        tabs = view.findViewById(R.id.tabs);
+//        Fragment fragment_homefeed = new FragHomeFeed();
+//        Fragment fragment_recipe = new FragHomeRecipe();
+//        Fragment fragment_product = new FragHomeProduct();
+//
+//        //getChildFragmentManager().beginTransaction().add(R.id.tabContents, fragment_homefeed).commit();
+//
+//        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                //transaction = getChildFragmentManager().beginTransaction();
+////                switch (tab.getId()){
+////                    case R.id.tab_home:
+////                        transaction.replace(R.id.tabContents, fragment_homefeed).commit();
+////
+////                    case R.id.tab_recipe:
+////                        transaction.replace(R.id.tabContents, fragment_recipe).commit();
+////
+////                    case R.id.tab_product:
+////                        transaction.replace(R.id.tabContents, fragment_product).commit();
+////                }
+//
+////                transaction.commit();
+//
+//                int position = tab.getPosition();
+//                Fragment selected = null;
+//                if (position == 0)
+//                    selected = fragment_homefeed;
+//                else if (position == 1)
+//                    selected = fragment_recipe;
+//                else if (position == 2)
+//                    selected = fragment_product;
+//                getChildFragmentManager().beginTransaction().replace(R.id.tabContents, selected).commit();
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
+
     }
 }
