@@ -6,31 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/layout_tab"-->
+    <!--        android:layout_width="250dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/main_layout"-->
+    <!--        app:tabGravity="center"-->
+    <!--        app:tabIndicatorColor="#96D5D7"-->
+    <!--        app:tabMode="scrollable"-->
+    <!--        app:tabSelectedTextColor="#96D5D7"-->
+    <!--        app:tabTextColor="#000000"/>-->
+
+    <!--    <androidx.viewpager2.widget.ViewPager2-->
+    <!--        android:id="@+id/pager_content"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/layout_tab" />-->
+
     <FrameLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="545dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_tab">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/flatingbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            tools:ignore="MissingConstraints"
             android:text="extended_fab_label"
-            android:layout_gravity="bottom|right"/>
+            tools:ignore="MissingConstraints" />
     </FrameLayout>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/layout_tab"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#96D5D7"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#96D5D7"
+        app:tabTextColor="#000000" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottomNavigationView"
         app:itemBackground="@android:color/white"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,25 +68,23 @@
         app:menu="@menu/bottom_menu" />
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:titleTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/black">
 
-<!--        <Button-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/goSearch"-->
-<!--            android:icon="@drawable/search" />-->
+        <!--        <Button-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:id="@+id/goSearch"-->
+        <!--            android:icon="@drawable/search" />-->
 
     </androidx.appcompat.widget.Toolbar>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
