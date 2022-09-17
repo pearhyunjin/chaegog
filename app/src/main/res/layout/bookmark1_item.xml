@@ -29,7 +29,7 @@
                 android:layout_height="30dp"
                 android:button="@null"
                 android:background="@drawable/custom_checkbox"
-                android:id="@+id/favoriteCheckBox"/>
+                android:id="@+id/bookmarkFavorite"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"

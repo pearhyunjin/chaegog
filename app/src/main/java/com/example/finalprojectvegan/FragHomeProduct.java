@@ -2,11 +2,23 @@ package com.example.finalprojectvegan;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +26,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FragHomeProduct extends Fragment {
+    ProductAdapter adapter;
+    ProductItem pList;
+    List<ProductData> pInfo;
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +74,28 @@ public class FragHomeProduct extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_home_product, container, false);
+        View view = inflater.inflate(R.layout.fragment_frag_home_product, container, false);
+        pInfo = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.product_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ProductApiInterface apiInterface = NaverMapRequest.getClient().create(ProductApiInterface.class);
+        Call<ProductItem> call = apiInterface.getProductData();
+        call.enqueue(new Callback<ProductItem>(){
+            @Override
+            public void onResponse(Call<ProductItem> call, Response<ProductItem> response) {
+                pList = response.body();
+                pInfo = pList.PRODUCT;
+
+                adapter = new ProductAdapter(getContext(), pInfo);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<ProductItem> call, Throwable t) {
+                Log.d("FragHomeProduct", t.toString());
+            }
+        });
+        return view;
     }
 }
