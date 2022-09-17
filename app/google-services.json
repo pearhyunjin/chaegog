@@ -1,40 +1,10 @@
 {
   "project_info": {
     "project_number": "313229751837",
-    "firebase_url": "https://finalprojectvegan-default-rtdb.firebaseio.com",
     "project_id": "finalprojectvegan",
     "storage_bucket": "finalprojectvegan.appspot.com"
   },
   "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:313229751837:android:c2b4672067cebf45f578f4",
-        "android_client_info": {
-          "package_name": "com.example.boreddevelopersns"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "313229751837-gubo9sp87luuh3st5dq0d5s26ml1eeb0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAoRgucHwpDNvqu2e3eNuf6o1hAZsQmeDs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "313229751837-gubo9sp87luuh3st5dq0d5s26ml1eeb0.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:313229751837:android:c3b9e4aaf87c759ef578f4",
@@ -51,35 +21,6 @@
             "certificate_hash": "7d13cc2b0a7c6fc17405ef9bf2d1b97e9c86b0a1"
           }
         },
-        {
-          "client_id": "313229751837-gubo9sp87luuh3st5dq0d5s26ml1eeb0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAoRgucHwpDNvqu2e3eNuf6o1hAZsQmeDs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "313229751837-gubo9sp87luuh3st5dq0d5s26ml1eeb0.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:313229751837:android:9f7e417fa991c7dff578f4",
-        "android_client_info": {
-          "package_name": "com.example.sns"
-        }
-      },
-      "oauth_client": [
         {
           "client_id": "313229751837-gubo9sp87luuh3st5dq0d5s26ml1eeb0.apps.googleusercontent.com",
           "client_type": 3
