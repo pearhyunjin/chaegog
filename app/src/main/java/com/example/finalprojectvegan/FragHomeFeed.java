@@ -22,11 +22,6 @@ import java.util.List;
 
 public class FragHomeFeed extends Fragment {
     public static final String ARG_OBJECT = "object";
-//    TabLayout tabs;
-//    FragmentTransaction transaction;
-//    TabLayout mTabLayout;
-//    ViewPager2 pager;
-//    VPAdapter vpAdapter;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -62,51 +57,6 @@ public class FragHomeFeed extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frag_home_feed, container, false);
         return view;
-//        tabs = view.findViewById(R.id.tabs);
-//        Fragment fragment_homefeed = new FragHomeFeed();
-//        Fragment fragment_recipe = new FragHomeRecipe();
-//        Fragment fragment_product = new FragHomeProduct();
-//
-//        //getChildFragmentManager().beginTransaction().add(R.id.tabContents, fragment_homefeed).commit();
-//
-//        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                //transaction = getChildFragmentManager().beginTransaction();
-////                switch (tab.getId()){
-////                    case R.id.tab_home:
-////                        transaction.replace(R.id.tabContents, fragment_homefeed).commit();
-////
-////                    case R.id.tab_recipe:
-////                        transaction.replace(R.id.tabContents, fragment_recipe).commit();
-////
-////                    case R.id.tab_product:
-////                        transaction.replace(R.id.tabContents, fragment_product).commit();
-////                }
-//
-////                transaction.commit();
-//
-//                int position = tab.getPosition();
-//                Fragment selected = null;
-//                if (position == 0)
-//                    selected = fragment_homefeed;
-//                else if (position == 1)
-//                    selected = fragment_recipe;
-//                else if (position == 2)
-//                    selected = fragment_product;
-//                getChildFragmentManager().beginTransaction().replace(R.id.tabContents, selected).commit();
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
 
     }
 }
