@@ -23,9 +23,6 @@
         android:theme="@style/Theme.FinalProjectVegan"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PostActivity"
-            android:exported="false" />
-        <activity
             android:name=".OcrActivity"
             android:exported="false" />
         <activity
