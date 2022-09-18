@@ -16,17 +16,19 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:cardCornerRadius="100dp"
-        android:layout_gravity="center">
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="100dp">
 
         <ImageView
             android:id="@+id/imageView_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="#c8c8c8" />
 
 
     </androidx.cardview.widget.CardView>
