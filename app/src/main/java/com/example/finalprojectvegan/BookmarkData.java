@@ -23,12 +23,12 @@ public class BookmarkData {
 //    private String storePhonenum;
 //    @SerializedName("storeMenu")
 //    private String storeMenu;
-//    @SerializedName("storeImage")
-//    private String storeImage;
-//    @SerializedName("storeTime")
-//    private String storeTime;
-//    @SerializedName("storeDayoff")
-//    private String storeDayoff;
+    @SerializedName("storeImage")
+    private String storeImage;
+    @SerializedName("storeTime")
+    private String storeTime;
+    @SerializedName("storeDayOff")
+    private String storeDayOff;
 
     public String getUserPK() {
         return userPK;
@@ -44,5 +44,17 @@ public class BookmarkData {
 
     public String getStoreAddr() {
         return storeAddr;
+    }
+
+    public String getStoreImage() {
+        return storeImage;
+    }
+
+    public String getStoreTime() {
+        return storeTime;
+    }
+
+    public String getStoreDayoff() {
+        return storeDayOff;
     }
 }

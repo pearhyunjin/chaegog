@@ -13,14 +13,17 @@ public class BookmarkRequest extends StringRequest {
     final static private String URL = "http://baehosting.dothome.co.kr/VeganUserBookmark.php";
     private Map<String, String> map;
 
-    public BookmarkRequest(String userPk, String userID, String storeName, String storeAddr,Response.Listener<String> listener) {
+    public BookmarkRequest(String userPK, String userID, String storeName, String storeAddr, String storeImage, String storeTime, String storeDayOff, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-        map.put("userPk", userPk);
+        map.put("userPK", userPK);
         map.put("userID", userID);
         map.put("storeName", storeName);
         map.put("storeAddr", storeAddr);
+        map.put("storeImage", storeImage);
+        map.put("storeTime", storeTime);
+        map.put("storeDayOff", storeDayOff);
     }
 
     @Nullable

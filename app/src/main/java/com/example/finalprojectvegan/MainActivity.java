@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.ocr:
                         Intent ocrintent = new Intent(MainActivity.this, OcrActivity.class);
+                        ocrintent.putExtra("userID", userID);
                         startActivity(ocrintent);
 //                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_ocr).commitAllowingStateLoss();
                         return true;

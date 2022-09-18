@@ -17,14 +17,20 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,8 +47,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,11 +71,28 @@ public class OcrActivity extends AppCompatActivity {
     ImageView ocrImage;
     Intent intent;
     InputImage image;
+    TextView ocrTextView;
+
+    // visibility=gone 상태인것
+    TextView n_ingredient_text;
+    TextView n_ingredient;
+    TextView allergy_text;
+    TextView allergy_ingredient;
+    TextView recomm_text;
+    TextView y_ingredient_text;
+    ImageView recomm_image; // 추후 리사이클러뷰로 구현해야함.
 
     FoodIngreItem foodList;
     List<FoodIngreData>  foodInfo;
     String foodInfoGroup;
     String foodInfoName;
+    public String resultText;
+    String OcrFoodStr;
+    String OcrResultStr;
+    boolean checkFit; // flag 변수
+    String USER_ID; // 사용자 닉네임
+    String USER_TYPE; // 사용자 채식주의 유형
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
 
@@ -78,6 +105,18 @@ public class OcrActivity extends AppCompatActivity {
         cameraBtn = findViewById(R.id.cameraBtn);
         galleryBtn = findViewById(R.id.galleryBtn);
         goOcr = findViewById(R.id.goOcr);
+
+        n_ingredient_text = findViewById(R.id.n_ingredient_text);
+        y_ingredient_text = findViewById(R.id.y_ingredient_text);
+        n_ingredient = findViewById(R.id.n_ingredient);
+        allergy_text = findViewById(R.id.allergy_text);
+        allergy_ingredient = findViewById(R.id.allergy_ingredient);
+        recomm_text = findViewById(R.id.recomm_text);
+        recomm_image = findViewById(R.id.recomm_image);
+
+
+        Intent mainIntent = getIntent();
+        USER_ID = mainIntent.getStringExtra("userID");
 
         TextRecognizer recognizer = TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
 
@@ -181,11 +220,13 @@ public class OcrActivity extends AppCompatActivity {
                     public void onSuccess(Text visionText) {
                         Log.e("텍스트 인식", "성공");
                         // Task completed successfully
-                        String resultText = visionText.getText();
+                        resultText = visionText.getText();
+
                         getAlertDialog("[OCR] 사진 인식 결과",
                                 String.valueOf(resultText),
                                 "확인", "", "");
 
+                        compare();
                     }
                 })
                 // 이미지 인식에 실패하면 실행되는 리스너
@@ -239,9 +280,17 @@ public class OcrActivity extends AppCompatActivity {
 
     // 비교
     public void compare(){
+        checkFit = true;
+        ocrTextView = findViewById(R.id.ocrTextView);
+        USER_TYPE = "페스코";
+        // 부적합한 원재료명을 넣을 리스트
+        List<String> list1 = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
+
         FoodIngreApiInterface apiInterface = NaverMapRequest.getClient().create(FoodIngreApiInterface.class);
         Call<FoodIngreItem> call = apiInterface.getFoodIngredientData();
         call.enqueue(new Callback<FoodIngreItem>(){
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<FoodIngreItem> call, Response<FoodIngreItem> response) {
                 foodList = response.body();
@@ -249,11 +298,122 @@ public class OcrActivity extends AppCompatActivity {
 
                 for(int i=0; i < foodInfo.size(); i++){
                     foodInfoGroup = foodInfo.get(i).getFoodGroup();
-                    if(foodInfoGroup.equals("육류 및 그 제품")){
+                    foodInfoName = foodInfo.get(i).getFoodName();
+                    String foodNameArr[] = foodInfoName.split(",");
+                    String resultArr[] = resultText.split(",");
+                    int arrSize = foodNameArr.length;
+                    int resultSize = resultArr.length;
+
+                    switch (USER_TYPE){
+                        case "비건":
+                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("우유 및 그 제품") || foodInfoGroup.equals("난류")){
+                                for(int j=0; j < resultSize; j++) {
+                                    OcrResultStr = resultArr[j].trim();
+                                    for (int k = 0; k < arrSize; k++) {
+                                        OcrFoodStr = foodNameArr[k].trim();
+                                        if (OcrResultStr.equals(OcrFoodStr)) {
+                                            checkFit = false;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case "락토":
+                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("난류"))  {
+                                for(int j=0; j < resultSize; j++) {
+                                    OcrResultStr = resultArr[j].trim();
+                                    for (int k = 0; k < arrSize; k++) {
+                                        OcrFoodStr = foodNameArr[k].trim();
+                                        if (OcrResultStr.equals(OcrFoodStr)) {
+                                            checkFit = false;
+                                        }
+                                    }
+                                }
+                            }
+                        case "오보":
+                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("우유 및 그 제품")){
+                                for(int j=0; j < resultSize; j++) {
+                                    OcrResultStr = resultArr[j].trim();
+                                    for (int k = 0; k < arrSize; k++) {
+                                        OcrFoodStr = foodNameArr[k].trim();
+                                        if (OcrResultStr.equals(OcrFoodStr)) {
+                                            checkFit = false;
+                                        }
+                                    }
+                                }
+                            }
+                        case "락토오보":
+                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품")) {
+                                for(int j=0; j < resultSize; j++) {
+                                    OcrResultStr = resultArr[j].trim();
+                                    for (int k = 0; k < arrSize; k++) {
+                                        OcrFoodStr = foodNameArr[k].trim();
+                                        if (OcrResultStr.equals(OcrFoodStr)) {
+                                            checkFit = false;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case "페스코":
+                            if(foodInfoGroup.equals("육류 및 그 제품")) {
+                                for(int j=0; j < resultSize; j++) {
+                                    OcrResultStr = resultArr[j].trim();
+                                    for (int k = 0; k < arrSize; k++) {
+                                        OcrFoodStr = foodNameArr[k].trim();
+                                        if (OcrResultStr.equals(OcrFoodStr)) {
+                                            list1.add(OcrFoodStr);
+                                            list2.add(OcrResultStr);
+                                            list1.retainAll(list2);
+                                            checkFit = false;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        default:
 
                     }
+
                 }
-                Log.d("OCR","");
+
+                List<String> newList = list1.stream().distinct().collect(Collectors.toList());
+                String n_ingre1 = newList.toString().replace("[","").replace("]","");
+
+;                if(!checkFit){
+                    Log.e("OCRTEST", resultText + " - 채식유형에 부적합합니다.");
+                    ocrTextView.setText(USER_ID + "님의 채식 유형에 맞지않는 제품입니다.");
+                    ocrTextView.setTextSize(20);
+                    n_ingredient.setText(n_ingre1);
+
+                    // 숨기기
+                    ocrImage.setVisibility(View.GONE);
+                    galleryBtn.setVisibility(View.GONE);
+                    cameraBtn.setVisibility(View.GONE);
+                    goOcr.setVisibility(View.GONE);
+
+                    // 보여주기
+                    n_ingredient_text.setVisibility(View.VISIBLE);
+                    n_ingredient.setVisibility(View.VISIBLE);
+                    allergy_text.setVisibility(View.VISIBLE);
+                    allergy_ingredient.setVisibility(View.VISIBLE);
+                    recomm_text.setVisibility(View.VISIBLE);
+                    recomm_image.setVisibility(View.VISIBLE);
+
+                }else{
+                    Log.e("OCRTEST", resultText + " - 채식유형에 적합합니다.");
+//                    SpannableStringBuilder ssb = new SpannableStringBuilder(USER_ID);
+//                    ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#FF0C75C5")), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    y_ingredient_text.setText(USER_ID + "님의 채식 유형에\n적합한 제품입니다.");
+                    y_ingredient_text.setVisibility(View.VISIBLE);
+
+                    // 숨기기
+                    ocrTextView.setVisibility(View.GONE);
+                    ocrImage.setVisibility(View.GONE);
+                    galleryBtn.setVisibility(View.GONE);
+                    cameraBtn.setVisibility(View.GONE);
+                    goOcr.setVisibility(View.GONE);
+                }
 
             }
 
