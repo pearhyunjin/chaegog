@@ -51,6 +51,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    FloatingActionButton Btn_addFeed;
+
     // 객체 선언
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
@@ -66,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Btn_addFeed = (FloatingActionButton) findViewById(R.id.Btn_addFeed);
+
+        Btn_addFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, WritePostActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // BoredDeveloper 보고 작성한 내용
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
