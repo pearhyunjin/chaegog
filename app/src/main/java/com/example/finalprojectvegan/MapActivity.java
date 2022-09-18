@@ -1,6 +1,6 @@
 package com.example.finalprojectvegan;
 
-import static java.lang.Math.round;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,18 +9,9 @@ import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowMetrics;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,7 +23,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
@@ -50,7 +40,6 @@ import retrofit2.Response;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
         private static final String TAG = "MapActivity";
         private static final int PERMISSION_REQUEST_CODE = 100;
-        private static final int REQUEST_MAP = 200;
         private static final String[] PERMISSION = {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -137,7 +126,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                              mapInfoName = naverMapInfo.get(finalI).getStoreName();
                                              mapInfoAddr = naverMapInfo.get(finalI).getStoreAddr();
                                              mapInfoTime = naverMapInfo.get(finalI).getStoreTime();
-                                             mapInfoDayoff = naverMapInfo.get(finalI).getStoreDayoff();
+                                             mapInfoDayoff = naverMapInfo.get(finalI).getStoreDayOff();
                                              mapInfoImage = naverMapInfo.get(finalI).getStoreImage();
                                              mapInfoCategory = naverMapInfo.get(finalI).getStoreCategory();
                                              mapInfoMenu = naverMapInfo.get(finalI).getStoreMenu();
@@ -149,8 +138,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                 public void onClick(View view) {
                                                     Intent intent = new Intent(MapActivity.this, MapInfoActivity.class);
                                                     intent.putExtra("name", mapInfoName);
+                                                    intent.putExtra("image", mapInfoImage);
                                                     intent.putExtra("addr", mapInfoAddr);
                                                     intent.putExtra("time", mapInfoTime);
+                                                    intent.putExtra("dayOff", mapInfoDayoff);
                                                     intent.putExtra("category", mapInfoCategory);
                                                     intent.putExtra("menu", mapInfoMenu);
                                                     intent.putExtra("bookmark", mapInfoBookmark);

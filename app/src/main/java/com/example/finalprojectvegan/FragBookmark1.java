@@ -33,7 +33,6 @@ public class FragBookmark1 extends Fragment {
 
     private BookmarkItem bookmarkList;
     private List<BookmarkData> bookmarkInfo;
-    String loginID;
 
     CheckBox BookmarkCheckbox;
     TextView BmNameTv, BmAddrTv;
@@ -86,11 +85,6 @@ public class FragBookmark1 extends Fragment {
         BookmarkCheckbox = view.findViewById(R.id.bookmarkFavorite);
         BmNameTv = view.findViewById(R.id.bookmarkNameTv);
 
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            loginID = bundle.getString("id");
-        }
-
         bookmarkInfo = new ArrayList<>();
         recyclerView = view.findViewById(R.id.bookmark1_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -103,10 +97,9 @@ public class FragBookmark1 extends Fragment {
             public void onResponse(Call<BookmarkItem> call, Response<BookmarkItem> response) {
                 bookmarkList = response.body();
                 bookmarkInfo = bookmarkList.USER_BOOKMARK;
-                Log.d("bookmark1Fragment", loginID);
 
 
-                adapter = new BookmarkAdapter(getContext(), bookmarkInfo, loginID);
+                adapter = new BookmarkAdapter(getContext(), bookmarkInfo);
                 recyclerView.setAdapter(adapter);
             }
 

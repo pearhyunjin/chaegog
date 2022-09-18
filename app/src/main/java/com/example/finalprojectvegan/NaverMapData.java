@@ -25,8 +25,8 @@ public class NaverMapData {
     private String storeImage;
     @SerializedName("storeTime")
     private String storeTime;
-    @SerializedName("storeDayoff")
-    private String storeDayoff;
+    @SerializedName("storeDayOff")
+    private String storeDayOff;
     @SerializedName("storeBookmark")
     private boolean storeBookmark;
 
@@ -70,8 +70,8 @@ public class NaverMapData {
         return storeTime;
     }
 
-    public String getStoreDayoff() {
-        return storeDayoff;
+    public String getStoreDayOff() {
+        return storeDayOff;
     }
 
     public boolean getStoreBookmark() {

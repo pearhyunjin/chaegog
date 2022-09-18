@@ -50,6 +50,7 @@
                 android:text="리뷰" />
         </com.google.android.material.tabs.TabLayout>
         <ImageView
+            android:id="@+id/map_info_detail_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/camera"
@@ -69,12 +70,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:id="@+id/map_info_detail_name"
                 android:text="식당명"/>
             <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:button="@null"
                 android:background="@drawable/custom_checkbox"
                 android:id="@+id/favorite_checkbox"/>
@@ -99,7 +100,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="17dp"
             android:text="메뉴"/>
 <!--        <androidx.recyclerview.widget.RecyclerView-->
 <!--            android:layout_width="match_parent"-->
@@ -121,7 +122,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="17dp"
+            android:text="주소"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/map_info_detail_addr"
+            android:text="주소"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:text="영업시간"/>
         <TextView
             android:layout_width="wrap_content"
@@ -138,12 +156,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="주소"/>
+            android:textSize="17dp"
+            android:text="휴무일"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/map_info_detail_addr"
-            android:text="주소"/>
+            android:id="@+id/map_info_detail_dayoff"
+            android:text="휴무일"/>
     </LinearLayout>
 </LinearLayout>
