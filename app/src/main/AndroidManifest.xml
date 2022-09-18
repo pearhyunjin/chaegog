@@ -24,6 +24,9 @@
         android:theme="@style/Theme.FinalProjectVegan"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".WritePostActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfileImageActivity"
             android:exported="false" />
 <!--        -->
