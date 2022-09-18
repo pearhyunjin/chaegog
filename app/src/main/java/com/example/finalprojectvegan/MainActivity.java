@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         fragment_product = new FragHomeProduct();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
+        fragment_search = new UserSearchFragment();
 
 
         // 초기 플래그먼트 설정
@@ -228,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_search:
                 Toast.makeText(getApplicationContext(), "검색창 클릭됨", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_search).commitAllowingStateLoss();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,fragment_search).commitAllowingStateLoss();
                 return true;
         }
         return true;

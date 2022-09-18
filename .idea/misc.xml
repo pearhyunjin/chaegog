@@ -53,13 +53,13 @@
         <entry key="app/src/main/res/layout/activity_ocr.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/activity_ocr_image_view.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/activity_ocr_popup.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_password_reset.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_password_reset.xml" value="0.20774078369140628" />
         <entry key="app/src/main/res/layout/activity_post.xml" value="0.21290911506204047" />
         <entry key="app/src/main/res/layout/activity_profile_image.xml" value="0.1515625" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.24731903076171877" />
         <entry key="app/src/main/res/layout/activity_register_step1.xml" value="0.16607773851590105" />
         <entry key="app/src/main/res/layout/activity_register_step2.xml" value="0.17475891113281253" />
-        <entry key="app/src/main/res/layout/activity_register_step3.xml" value="0.16757246376811594" />
+        <entry key="app/src/main/res/layout/activity_register_step3.xml" value="0.2451202392578125" />
         <entry key="app/src/main/res/layout/activity_register_step4.xml" value="0.22313232421875" />
         <entry key="app/src/main/res/layout/activity_title.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_write_post.xml" value="0.2526041666666667" />
@@ -76,7 +76,7 @@
         <entry key="app/src/main/res/layout/fragment_frag_mypage.xml" value="0.17391304347826086" />
         <entry key="app/src/main/res/layout/fragment_frag_ocr.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_frag_ocr_popup.xml" value="0.2006340579710145" />
-        <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.22313232421875" />
         <entry key="app/src/main/res/layout/homefeed_item.xml" value="0.1989557902018229" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.1408514492753623" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.1" />
