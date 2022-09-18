@@ -10,24 +10,29 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="STEP 3/4"
+        android:layout_marginTop="54dp"
+        android:fontFamily="@font/hssaemaul_regular"
+        android:text="채곡채곡 3/4"
         android:textAlignment="center"
+        android:textColor="#1b1b1b"
         android:textSize="40dp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:text="채식주의 유형을 선택해주세요."
+        android:fontFamily="@font/pretendardregular"
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textColor="#1b1b1b"
+        android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,6 +44,7 @@
         android:id="@+id/Btn_RegisterThirdToFourth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardregular"
         android:text="다음 단계로"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +73,7 @@
                 android:textColor="@drawable/selector_radio_text"
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
+                android:fontFamily="@font/pretendardregular"
                 android:text="비건"/>
             <RadioButton
                 android:id="@+id/radio_Lacto"
@@ -77,6 +84,7 @@
                 android:textColor="@drawable/selector_radio_text"
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
+                android:fontFamily="@font/pretendardregular"
                 android:text="락토"/>
             <RadioButton
                 android:id="@+id/radio_Ovo"
@@ -87,6 +95,7 @@
                 android:textColor="@drawable/selector_radio_text"
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
+                android:fontFamily="@font/pretendardregular"
                 android:text="오보"/>
             <RadioButton
                 android:id="@+id/radio_LactoOvo"
@@ -97,6 +106,7 @@
                 android:textColor="@drawable/selector_radio_text"
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
+                android:fontFamily="@font/pretendardregular"
                 android:text="락토오보"/>
             <RadioButton
                 android:id="@+id/radio_Pollo"
@@ -117,6 +127,7 @@
                 android:textColor="@drawable/selector_radio_text"
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
+                android:fontFamily="@font/pretendardregular"
                 android:text="페스코"/>
             <RadioButton
                 android:id="@+id/radio_etc"
@@ -127,6 +138,7 @@
                 android:textColor="@drawable/selector_radio_text"
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
+                android:fontFamily="@font/pretendardregular"
                 android:text="지향없음"/>
         </RadioGroup>
 
