@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:src="#c8c8c8" />
+            android:src="@drawable/ic_baseline_account_circle_24" />
 
 
     </androidx.cardview.widget.CardView>
