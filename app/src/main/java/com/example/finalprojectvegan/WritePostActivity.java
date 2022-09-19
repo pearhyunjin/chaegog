@@ -78,6 +78,7 @@ public class WritePostActivity extends AppCompatActivity {
 
                 uploadImage(bytes);
 //                loadImage();
+                finish();
             }
         });
 
