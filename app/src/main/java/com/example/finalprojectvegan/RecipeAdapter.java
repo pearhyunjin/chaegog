@@ -19,9 +19,9 @@ import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
     private Context context;
-    private List<RecipeItem> rList;
+    private List<RecipeData> rList;
 
-    public RecipeAdapter(Context context, List<RecipeItem> rList) {
+    public RecipeAdapter(Context context, List<RecipeData> rList) {
         this.context = context;
         this.rList = rList;
     }
@@ -33,16 +33,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
     @Override
     public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder holder, int position) {
-//        holder.type.setText(rList.get(position).getRcpPat2());
-//        holder.name.setText(rList.get(position).getRcpNm());
-//
-//        String imgURL = rList.get(position).getAttFileNoMk();
-//        Glide.with(holder.itemView)
-//                .load(imgURL)
-//                .override(100,100)
-//                .apply(new RequestOptions().transform(new CenterCrop(),
-//                        new RoundedCorners(20)))
-//                .into(holder.image);
+        holder.name.setText(rList.get(position).getRecipeName());
+        holder.type.setText(rList.get(position).getRecipeType());
+        holder.level.setText(rList.get(position).getRecipeLevel());
+
+        String imgURL = rList.get(position).getRecipeImage();
+        Glide.with(holder.itemView)
+                .load(imgURL)
+                .override(400,200)
+                .apply(new RequestOptions().transform(new CenterCrop(),
+                        new RoundedCorners(20)))
+                .into(holder.image);
     }
 
     @Override
@@ -53,6 +54,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView type;
+        TextView level;
         TextView name;
         ImageView image;
 
@@ -60,6 +62,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             super(itemView);
 
             type = (TextView)itemView.findViewById(R.id.recipe_type);
+            level = (TextView)itemView.findViewById(R.id.recipe_level);
             name = (TextView)itemView.findViewById(R.id.recipe_name);
             image = (ImageView)itemView.findViewById(R.id.recipe_image);
         }
