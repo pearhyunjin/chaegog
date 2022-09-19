@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardElevation="20dp"
+    app:strokeColor="#000000"
+    app:strokeWidth="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,12 +18,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
             android:orientation="horizontal" >
 
             <androidx.cardview.widget.CardView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 app:cardCornerRadius="100dp">
 
@@ -40,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 tools:text="작성자" />
@@ -55,12 +60,16 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_horizontal_rule_24" />
+
         <TextView
             android:id="@+id/homefeed_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:textSize="15dp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -86,8 +95,8 @@
 
         <ImageView
             android:id="@+id/homefeed_item_imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_gravity="center"
             android:background="#c8c8c8"/>

@@ -150,7 +150,7 @@ public class RegisterStep1Activity extends AppCompatActivity {
 
                                         // 처리중 화면 종료
                                         pd.dismiss();
-                                        Intent intent = new Intent(RegisterStep1Activity.this, LoginActivity.class);
+                                        Intent intent = new Intent(RegisterStep1Activity.this, RegisterStep2Activity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
