@@ -159,29 +159,32 @@ public class WritePostActivity extends AppCompatActivity {
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        StorageReference mountainImageReference = storageReference.child("posts/" + firebaseUser.getUid() + "/postImage" + System.currentTimeMillis() + ".jpg");
-        UploadTask uploadTask = mountainImageReference.putBytes(bytes);
-        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    Log.d("실패", "실패");
-                    throw task.getException();
+        if (firebaseUser != null) {
+            StorageReference mountainImageReference = storageReference.child("posts/" + firebaseUser.getUid() + "/postImage" + System.currentTimeMillis() + ".jpg");
+            UploadTask uploadTask = mountainImageReference.putBytes(bytes);
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        Log.d("실패", "실패");
+                        throw task.getException();
+                    }
+                    return mountainImageReference.getDownloadUrl();
                 }
-                return mountainImageReference.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    uri = task.getResult();
-                    postUpdate(uri);
-                    Log.d("성공", "성공" + uri);
-                } else {
-                    Log.d("실패2", "실패2");
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        uri = task.getResult();
+                        postUpdate(uri);
+                        Log.d("성공", "성공" + uri);
+                    } else {
+                        Log.d("실패2", "실패2");
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
 
 //    public void loadImage() {
