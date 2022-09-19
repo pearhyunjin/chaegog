@@ -31,6 +31,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -134,10 +135,13 @@ public class OcrActivity extends AppCompatActivity {
         goOcr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // 텍스트 인식 함수 실행
-                TextRecognition(recognizer);
-
+                // ImageView에 이미지가 있으면
+                if(ocrImage.getDrawable() != null){
+                    // 텍스트 인식 함수 실행
+                    TextRecognition(recognizer);
+                } else {
+                    Toast.makeText(OcrActivity.this, "이미지를 넣어주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -371,6 +375,8 @@ public class OcrActivity extends AppCompatActivity {
                                 }
                             }
                             break;
+                        case "폴로":
+                            break;
                         default:
 
                     }
@@ -402,8 +408,6 @@ public class OcrActivity extends AppCompatActivity {
 
                 }else{
                     Log.e("OCRTEST", resultText + " - 채식유형에 적합합니다.");
-//                    SpannableStringBuilder ssb = new SpannableStringBuilder(USER_ID);
-//                    ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#FF0C75C5")), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     y_ingredient_text.setText(USER_ID + "님의 채식 유형에\n적합한 제품입니다.");
                     y_ingredient_text.setVisibility(View.VISIBLE);
 

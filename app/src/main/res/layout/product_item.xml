@@ -6,12 +6,14 @@
     android:layout_margin="5dp">
     <ImageView
         android:id="@+id/ProductImageView"
+        android:layout_margin="10dp"
         android:layout_width="90dp"
         android:layout_height="90dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="10dp"
         android:layout_marginLeft="10dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +23,8 @@
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:text="제조사"
-                android:textSize="10dp"
+                android:textSize="11dp"
+                android:textColor="@color/black"
                 android:id="@+id/ProductCompanyTv"/>
         </LinearLayout>
         <TextView
@@ -29,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="이름"
             android:textSize="14dp"
+            android:textColor="@color/black"
             android:id="@+id/ProductNameTv"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,12 +43,13 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
             <CheckBox
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:button="@null"
                 android:background="@drawable/custom_checkbox"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="2dp"
+
                 android:id="@+id/ProductFavorite"/>
         </LinearLayout>
     </LinearLayout>

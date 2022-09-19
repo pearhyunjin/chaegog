@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         fragment_product = new FragHomeProduct();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
-        fragment_search = new UserSearchFragment();
+        //fragment_search = new UserSearchFragment();
 
 
         // 초기 플래그먼트 설정

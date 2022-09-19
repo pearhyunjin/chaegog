@@ -26,6 +26,9 @@ import retrofit2.Retrofit;
  */
 public class FragHomeRecipe extends Fragment {
     RecyclerView recyclerView;
+    RecipeAdapter adapter;
+    private RecipeItem recipeList;
+    private List<RecipeData> recipeInfo;
     private String API_KEY = "103e7cc45df5463fafbb";
 
     // TODO: Rename parameter arguments, choose names that match
@@ -72,8 +75,29 @@ public class FragHomeRecipe extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frag_home_recipe, container, false);
+
+        recipeInfo = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recipe_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        RecipeApiInterface recipeApiInterface = NaverMapRequest.getClient().create(RecipeApiInterface.class);
+        Call<RecipeItem> call = recipeApiInterface.getRecipeData();
+        call.enqueue(new Callback<RecipeItem>() {
+            @Override
+            public void onResponse(Call<RecipeItem> call, Response<RecipeItem> response) {
+                recipeList = response.body();
+                recipeInfo = recipeList.RECIPE;
+
+                adapter = new RecipeAdapter(getContext(), recipeInfo);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<RecipeItem> call, Throwable t) {
+                Log.d("HomeRecipeFragment", t.toString());
+            }
+
+        });
 
         return view;
     }
