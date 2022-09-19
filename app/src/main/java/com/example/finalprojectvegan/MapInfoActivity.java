@@ -58,8 +58,8 @@ public class MapInfoActivity extends AppCompatActivity {
         getMapInfoDetailCategory = findViewById(R.id.map_info_detail_category);
         getMapInfoDetailMenu = findViewById(R.id.map_info_detail_menu);
         getMapInfoBookmark = findViewById(R.id.favorite_checkbox);
-        getMapInfoDetailImage = findViewById(R.id.map_info_detail_image);
-        getMapInfoDetailDayOff = findViewById(R.id.map_info_detail_dayoff);
+//        getMapInfoDetailImage = findViewById(R.id.map_info_detail_image);
+//        getMapInfoDetailDayOff = findViewById(R.id.map_info_detail_dayoff);
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
