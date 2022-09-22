@@ -7,54 +7,105 @@
     android:orientation="vertical"
     tools:context=".WritePostActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:dividerHeight="1dp">
 
-        <ImageView
-            android:id="@+id/imageView_uploadPost"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp" />
-
-        <EditText
-            android:id="@+id/edit_post_title"
-            android:hint="제목"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout_Contents"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <EditText
-                android:id="@+id/edit_post_contents"
-                android:hint="내용"
-                android:lines="2"
-                android:layout_margin="10dp"
-                android:gravity="top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/pretendardregular"
+            android:lineSpacingExtra="3sp"
+            android:layout_marginTop="10dp"
+            android:text="새 게시물"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:titleTextColor="@color/black" />
 
         <Button
             android:id="@+id/Btn_uploadPost"
-            android:text="확인"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
+            android:layout_gravity="right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/pretendardregular"
+            android:text="공유" />
+
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="@drawable/dividingline">
+
+        </View>
+
+
+        <ImageView
+            android:id="@+id/imageView_uploadPost"
+            android:layout_width="330dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@drawable/dividingline">
+
+        </View>
+
+        <EditText
+            android:id="@+id/edit_post_title"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/pretendardregular"
+            android:hint="제목"
+            android:minHeight="48dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_Contents"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/edit_post_contents"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/pretendardregular"
+                android:gravity="top"
+                android:hint="내용 입력"
+                android:lines="4" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@drawable/dividingline">
+
+        </View>
 
         <Button
             android:id="@+id/Btn_uploadImagePost"
-            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:fontFamily="@font/pretendardregular"
             android:text="사진" />
 
     </LinearLayout>
