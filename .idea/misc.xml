@@ -67,7 +67,7 @@
         <entry key="app/src/main/res/layout/activity_register_step3.xml" value="0.2451202392578125" />
         <entry key="app/src/main/res/layout/activity_register_step4.xml" value="0.32437744140625" />
         <entry key="app/src/main/res/layout/activity_title.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_write_post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_write_post.xml" value="0.16596374511718756" />
         <entry key="app/src/main/res/layout/bookmark1_item.xml" value="0.17028985507246377" />
         <entry key="app/src/main/res/layout/fragment_camera2_basic.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_frag_bookmark.xml" value="0.17391304347826086" />
@@ -83,6 +83,7 @@
         <entry key="app/src/main/res/layout/fragment_frag_ocr_popup.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.22313232421875" />
         <entry key="app/src/main/res/layout/homefeed_item.xml" value="0.1131927490234375" />
+        <entry key="app/src/main/res/layout/recipe_item.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.1408514492753623" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.23192749023437498" />
