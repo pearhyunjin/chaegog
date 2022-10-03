@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/edit_register_name"
+        android:id="@+id/edit_register_id"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -97,7 +97,7 @@
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/edit_register_name"
+        app:layout_constraintBottom_toTopOf="@+id/edit_register_id"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="닉네임" />
 
@@ -116,7 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_register_name" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_register_id" />
 
     <TextView
         android:id="@+id/textView4"

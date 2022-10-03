@@ -2,17 +2,18 @@ package com.example.finalprojectvegan;
 
 public class UserVeganTypeInfo {
 
-    private String category;
+    private String veganType;
 
-    public UserVeganTypeInfo(String category) {
-        this.category = category;
+    public UserVeganTypeInfo(String veganType) {
+        this.veganType = veganType;
     }
 
-    public String getCategory() {
-        return category;
+    public String getVeganType() {
+        return veganType;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setVeganType(String veganType) {
+        this.veganType = veganType;
     }
+
 }

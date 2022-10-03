@@ -16,6 +16,7 @@ import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -94,6 +95,36 @@ public class FragHomeFeed extends Fragment {
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
                             RecyclerView.Adapter mAdapter = new HomefeedAdapter(getActivity(), postList);
+                            recyclerView.setAdapter(mAdapter);
+
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
+
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            ArrayList<UserInfo> postUserList = new ArrayList<>();
+
+
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                postUserList.add(new UserInfo(
+                                        documentSnapshot.getData().get("userID").toString(),
+                                        documentSnapshot.getData().get("userEmail").toString(),
+                                        documentSnapshot.getData().get("userPassword").toString()));
+                            }
+                            RecyclerView recyclerView = view.findViewById(R.id.homefeed_recyclerView);
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                            RecyclerView.Adapter mAdapter = new UserInfoAdapter(getActivity(), postUserList);
                             recyclerView.setAdapter(mAdapter);
 
                         } else {

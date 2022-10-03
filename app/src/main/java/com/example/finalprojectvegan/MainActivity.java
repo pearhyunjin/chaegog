@@ -31,6 +31,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment_bookmark;
     Fragment fragment_search;
 
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // BoredDeveloper 보고 작성한 내용
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser == null) {
             Intent intent = new Intent(MainActivity.this, RegisterStep1Activity.class);
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         fragment_product = new FragHomeProduct();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
-        //fragment_search = new UserSearchFragment();
+        fragment_search = new UserSearchFragment();
 
 
         // 초기 플래그먼트 설정
@@ -206,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         editor.apply();
 
-                        Intent mypageintent = new Intent(MainActivity.this, MypageActivity.class);
-                        startActivity(mypageintent);
+//                        Intent mypageintent = new Intent(MainActivity.this, MypageActivity.class);
+//                        startActivity(mypageintent);
 
 //                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_mypage).commitAllowingStateLoss();
                         return true;
@@ -232,7 +235,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "검색창 클릭됨", Toast.LENGTH_SHORT).show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,fragment_search).commitAllowingStateLoss();
                 return true;
+            case R.id.action_settings:
+                Toast.makeText(getApplicationContext(), "마이페이지 클릭됨", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                startActivity(intent);
+//                getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,fragment_search).commitAllowingStateLoss();
+                return true;
         }
         return true;
     }
+
+//    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//    CollectionReference productReference = db.collection("user").document(firebaseUser)
 }

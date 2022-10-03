@@ -66,7 +66,7 @@ public class RegisterStep3Activity extends AppCompatActivity {
                         textView_select_VeganType.setText("폴로");
                         break;
                     case R.id.radio_etc:
-                        textView_select_VeganType.setText("기타");
+                        textView_select_VeganType.setText("지향없음");
                         break;
                 }
             }
@@ -77,7 +77,13 @@ public class RegisterStep3Activity extends AppCompatActivity {
         Btn_RegisterThirdToFourth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                profileUpload();
+                if (textView_select_VeganType == null) {
+                    Toast.makeText(getApplicationContext(), "선택해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+                    profileUpload();
+                }
+
+//                profileUpload();
             }
         });
     }
@@ -92,7 +98,7 @@ public class RegisterStep3Activity extends AppCompatActivity {
 
             UserVeganTypeInfo userVeganTypeInfo = new UserVeganTypeInfo(veganType);
             if (firebaseUser != null) {
-                db.collection("users").document(firebaseUser.getUid()).set(userVeganTypeInfo)
+                db.collection("userVeganType").document(firebaseUser.getUid()).set(userVeganTypeInfo)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {

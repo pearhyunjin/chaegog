@@ -65,46 +65,55 @@
             android:fontFamily="@font/pretendardregular">
 
             <CheckBox
+                android:id="@+id/checkbox_memil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="메밀"/>
 
             <CheckBox
+                android:id="@+id/checkbox_mil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="밀" />
 
             <CheckBox
+                android:id="@+id/checkbox_daedu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="대두" />
 
             <CheckBox
+                android:id="@+id/checkbox_hodu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="호두" />
 
             <CheckBox
+                android:id="@+id/checkbox_peanut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="땅콩" />
 
             <CheckBox
+                android:id="@+id/checkbox_peach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="복숭아" />
 
             <CheckBox
+                android:id="@+id/checkbox_tomato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="토마토" />
 
             <CheckBox
+                android:id="@+id/checkbox_poultry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="난류(가금류)" />
 
             <CheckBox
+                android:id="@+id/checkbox_milk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="우유" />
@@ -118,51 +127,69 @@
             android:fontFamily="@font/pretendardregular">
 
             <CheckBox
+                android:id="@+id/checkbox_shrimp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="새우" />
 
             <CheckBox
+                android:id="@+id/checkbox_mackerel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="고등어" />
 
             <CheckBox
+                android:id="@+id/checkbox_mussel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="홍합" />
 
             <CheckBox
+                android:id="@+id/checkbox_abalone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="전복" />
 
             <CheckBox
+                android:id="@+id/checkbox_oyster"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="굴" />
 
             <CheckBox
+                android:id="@+id/checkbox_shellfish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="조개류" />
 
             <CheckBox
+                android:id="@+id/checkbox_crab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="게" />
 
             <CheckBox
+                android:id="@+id/checkbox_squid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="오징어" />
 
             <CheckBox
+                android:id="@+id/checkbox_sulfurous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="아황산 포함식품" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_select_allergy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/Btn_RegisterFinish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

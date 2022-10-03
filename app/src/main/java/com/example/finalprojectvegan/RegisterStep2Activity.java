@@ -12,11 +12,17 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RegisterStep2Activity extends AppCompatActivity {
 
@@ -54,10 +60,53 @@ public class RegisterStep2Activity extends AppCompatActivity {
         Btn_RegisterSecondToThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                profileUpload();
+
+                String userVeganCategory = textView_select_type.getText().toString();
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if (success) {
+                                Toast.makeText(getApplicationContext(), "회원 정보 2단계 등록 완료", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterStep2Activity.this, RegisterStep3Activity.class);
+                                startActivity(intent);
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "회원 정보 2단계 등록 실패", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+
+                if (textView_select_type == null) {
+                    Toast.makeText(getApplicationContext(), "선택해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+                    profileUpload();
+                }
+
+//                profileUpload();
+                RegisterStep2Request registerStep2Request = new RegisterStep2Request(userVeganCategory, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(RegisterStep2Activity.this);
+                queue.add(registerStep2Request);
             }
         });
     }
+
+//    public void onCheckboxClicked(View view) {
+//        boolean checked = ((CheckBox) view).isChecked();
+//
+//        if (checked) {
+//            textView_select_type.append(((CheckBox)view).getText());
+//        }
+//    }
+
 
     View.OnClickListener checkboxClickListener = new View.OnClickListener() {
         @Override
@@ -117,9 +166,9 @@ public class RegisterStep2Activity extends AppCompatActivity {
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            UserVeganTypeInfo userVeganTypeInfo = new UserVeganTypeInfo(category);
+            UserVeganCategoryInfo userVeganCategoryInfo = new UserVeganCategoryInfo(category);
             if (firebaseUser != null) {
-                db.collection("users").document(firebaseUser.getUid()).set(userVeganTypeInfo)
+                db.collection("userVeganCategory").document(firebaseUser.getUid()).set(userVeganCategoryInfo)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {

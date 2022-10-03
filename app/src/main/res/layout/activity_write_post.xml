@@ -12,17 +12,41 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#fff8e1"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@color/black">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="새 게시물"
+                android:textColor="@color/black"
+                android:layout_gravity="center" />
+
+        </androidx.appcompat.widget.Toolbar>
+
         <ImageView
             android:id="@+id/imageView_uploadPost"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:backgroundTint="#c8c8c8"
+            android:padding="70dp"
+            android:src="@drawable/ic_baseline_add_circle_24"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="20dp" />
 
         <EditText
             android:id="@+id/edit_post_title"
             android:hint="제목"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -35,8 +59,8 @@
             <EditText
                 android:id="@+id/edit_post_contents"
                 android:hint="내용"
-                android:lines="2"
-                android:layout_margin="10dp"
+                android:lines="5"
+                android:layout_margin="20dp"
                 android:gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -48,14 +72,7 @@
             android:text="확인"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
-
-        <Button
-            android:id="@+id/Btn_uploadImagePost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="사진" />
+            android:layout_marginHorizontal="20dp" />
 
     </LinearLayout>
 

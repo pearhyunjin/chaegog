@@ -41,6 +41,10 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
+import com.lakue.lakuepopupactivity.PopupActivity;
+import com.lakue.lakuepopupactivity.PopupGravity;
+import com.lakue.lakuepopupactivity.PopupResult;
+import com.lakue.lakuepopupactivity.PopupType;
 
 
 import java.io.File;
@@ -103,8 +107,8 @@ public class OcrActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ocr);
 
         ocrImage = findViewById(R.id.ocrimagepopup);
-        cameraBtn = findViewById(R.id.cameraBtn);
-        galleryBtn = findViewById(R.id.galleryBtn);
+//        cameraBtn = findViewById(R.id.cameraBtn);
+//        galleryBtn = findViewById(R.id.galleryBtn);
         goOcr = findViewById(R.id.goOcr);
 
         n_ingredient_text = findViewById(R.id.n_ingredient_text);
@@ -121,6 +125,15 @@ public class OcrActivity extends AppCompatActivity {
 
         TextRecognizer recognizer = TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
 
+        Intent intent = new Intent(getBaseContext(), PopupActivity.class);
+        intent.putExtra("type", PopupType.SELECT);
+        intent.putExtra("gravity", PopupGravity.CENTER);
+        intent.putExtra("title", "사진을 불러올 기능을 선택하세요");
+//                intent.putExtra("content", "Popup Activity was made by Lakue");
+        intent.putExtra("buttonLeft", "카메라");
+        intent.putExtra("buttonRight", "갤러리");
+        startActivityForResult(intent, 2);
+
         // 카메라 권한 설정
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -130,6 +143,8 @@ public class OcrActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(OcrActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
+
+
 
         // ocr 스캔하기 버튼 클릭시
         goOcr.setOnClickListener(new View.OnClickListener() {
@@ -146,25 +161,61 @@ public class OcrActivity extends AppCompatActivity {
         });
 
         // 카메라 버튼 클릭시
-        cameraBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        cameraBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                activityResultPicture.launch(intent);
+//            }
+//        });
+//
+//        galleryBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                intent = new Intent(Intent.ACTION_PICK);
+//                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//                intent.setType("image/*");
+//                startActivityForResult(intent, GALLERY);
+//            }
+//        });
 
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                activityResultPicture.launch(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            //데이터 받기
+            if (requestCode == 2) {
+                PopupResult result = (PopupResult) data.getSerializableExtra("result");
+                if (result == PopupResult.LEFT) {
+                    // 작성 코드
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    activityResultPicture.launch(intent);
+
+                } else if (result == PopupResult.RIGHT) {
+                    // 작성 코드
+                    intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, GALLERY);
+                }
             }
-        });
 
-        galleryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent.setType("image/*");
-                startActivityForResult(intent, GALLERY);
+            else if(requestCode == GALLERY) {
+                Uri uri = data.getData();
+                setImage(uri);
+
             }
-        });
+        }
 
+        // 갤러리
+//        else if(requestCode == GALLERY && resultCode == RESULT_OK) {
+//            Uri uri = data.getData();
+//            setImage(uri);
+//
+//        }
     }
 
     // 카메라 실행시
@@ -186,20 +237,20 @@ public class OcrActivity extends AppCompatActivity {
 
 
     // 갤러리 실행시
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == CAMERA && resultCode == RESULT_OK) {
-
-        }
-        else if(requestCode == GALLERY && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-            setImage(uri);
-
-        }
-
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if(requestCode == CAMERA && resultCode == RESULT_OK) {
+//
+//        }
+//        else if(requestCode == GALLERY && resultCode == RESULT_OK) {
+//            Uri uri = data.getData();
+//            setImage(uri);
+//
+//        }
+//
+//    }
 
     // 갤러리 이미지 이미지뷰에
     private void setImage(Uri uri) {
@@ -209,6 +260,7 @@ public class OcrActivity extends AppCompatActivity {
             ocrImage.setImageBitmap(bitmap);
 
             image = InputImage.fromBitmap(bitmap, 0);
+
             Log.e("setImage", "이미지 to 비트맵");
         } catch (FileNotFoundException e){
             e.printStackTrace();
@@ -226,9 +278,9 @@ public class OcrActivity extends AppCompatActivity {
                         // Task completed successfully
                         resultText = visionText.getText();
 
-                        getAlertDialog("[OCR] 사진 인식 결과",
-                                String.valueOf(resultText),
-                                "확인", "", "");
+//                        getAlertDialog("[OCR] 사진 인식 결과",
+//                                String.valueOf(resultText),
+//                                "확인", "", "");
 
                         compare();
                     }
@@ -375,8 +427,8 @@ public class OcrActivity extends AppCompatActivity {
                                 }
                             }
                             break;
-                        case "폴로":
-                            break;
+//                        case "폴로":
+//                            break;
                         default:
 
                     }
@@ -394,8 +446,8 @@ public class OcrActivity extends AppCompatActivity {
 
                     // 숨기기
                     ocrImage.setVisibility(View.GONE);
-                    galleryBtn.setVisibility(View.GONE);
-                    cameraBtn.setVisibility(View.GONE);
+//                    galleryBtn.setVisibility(View.GONE);
+//                    cameraBtn.setVisibility(View.GONE);
                     goOcr.setVisibility(View.GONE);
 
                     // 보여주기
@@ -414,8 +466,8 @@ public class OcrActivity extends AppCompatActivity {
                     // 숨기기
                     ocrTextView.setVisibility(View.GONE);
                     ocrImage.setVisibility(View.GONE);
-                    galleryBtn.setVisibility(View.GONE);
-                    cameraBtn.setVisibility(View.GONE);
+//                    galleryBtn.setVisibility(View.GONE);
+//                    cameraBtn.setVisibility(View.GONE);
                     goOcr.setVisibility(View.GONE);
                 }
 

@@ -1,16 +1,24 @@
 package com.example.finalprojectvegan;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -36,7 +44,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.mlkit.vision.common.InputImage;
+import com.lakue.lakuepopupactivity.PopupActivity;
+import com.lakue.lakuepopupactivity.PopupGravity;
 import com.lakue.lakuepopupactivity.PopupResult;
+import com.lakue.lakuepopupactivity.PopupType;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -70,25 +81,54 @@ public class WritePostActivity extends AppCompatActivity {
         imageView_uploadPost = findViewById(R.id.imageView_uploadPost);
 
         Btn_uploadPost = findViewById(R.id.Btn_uploadPost);
-        Btn_uploadImagePost = findViewById(R.id.Btn_uploadImagePost);
+//        Btn_uploadImagePost = findViewById(R.id.Btn_uploadImagePost);
 
         Btn_uploadPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 uploadImage(bytes);
-//                loadImage();
+                Toast.makeText(WritePostActivity.this, "게시물이 업로드 되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
 
-        Btn_uploadImagePost.setOnClickListener(new View.OnClickListener() {
+//        Btn_uploadImagePost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_PICK);
+//                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//                intent.setType("image/*");
+//                startActivityForResult(intent, GALLERY);
+//            }
+//        });
+
+        imageView_uploadPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent.setType("image/*");
-                startActivityForResult(intent, GALLERY);
+//                Intent intent = new Intent(Intent.ACTION_PICK);
+//                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//                intent.setType("image/*");
+//                startActivityForResult(intent, GALLERY);
+
+                Intent intent = new Intent(getBaseContext(), PopupActivity.class);
+                intent.putExtra("type", PopupType.SELECT);
+                intent.putExtra("gravity", PopupGravity.CENTER);
+                intent.putExtra("title", "사진을 불러올 기능을 선택하세요");
+//                intent.putExtra("content", "Popup Activity was made by Lakue");
+                intent.putExtra("buttonLeft", "카메라");
+                intent.putExtra("buttonRight", "갤러리");
+                startActivityForResult(intent, 2);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+//                        Log.d(TAG, "권한 설정 완료");
+                    } else {
+//                        Log.d(TAG, "권한 설정 요청");
+                        ActivityCompat.requestPermissions(WritePostActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    }
+                }
+
             }
         });
     }
@@ -96,11 +136,86 @@ public class WritePostActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == GALLERY && resultCode == RESULT_OK) {
-            uri = data.getData();
-            setImage(uri);
+//        if(requestCode == GALLERY && resultCode == RESULT_OK) {
+//            uri = data.getData();
+//            setImage(uri);
+//        }
+
+//        if (resultCode == RESULT_OK) {
+//            //데이터 받기
+//            if (requestCode == 2) {
+//                PopupResult result = (PopupResult) data.getSerializableExtra("result");
+//                if (result == PopupResult.LEFT) {
+//                    // 작성 코드
+//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    activityResultPicture.launch(intent);
+//
+//                } else if (result == PopupResult.RIGHT) {
+//                    // 작성 코드
+//                    Intent intent = new Intent(Intent.ACTION_PICK);
+//                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//                    intent.setType("image/*");
+//                    startActivityForResult(intent, GALLERY);
+//                }
+////                else if (requestCode == 0 ) {
+////                    String returnValue = data.getStringExtra("some key");
+//////                    Log.d("로그 : ", "profilePath : " + profilePath);
+////                }
+//            }
+//            else if (requestCode == 0 ) {
+//                String returnValue = data.getStringExtra("some key");
+////                    Log.d("로그 : ", "profilePath : " + profilePath);
+//            }
+//        }
+//
+//        // 갤러리
+//        else if(requestCode == GALLERY && resultCode == RESULT_OK) {
+//            Uri uri = data.getData();
+//            setImage(uri);
+//
+//        }
+
+        if (resultCode == RESULT_OK) {
+            //데이터 받기
+            if (requestCode == 2) {
+                PopupResult result = (PopupResult) data.getSerializableExtra("result");
+                if (result == PopupResult.LEFT) {
+                    // 작성 코드
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    activityResultPicture.launch(intent);
+
+                } else if (result == PopupResult.RIGHT) {
+                    // 작성 코드
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, GALLERY);
+                }
+            } else if (requestCode == GALLERY) {
+                Uri uri = data.getData();
+                setImage(uri);
+
+            }
         }
+
     }
+
+    ActivityResultLauncher<Intent> activityResultPicture = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Bundle extras = result.getData().getExtras();
+                        bitmap = (Bitmap) extras.get("data");
+                        imageView_uploadPost.setImageBitmap(bitmap);
+
+                        bytes = bitmapToByteArray(bitmap);
+//                        image = InputImage.fromBitmap(bitmap, 0);
+                    }
+                }
+            }
+    );
 
 //    public static String uri2path(Context context, Uri contentUri) {
 //        String[] proj = { MediaStore.Images.Media.DATA };
@@ -187,32 +302,6 @@ public class WritePostActivity extends AppCompatActivity {
         }
 
     }
-
-//    public void loadImage() {
-//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-//        StorageReference storageReference = firebaseStorage.getReference();
-//        StorageReference pathReference = storageReference.child("users");
-//        if (pathReference == null) {
-//            Toast.makeText(this, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();
-//        } else {
-//            StorageReference submitProfile = storageReference.child("posts/" + firebaseUser.getUid() + "/postImage" + System.currentTimeMillis() + ".jpg");
-//            submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-////                    Glide.with(WritePostActivity.this).load(uri).centerCrop().override(300).into(imageView_uploadPost);
-//                    Log.e("downloadurl", "downloadurl : " + uri);
-//                    Toast.makeText(WritePostActivity.this, "uri : " + uri, Toast.LENGTH_SHORT).show();
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    Toast.makeText(WritePostActivity.this, "실패", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }
-//    }
 
     public byte[] bitmapToByteArray( Bitmap bitmap ) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream() ;

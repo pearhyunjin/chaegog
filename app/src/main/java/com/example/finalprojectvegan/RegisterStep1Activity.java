@@ -7,21 +7,26 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,8 +49,8 @@ public class RegisterStep1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_step1);
 
-        edit_register_name = findViewById(R.id.edit_register_name);
-//        edit_register_id = findViewById(R.id.edit_register_id);
+//        edit_register_name = findViewById(R.id.edit_register_name);
+        edit_register_id = findViewById(R.id.edit_register_id);
         edit_register_password = findViewById(R.id.edit_register_password);
         edit_register_email = findViewById(R.id.edit_register_email);
 //        edit_register_phonenum = findViewById(R.id.edit_register_phonenum);
@@ -65,22 +70,22 @@ public class RegisterStep1Activity extends AppCompatActivity {
                 pd.show();
 
                 // EditText에 현재 입력되어 있는 값을 get(가져오기)해준다.
-                String userName = edit_register_name.getText().toString();
-//                String userID = edit_register_id.getText().toString();
+//                String userName = edit_register_name.getText().toString();
+                String userID = edit_register_id.getText().toString();
                 String userPassword = edit_register_password.getText().toString();
                 String passwordCheck = edit_password_check.getText().toString();
                 String userEmail = edit_register_email.getText().toString();
 //                int userPhonenum = Integer.parseInt(edit_register_phonenum.getText().toString());
 
 
-                if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPassword) || TextUtils.isEmpty(passwordCheck)){
+                if (TextUtils.isEmpty(userID) || TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPassword) || TextUtils.isEmpty(passwordCheck)){
                     Toast.makeText(RegisterStep1Activity.this, "모든 양식을 채워주세요!", Toast.LENGTH_SHORT).show();
                 } else {
                     if (userPassword.length() < 6){
                         Toast.makeText(RegisterStep1Activity.this, "비밀번호는 최소 6자리 이상으로 해주세요!", Toast.LENGTH_SHORT).show();
                     } else {
                         if (userPassword.equals(passwordCheck)) {
-                            register(userName, userEmail, userPassword);
+                            register(userID, userEmail, userPassword);
                         } else {
                             Toast.makeText(RegisterStep1Activity.this, "비밀번호를 다시 확인해주세요", Toast.LENGTH_SHORT).show();
                         }
@@ -111,16 +116,17 @@ public class RegisterStep1Activity extends AppCompatActivity {
                     }
                 };
 
-                RegisterStep1Request registerStep1Request = new RegisterStep1Request(userName, userEmail, userPassword, responseListener);
+                RegisterStep1Request registerStep1Request = new RegisterStep1Request(userID, userEmail, userPassword, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterStep1Activity.this);
                 queue.add(registerStep1Request);
+
 
             }
         });
 
     }
 
-    private void register (String userName, String userEmail, String userPassword) {
+    private void register (String userID, String userEmail, String userPassword) {
         firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(RegisterStep1Activity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -137,7 +143,7 @@ public class RegisterStep1Activity extends AppCompatActivity {
                             // HashMap 에 유저정보 담는다.
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id", id);
-                            hashMap.put("userName", userName.toLowerCase());
+                            hashMap.put("userID", userID.toLowerCase());
                             hashMap.put("userEmail", userEmail);
                             hashMap.put("bio", "");
                             hashMap.put("imageurl", "https://w7.pngwing.com/pngs/858/581/png-transparent-profile-icon-user-computer-icons-system-chinese-wind-title-column-miscellaneous-service-logo.png");
@@ -157,6 +163,29 @@ public class RegisterStep1Activity extends AppCompatActivity {
                                 }
                             });
 
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                            UserInfo userInfo = new UserInfo(userID, userEmail, userPassword);
+
+                            db.collection("user").document(firebaseUser.getUid()).set(userInfo)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(getApplicationContext(), "회원정보 등록 성공", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(RegisterStep2Activity.this, RegisterStep3Activity.class);
+//                                startActivity(intent);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getApplicationContext(), "회원정보 등록 실패", Toast.LENGTH_SHORT).show();
+                                            Log.d("tag", "Error writing document", e);
+                                        }
+                                    });
+//            }
+//                            }
+
                         } else {
 
                             // 유저입력 정보가 유효하지 않을경우
@@ -165,5 +194,8 @@ public class RegisterStep1Activity extends AppCompatActivity {
                         }
                     }
                 });
+
+//        profileUpload();
+
     }
 }

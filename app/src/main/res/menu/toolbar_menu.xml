@@ -6,7 +6,12 @@
         android:id="@+id/action_search"
         android:title="검색"
         android:icon="@drawable/search"
-        android:gravity="center_vertical"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="설정"
+        android:icon="@drawable/ic_baseline_settings_24"
         app:showAsAction="ifRoom" />
 
 </menu>

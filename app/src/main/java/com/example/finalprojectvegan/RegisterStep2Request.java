@@ -9,20 +9,16 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterStep1Request extends StringRequest {
+public class RegisterStep2Request extends StringRequest {
 
-    final static private String URL = "http://baehosting.dothome.co.kr/VeganRegisterFi.php";
+    final static private String URL = "http://baehosting.dothome.co.kr/VeganRegister2Fi.php";
     private Map<String, String> map;
 
-    public RegisterStep1Request(String userID, String userEmail, String userPassword, Response.Listener<String> listener) {
+    public RegisterStep2Request(String userVeganCategory, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-//        map.put("userName", userName);
-        map.put("userID", userID);
-        map.put("userPassword", userPassword);
-        map.put("userEmail", userEmail);
-//        map.put("userPhonenum", userPhonenum + "");
+        map.put("userVeganCategory", userVeganCategory);
     }
 
     @Nullable
