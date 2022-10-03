@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/hssaemaul_regular"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="1sp"
@@ -73,6 +73,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="환경"/>
             <CheckBox
                 android:id="@+id/checkbox_animal"
@@ -84,7 +85,8 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
-                android:text="동물복지"/>
+                android:textSize="16sp"
+                android:text="동물권"/>
             <CheckBox
                 android:id="@+id/checkbox_health"
                 android:layout_width="wrap_content"
@@ -95,6 +97,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="건강"/>
             <CheckBox
                 android:id="@+id/checkbox_religion"
@@ -106,6 +109,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="종교"/>
             <CheckBox
                 android:id="@+id/checkbox_etc"
@@ -117,6 +121,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="기타"/>
 
         <TextView

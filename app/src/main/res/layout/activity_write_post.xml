@@ -7,10 +7,57 @@
     android:orientation="vertical"
     tools:context=".WritePostActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:dividerHeight="1dp"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/Btn_uploadPost"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="right"
+                android:backgroundTint="@color/green"
+                android:fontFamily="@font/pretendardregular"
+                android:text="공유"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/pretendardregular"
+                android:lineSpacingExtra="3sp"
+                android:text="새 게시물"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:titleTextColor="@color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:background="@drawable/dividingline">
+
+            </View>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -43,38 +90,62 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp" />
 
-        <EditText
-            android:id="@+id/edit_post_title"
-            android:hint="제목"
-            android:layout_margin="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:background="@drawable/dividingline">
 
-        <LinearLayout
-            android:id="@+id/linearLayout_Contents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            </View>
 
             <EditText
-                android:id="@+id/edit_post_contents"
-                android:hint="내용"
-                android:lines="5"
-                android:layout_margin="20dp"
-                android:gravity="top"
+                android:id="@+id/edit_post_title"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/pretendardregular"
+                android:hint="제목"
+                android:minHeight="48dp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout_Contents"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edit_post_contents"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/pretendardregular"
+                    android:gravity="top"
+                    android:hint="내용 입력"
+                    android:lines="4" />
+
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="1sp"
+                android:background="@drawable/dividingline">
+
+            </View>
+
+            <Button
+                android:id="@+id/Btn_uploadImagePost"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/pretendardregular"
+                android:text="사진" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/Btn_uploadPost"
-            android:text="확인"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp" />
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </ScrollView>

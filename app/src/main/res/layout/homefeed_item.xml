@@ -41,13 +41,14 @@
             <TextView
                 android:id="@+id/homefeed_item_publisher"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:textSize="15dp"
-                android:textStyle="bold"
+                android:layout_weight="1"
+                android:fontFamily="@font/pretendardregular"
                 android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 tools:text="작성자" />
 
             <TextView
@@ -55,8 +56,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="10dp"
-                tools:text="2019-04-25"/>
+                android:fontFamily="@font/pretendardregular"
+                android:padding="5dp"
+                tools:text="2022-09-25" />
 
         </LinearLayout>
 
@@ -69,10 +71,12 @@
             android:id="@+id/homefeed_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:fontFamily="@font/pretendardregular"
             tools:text="타이틀"/>
 
 
@@ -82,24 +86,26 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:textSize="15dp"
+            android:padding="5dp"
+            android:textSize="16dp"
             android:textStyle="normal"
             android:textColor="@color/black"
+            android:fontFamily="@font/pretendardregular"
             tools:text="우선 물을 넉넉히 끓여 채소를 넣었을 때 물의 온도가 내려가지 않도록한다. 또 물이  팔팔 끓을 때 뚜껑을 열고 데쳐내야 하고, 삶을 때 끓는 물에 소금을 조금 넣으면 ...."/>
 
         <TextView
             android:id="@+id/homefeed_item_imagePath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/homefeed_item_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="#c8c8c8"/>
+            android:layout_margin="20dp"
+            android:background="#dfdfdf" />
 
 
     </LinearLayout>

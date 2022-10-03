@@ -3,8 +3,10 @@ package com.example.finalprojectvegan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,7 +29,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -120,17 +121,16 @@ public class RegisterStep1Activity extends AppCompatActivity {
                     }
                 };
 
-                RegisterStep1Request registerStep1Request = new RegisterStep1Request(userID, userEmail, userPassword, responseListener);
+                RegisterStep1Request registerStep1Request = new RegisterStep1Request(userName, userEmail, userPassword, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterStep1Activity.this);
                 queue.add(registerStep1Request);
-
 
             }
         });
 
     }
 
-    private void register (String userID, String userEmail, String userPassword) {
+    private void register (String userName, String userEmail, String userPassword) {
         firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(RegisterStep1Activity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -147,7 +147,7 @@ public class RegisterStep1Activity extends AppCompatActivity {
                             // HashMap 에 유저정보 담는다.
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id", id);
-                            hashMap.put("userID", userID.toLowerCase());
+                            hashMap.put("userName", userName.toLowerCase());
                             hashMap.put("userEmail", userEmail);
                             hashMap.put("bio", "");
                             hashMap.put("imageurl", "https://w7.pngwing.com/pngs/858/581/png-transparent-profile-icon-user-computer-icons-system-chinese-wind-title-column-miscellaneous-service-logo.png");
@@ -160,35 +160,12 @@ public class RegisterStep1Activity extends AppCompatActivity {
 
                                         // 처리중 화면 종료
                                         pd.dismiss();
-                                        Intent intent = new Intent(RegisterStep1Activity.this, RegisterStep2Activity.class);
+                                        Intent intent = new Intent(RegisterStep1Activity.this, LoginActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
                                 }
                             });
-
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-                            UserInfo userInfo = new UserInfo(userID, userEmail, userPassword);
-
-                            db.collection("user").document(firebaseUser.getUid()).set(userInfo)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Toast.makeText(getApplicationContext(), "회원정보 등록 성공", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(RegisterStep2Activity.this, RegisterStep3Activity.class);
-//                                startActivity(intent);
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(getApplicationContext(), "회원정보 등록 실패", Toast.LENGTH_SHORT).show();
-                                            Log.d("tag", "Error writing document", e);
-                                        }
-                                    });
-//            }
-//                            }
 
                         } else {
 
@@ -198,8 +175,5 @@ public class RegisterStep1Activity extends AppCompatActivity {
                         }
                     }
                 });
-
-//        profileUpload();
-
     }
 }

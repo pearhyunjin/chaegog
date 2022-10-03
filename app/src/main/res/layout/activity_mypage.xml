@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".MypageActivity">
 
+    <Button
+        android:id="@+id/Btn_Logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:fontFamily="@font/pretendardregular"
+        android:text="로그아웃" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -54,14 +62,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="사용자계정"/>
-
-    <Button
-        android:id="@+id/Btn_Logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_gravity="center"
-        android:text="로그아웃" />
 
 
 </LinearLayout>

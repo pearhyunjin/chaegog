@@ -125,8 +125,8 @@ public class RegisterStep2Activity extends AppCompatActivity {
                     break;
                 case R.id.checkbox_animal:
                     if (checked) {
-                        Toast.makeText(getApplicationContext(), "동물권", Toast.LENGTH_SHORT).show();
-                        textView_select_type.append(" 동물권");
+                        Toast.makeText(getApplicationContext(), "동물복지", Toast.LENGTH_SHORT).show();
+                        textView_select_type.append(" 동물복지");
                     } else {
 
                     }

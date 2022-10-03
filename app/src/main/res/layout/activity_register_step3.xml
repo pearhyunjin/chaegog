@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/hssaemaul_regular"
         android:text="채곡채곡 3/4"
         android:textAlignment="center"
@@ -74,6 +74,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="비건"/>
             <RadioButton
                 android:id="@+id/radio_Lacto"
@@ -85,6 +86,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="락토"/>
             <RadioButton
                 android:id="@+id/radio_Ovo"
@@ -96,6 +98,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="오보"/>
             <RadioButton
                 android:id="@+id/radio_LactoOvo"
@@ -107,6 +110,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="락토오보"/>
             <RadioButton
                 android:id="@+id/radio_Pollo"
@@ -128,6 +132,7 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
+                android:textSize="16sp"
                 android:text="페스코"/>
             <RadioButton
                 android:id="@+id/radio_etc"
@@ -139,7 +144,8 @@
                 android:gravity="center"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/pretendardregular"
-                android:text="지향없음"/>
+                android:textSize="16sp"
+                android:text="지향 없음"/>
         </RadioGroup>
 
         <TextView
