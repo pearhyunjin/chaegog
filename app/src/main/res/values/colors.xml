@@ -8,6 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#20672d</color>
+    <color name="green_light">#81C784</color>
+    <color name="tomato">#ff6f60</color>
+    <color name="tomato_juice">#ffa18e</color>
+    <color name="black_42">#424242</color>
+    <color name="gray_6d">#6D6D6D</color>
+    <color name="gray_9b">#9B9B9B</color>
+    <color name="gary_df">#DFDFDF</color>
+    <color name="green">#20672d</color>
     <color name="tomato">#ff6f60</color>
     <color name="tomato_juice">#ffa18e</color>
 
