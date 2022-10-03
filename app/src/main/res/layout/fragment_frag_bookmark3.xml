@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00ff00"
+    android:background="@color/white"
     tools:context=".FragBookmark3">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="32dp"
-        android:text="레시피 북마크" />
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff8e1">
+
+    </View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="615dp"
+        android:fontFamily="@font/pretendardregular"
+        android:text="레시피 북마크"
+        android:textAlignment="center"
+        android:textColor="@color/black_42"
+        android:textSize="16dp" />
+
+    <View
+        android:layout_width="338dp"
+        android:layout_height="240dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="36dp"
+        android:background="@color/gray_f5">
+
+    </View>
+
+    <View
+        android:layout_width="284dp"
+        android:layout_height="185dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="62dp"
+        android:background="@color/gary_df"
+        android:bottomLeftRadius="12dp">
+
+    </View>
+
+
+</RelativeLayout>

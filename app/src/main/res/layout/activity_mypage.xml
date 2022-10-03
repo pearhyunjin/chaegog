@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:src="#c8c8c8" />
+            android:src="#C8C8C8" />
 
 
     </androidx.cardview.widget.CardView>
