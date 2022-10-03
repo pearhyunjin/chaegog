@@ -12,6 +12,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -80,7 +81,6 @@ public class MypageActivity extends AppCompatActivity {
 
         getFirebaseProfileImage(firebaseUser);
 
-
         imageView_profile = findViewById(R.id.imageView_profile);
         Btn_Logout = findViewById(R.id.Btn_Logout);
 
@@ -90,6 +90,10 @@ public class MypageActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(MypageActivity.this, LoginActivity.class);
                 startActivity(intent);
+//                SharedPreferences sh = getSharedPreferences("temp", MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sh.edit();
+//                editor.clear();
+//                editor.commit();
             }
         });
 

@@ -8,12 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,10 +22,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Layout;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,16 +39,10 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
 
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
@@ -226,9 +216,9 @@ public class OcrActivity extends AppCompatActivity {
                         // Task completed successfully
                         resultText = visionText.getText();
 
-                        getAlertDialog("[OCR] 사진 인식 결과",
-                                String.valueOf(resultText),
-                                "확인", "", "");
+//                        getAlertDialog("[OCR] 사진 인식 결과",
+//                                String.valueOf(resultText),
+//                                "확인", "", "");
 
                         compare();
                     }
@@ -284,8 +274,11 @@ public class OcrActivity extends AppCompatActivity {
 
     // 비교
     public void compare(){
+
         checkFit = true;
         ocrTextView = findViewById(R.id.ocrTextView);
+//        USER_TYPE = sh2.getString("Type", "USER_TYPE");
+//        Log.e("type", USER_TYPE);
         USER_TYPE = "페스코";
         // 부적합한 원재료명을 넣을 리스트
         List<String> list1 = new ArrayList<>();
@@ -375,8 +368,8 @@ public class OcrActivity extends AppCompatActivity {
                                 }
                             }
                             break;
-                        case "폴로":
-                            break;
+//                        case "폴로":
+//                            break;
                         default:
 
                     }
@@ -386,11 +379,20 @@ public class OcrActivity extends AppCompatActivity {
                 List<String> newList = list1.stream().distinct().collect(Collectors.toList());
                 String n_ingre1 = newList.toString().replace("[","").replace("]","");
 
+                // 로그인할때 저장한 사용자의 이메일을 잘라서 불러옴(추후 닉네임으로 변경)
+//                SharedPreferences sh = getSharedPreferences("temp", MODE_PRIVATE);
+//                USER_ID = sh.getString("userName", "USER_NAME");
+//                int index = USER_ID.indexOf("@");
+//                USER_ID = USER_ID.substring(0, index);
+
 ;                if(!checkFit){
                     Log.e("OCRTEST", resultText + " - 채식유형에 부적합합니다.");
                     ocrTextView.setText(USER_ID + "님의 채식 유형에 맞지않는 제품입니다.");
                     ocrTextView.setTextSize(20);
                     n_ingredient.setText(n_ingre1);
+
+                    View ocrLayout = findViewById(R.id.ocrLayout);
+                    ocrLayout.setBackgroundColor(Color.parseColor("#FFF8E1"));
 
                     // 숨기기
                     ocrImage.setVisibility(View.GONE);

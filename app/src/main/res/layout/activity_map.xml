@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/map_layout"
     tools:context=".MapActivity">
 
     <fragment
@@ -93,12 +94,14 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <ImageButton
                 android:id="@+id/map_info_button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_baseline_add_24"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:src="@drawable/soso"
+                android:background="@null"/>
         </LinearLayout>
     </LinearLayout>
 

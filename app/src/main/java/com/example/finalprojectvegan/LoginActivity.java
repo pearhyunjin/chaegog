@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        SharedPreferences sh = getSharedPreferences("temp", MODE_PRIVATE);
 
         // 변수 초기화
         edit_login_email = findViewById(R.id.edit_login_email);
@@ -72,6 +74,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 // 문자열에 담기
                 String userEmail = edit_login_email.getText().toString();
+
+                // 로그인 할 때 사용자의 이메일을 저장함(추후 닉네임 저장으로 변경)
+//                SharedPreferences.Editor editor = sh.edit();
+//                editor.putString("userEmail", userEmail);
+//                editor.apply();
+
                 String userPassword = edit_login_password.getText().toString();
 
                 // 작성란 확인

@@ -5,18 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/ocrLayout"
     tools:context=".OcrActivity">
-        <TextView
-            android:id="@+id/ocrTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="50dp"
-            android:text="제품의 식품유형표를 인식해주세요."
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/ocrTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:text="제품의 식품유형표를 인식해주세요."
+        android:textAlignment="center"
+        android:textSize="16dp"
+        android:textColor="#424242"
+        android:textStyle="bold"
+        android:visibility="visible"/>
     <TextView
         android:id="@+id/n_ingredient_text"
         android:layout_width="wrap_content"
@@ -24,6 +27,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginStart="15dp"
         android:text="부적합 원재료명"
+        android:textColor="#424242"
         android:textSize="16dp"
         android:visibility="gone"/>
     <TextView
@@ -32,37 +36,43 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="USER_ID님의 채식유형에\n적합한 제품입니다."
-        android:background="#96D5D7"
+        android:background="#FFF8E1"
         android:textSize="27dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="#81C784"
         android:visibility="gone"/>
+
     <TextView
         android:id="@+id/n_ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:textSize="22dp"
         android:text="원재료명"
-        android:visibility="gone"/>
+        android:textColor="#424242"
+        android:textSize="22dp"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/allergy_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="15dp"
         android:text="알러지 유발 원재료명"
+        android:textColor="#424242"
         android:textSize="16dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/allergy_ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:textSize="22dp"
         android:text="원재료명"
-        android:visibility="gone"/>
+        android:textColor="#424242"
+        android:textSize="22dp"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/recomm_text"
         android:layout_width="match_parent"
@@ -71,6 +81,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginStart="15dp"
         android:text="추천 제품"
+        android:textColor="#424242"
         android:textSize="16dp"
         android:visibility="gone"/>
     <ImageView

@@ -38,6 +38,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,6 +49,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         fragment_product = new FragHomeProduct();
         fragment_mypage = new FragMypage();
         fragment_bookmark = new FragBookmark();
-        //fragment_search = new UserSearchFragment();
+        fragment_search = new UserSearchFragment();
 
 
         // 초기 플래그먼트 설정

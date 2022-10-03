@@ -1,8 +1,15 @@
 package com.example.finalprojectvegan;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.room.RoomDatabase;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
@@ -33,34 +42,82 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class MapInfoActivity extends AppCompatActivity {
-//    public static Context context;
-//    public String id;
+    private Fragment fragment_info, fragment_menu, fragment_photo, fragment_review;
+    private TabLayout tabs;
 
     TextView getMapInfoDetailName, getMapInfoDetailAddr, getMapInfoDetailTime,
-    getMapInfoDetailCategory, getMapInfoDetailMenu, getMapInfoDetailDayOff;
+            getMapInfoDetailCategory, getMapInfoDetailMenu, getMapInfoDetailDayOff;
     ImageView getMapInfoDetailImage;
     CheckBox getMapInfoBookmark;
     String name, addr, time, dayoff, category, menu, pk, id, image;
     boolean bookmark;
     FirebaseAuth firebaseAuth;
-    FragBookmark1 fragBookmark1;
+    LinearLayout info_layout;
+    Fragment selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_info);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        fragment_info = new MapTabInfo();
+        fragment_menu = new MapTabMenu();
+        fragment_photo = new MapTabPhoto();
+        fragment_review = new MapTabReview();
 
-        getMapInfoDetailName = findViewById(R.id.map_info_detail_name);
-        getMapInfoDetailAddr = findViewById(R.id.map_info_detail_addr);
-        getMapInfoDetailTime = findViewById(R.id.map_info_detail_time);
-        getMapInfoDetailCategory = findViewById(R.id.map_info_detail_category);
-        getMapInfoDetailMenu = findViewById(R.id.map_info_detail_menu);
-        getMapInfoBookmark = findViewById(R.id.favorite_checkbox);
-        getMapInfoDetailImage = findViewById(R.id.map_info_detail_image);
-        getMapInfoDetailDayOff = findViewById(R.id.map_info_detail_dayoff);
+        tabs = findViewById(R.id.map_info_tabs);
+//        tabs.addTab(tabs.newTab().setText("정보"));
+//        tabs.addTab(tabs.newTab().setText("메뉴"));
+//        tabs.addTab(tabs.newTab().setText("사진"));
+//        tabs.addTab(tabs.newTab().setText("리뷰"));
 
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_info).commitAllowingStateLoss();
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+//                transaction.remove(fragment_info);
+//                selected = null;
+                    if (position == 0)
+//                        selected = fragment_info;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_info).commitAllowingStateLoss();
+                    else if (position == 1)
+//                        selected = fragment_menu;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_menu).commitAllowingStateLoss();
+                    else if (position == 2)
+//                        selected = fragment_photo;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_photo).commitAllowingStateLoss();
+                    else if (position == 3)
+//                        selected = fragment_review;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_review).commitAllowingStateLoss();
+//                    transaction.commitAllowingStateLoss();
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+//        firebaseAuth = FirebaseAuth.getInstance();
+//
+//        getMapInfoDetailName = findViewById(R.id.map_info_detail_name);
+//        getMapInfoDetailAddr = findViewById(R.id.map_info_detail_addr);
+//        getMapInfoDetailTime = findViewById(R.id.map_info_detail_time);
+//        getMapInfoDetailCategory = findViewById(R.id.map_info_detail_category);
+//        getMapInfoDetailMenu = findViewById(R.id.map_info_detail_menu);
+//        getMapInfoBookmark = findViewById(R.id.favorite_checkbox);
+//        getMapInfoDetailImage = findViewById(R.id.map_info_detail_image);
+//        getMapInfoDetailDayOff = findViewById(R.id.map_info_detail_dayoff);
+//
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         addr = intent.getStringExtra("addr");
@@ -73,99 +130,43 @@ public class MapInfoActivity extends AppCompatActivity {
         pk = intent.getStringExtra("userPk");
         image = intent.getStringExtra("image");
 
-//        fragBookmark1 = new FragBookmark1();
-//        Bundle bundle = new Bundle();
-//        bundle.putString("id", id);
-//        fragBookmark1.setArguments(bundle);
+        Bundle bundle = new Bundle();
 
-        getMapInfoDetailName.setText(name);
-        getMapInfoDetailAddr.setText(addr);
-        getMapInfoDetailTime.setText(time);
-        getMapInfoDetailDayOff.setText(dayoff);
-        getMapInfoDetailCategory.setText(category);
-        getMapInfoDetailMenu.setText(menu);
-        Glide.with(this)
-                .load(image)
-                .apply(new RequestOptions().transform(new CenterCrop(),
-                        new RoundedCorners(10)))
-                .into(getMapInfoDetailImage);
+        bundle.putString("name", name);
+        bundle.putString("image", image);
+        bundle.putString("addr", addr);
+        bundle.putString("time", time);
+        bundle.putString("dayOff", dayoff);
+        bundle.putString("category", category);
+        bundle.putString("userID", id);
+        bundle.putString("menu", menu);
+        bundle.putString("userPk", pk);
+        fragment_info.setArguments(bundle);
 
-        getMapInfoBookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String userPK = pk;
-                String userID = id;
-                String storeName = name;
-                String storeAddr = addr;
-                String storeImage =  image;
-                String storeTime = time;
-                String storeDayOff = dayoff;
 
-                if (getMapInfoBookmark.isChecked()) {
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                boolean success = jsonObject.getBoolean("success");
-                                if (success) {
-                                    Toast.makeText(getApplicationContext(), "북마크 추가", Toast.LENGTH_SHORT).show();
-                                    Log.d("bookmark", userPK);
-                                    Log.d("bookmark", userID);
-                                    Log.d("bookmark", storeName);
-                                    Log.d("bookmark", storeAddr);
-                                    Log.d("bookmark", storeImage);
-                                    Log.d("bookmark", storeTime);
-                                    Log.d("bookmark", storeDayOff);
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "북마크 실패", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
 
-                    BookmarkRequest bookmarkRequest = new BookmarkRequest(userPK, userID, storeName, storeAddr, storeImage, storeTime, storeDayOff, responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(MapInfoActivity.this);
-                    queue.add(bookmarkRequest);
-                } else {
-                    Toast.makeText(MapInfoActivity.this, "북마크 삭제", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        });
-
-    }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        Intent intent = getIntent();
-//        name = intent.getStringExtra("name");
-//        addr = intent.getStringExtra("addr");
-//        time = intent.getStringExtra("time");
-//        category = intent.getStringExtra("category");
-//        menu = intent.getStringExtra("menu");
-//        bookmark = intent.getBooleanExtra("bookmark", bookmark);
-//        id = intent.getStringExtra("userID");
-//        pk = intent.getStringExtra("userPk");
-//
 //        getMapInfoDetailName.setText(name);
 //        getMapInfoDetailAddr.setText(addr);
 //        getMapInfoDetailTime.setText(time);
+//        getMapInfoDetailDayOff.setText(dayoff);
 //        getMapInfoDetailCategory.setText(category);
 //        getMapInfoDetailMenu.setText(menu);
+//        Glide.with(this)
+//                .load(image)
+//                .apply(new RequestOptions().transform(new CenterCrop(),
+//                        new RoundedCorners(10)))
+//                .into(getMapInfoDetailImage);
 //
 //        getMapInfoBookmark.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                String userPk = pk;
+//                String userPK = pk;
 //                String userID = id;
 //                String storeName = name;
 //                String storeAddr = addr;
+//                String storeImage =  image;
+//                String storeTime = time;
+//                String storeDayOff = dayoff;
 //
 //                if (getMapInfoBookmark.isChecked()) {
 //                    Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -176,10 +177,13 @@ public class MapInfoActivity extends AppCompatActivity {
 //                                boolean success = jsonObject.getBoolean("success");
 //                                if (success) {
 //                                    Toast.makeText(getApplicationContext(), "북마크 추가", Toast.LENGTH_SHORT).show();
-//                                    Log.d("bookmark", userPk);
+//                                    Log.d("bookmark", userPK);
 //                                    Log.d("bookmark", userID);
 //                                    Log.d("bookmark", storeName);
 //                                    Log.d("bookmark", storeAddr);
+//                                    Log.d("bookmark", storeImage);
+//                                    Log.d("bookmark", storeTime);
+//                                    Log.d("bookmark", storeDayOff);
 //                                } else {
 //                                    Toast.makeText(getApplicationContext(), "북마크 실패", Toast.LENGTH_SHORT).show();
 //                                    return;
@@ -190,7 +194,7 @@ public class MapInfoActivity extends AppCompatActivity {
 //                        }
 //                    };
 //
-//                    BookmarkRequest bookmarkRequest = new BookmarkRequest(userPk, userID, storeName, storeAddr, responseListener);
+//                    BookmarkRequest bookmarkRequest = new BookmarkRequest(userPK, userID, storeName, storeAddr, storeImage, storeTime, storeDayOff, responseListener);
 //                    RequestQueue queue = Volley.newRequestQueue(MapInfoActivity.this);
 //                    queue.add(bookmarkRequest);
 //                } else {
@@ -199,7 +203,6 @@ public class MapInfoActivity extends AppCompatActivity {
 //            }
 //
 //        });
-//
-//
-//    }
+
+    }
 }

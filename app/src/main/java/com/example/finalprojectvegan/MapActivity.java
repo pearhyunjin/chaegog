@@ -5,6 +5,7 @@ package com.example.finalprojectvegan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
@@ -75,7 +76,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             getMapInfoBookmark = findViewById(R.id.favorite_checkbox);
             mapInfoButton = findViewById(R.id.map_info_button);
 
-
             Intent intent = getIntent();
             userID = intent.getStringExtra("userID");
 
@@ -97,6 +97,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Log.d(TAG, "onMapReady");
 
             mapInfoLayout = findViewById(R.id.map_info_layout);
+            Fragment fragment_map_info = new MapTabInfo();
 
             NaverMapApiInterface naverMapApiInterface = NaverMapRequest.getClient().create(NaverMapApiInterface.class);
             Call<NaverMapItem> call = naverMapApiInterface.getMapData();
@@ -136,6 +137,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                              mapInfoButton.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+
                                                     Intent intent = new Intent(MapActivity.this, MapInfoActivity.class);
                                                     intent.putExtra("name", mapInfoName);
                                                     intent.putExtra("image", mapInfoImage);
@@ -144,11 +146,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                     intent.putExtra("dayOff", mapInfoDayoff);
                                                     intent.putExtra("category", mapInfoCategory);
                                                     intent.putExtra("menu", mapInfoMenu);
-                                                    intent.putExtra("bookmark", mapInfoBookmark);
                                                     intent.putExtra("userID", userID);
                                                     intent.putExtra("userPk", userPk);
-
                                                     startActivity(intent);
+
                                                 }
                                              });
 

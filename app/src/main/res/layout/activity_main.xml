@@ -30,9 +30,9 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:tabGravity="fill"
-        app:tabIndicatorColor="#96D5D7"
+        app:tabIndicatorColor="@color/tomato_juice"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="#96D5D7"
+        app:tabSelectedTextColor="@color/tomato_juice"
         app:tabTextColor="#000000" />
 
     <FrameLayout

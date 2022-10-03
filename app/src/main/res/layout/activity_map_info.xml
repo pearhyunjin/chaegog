@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="vertical"
+    android:id="@+id/activity_map_info"
     tools:context=".MapInfoActivity">
     <TextView
         android:layout_width="wrap_content"
@@ -15,11 +16,7 @@
         android:textColor="@color/black"
         android:layout_margin="20dp"
         android:layout_gravity="center"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,135 +51,10 @@
                 android:textColor="@color/black"
                 android:text="리뷰" />
         </com.google.android.material.tabs.TabLayout>
-        <ImageView
-            android:id="@+id/map_info_detail_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/camera"
-            android:layout_gravity="center"/>
-    </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_below="@id/map_info_tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:id="@+id/map_info_detail_name"
-                android:text="식당명"/>
-            <CheckBox
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:button="@null"
-                android:background="@drawable/custom_checkbox"
-                android:id="@+id/favorite_checkbox"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/map_info_detail_category"
-            android:text="종류"
-            android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="별점"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:text="메뉴"
-            android:textColor="@color/black"/>
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:id="@+id/map_info_recyclerView"/>-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/map_info_detail_menu"
-            android:text="메뉴"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:text="주소"
-            android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/map_info_detail_addr"
-            android:text="주소"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="영업시간"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/map_info_detail_time"
-            android:text="영업시간"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="휴무일"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/map_info_detail_dayoff"
-            android:text="휴무일"
-            android:textColor="@color/black"/>
-    </LinearLayout>
+        android:layout_height="match_parent"/>
 </LinearLayout>

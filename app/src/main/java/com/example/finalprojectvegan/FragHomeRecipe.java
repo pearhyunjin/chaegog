@@ -11,13 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +33,7 @@ public class FragHomeRecipe extends Fragment {
     RecipeAdapter adapter;
     private RecipeItem recipeList;
     private List<RecipeData> recipeInfo;
-    private String API_KEY = "103e7cc45df5463fafbb";
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,10 +44,6 @@ public class FragHomeRecipe extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragHomeRecipe() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -53,7 +53,7 @@ public class FragHomeRecipe extends Fragment {
      * @return A new instance of fragment FragHome_recipe.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragHomeRecipe newInstance(String param1, String param2) {
+    public static FragHomeRecipe newInstance(String param1, String param2) throws IOException, ParserConfigurationException, SAXException {
         FragHomeRecipe fragment = new FragHomeRecipe();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -76,10 +76,10 @@ public class FragHomeRecipe extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frag_home_recipe, container, false);
 
+
         recipeInfo = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recipe_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         RecipeApiInterface recipeApiInterface = NaverMapRequest.getClient().create(RecipeApiInterface.class);
         Call<RecipeItem> call = recipeApiInterface.getRecipeData();
         call.enqueue(new Callback<RecipeItem>() {
@@ -87,6 +87,8 @@ public class FragHomeRecipe extends Fragment {
             public void onResponse(Call<RecipeItem> call, Response<RecipeItem> response) {
                 recipeList = response.body();
                 recipeInfo = recipeList.RECIPE;
+
+
 
                 adapter = new RecipeAdapter(getContext(), recipeInfo);
                 recyclerView.setAdapter(adapter);
@@ -98,7 +100,6 @@ public class FragHomeRecipe extends Fragment {
             }
 
         });
-
         return view;
     }
 }

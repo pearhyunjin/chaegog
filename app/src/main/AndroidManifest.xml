@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--test-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
@@ -22,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectVegan"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".RecipeDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".WritePostActivity"
             android:exported="false" />
@@ -75,13 +79,11 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"-->
-<!--            android:theme="@style/Base.Theme.AppCompat" />-->
     </application>
 
 </manifest>

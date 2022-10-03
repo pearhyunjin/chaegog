@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -66,6 +67,7 @@ public class RegisterStep1Activity extends AppCompatActivity {
 
                 // EditText에 현재 입력되어 있는 값을 get(가져오기)해준다.
                 String userName = edit_register_name.getText().toString();
+
 //                String userID = edit_register_id.getText().toString();
                 String userPassword = edit_register_password.getText().toString();
                 String passwordCheck = edit_password_check.getText().toString();

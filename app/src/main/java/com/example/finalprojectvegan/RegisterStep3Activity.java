@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,7 @@ public class RegisterStep3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_step3);
 
+
         textView_select_VeganType = findViewById(R.id.textView_select_VeganType);
 
         radio_Vegan = findViewById(R.id.radio_Vegan);
@@ -42,7 +44,6 @@ public class RegisterStep3Activity extends AppCompatActivity {
         radio_etc = findViewById(R.id.radio_etc);
 
         radioGroup_veganType = findViewById(R.id.radioGroup_veganType);
-
         radioGroup_veganType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -68,7 +69,7 @@ public class RegisterStep3Activity extends AppCompatActivity {
                     case R.id.radio_etc:
                         textView_select_VeganType.setText("기타");
                         break;
-                }
+                };
             }
         });
 
