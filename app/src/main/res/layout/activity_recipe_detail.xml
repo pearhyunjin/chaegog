@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".RecipeDetailActivity">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,10 +98,9 @@
     <TextView
         android:id="@+id/recipe_ingredient"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_weight="1"
         android:text="재료 리스트"
         android:textColor="@color/black"
         android:textSize="14dp" />
@@ -114,55 +115,117 @@
 
     <ImageView
         android:id="@+id/recipe_manual_image01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="370sp"
+        android:layout_height="270sp"
         android:layout_margin="15dp"
         android:src="@drawable/camera"/>
 
     <TextView
         android:id="@+id/recipe_manual01"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_weight="1"
         android:text="요리 설명_01"
         android:textColor="@color/black"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/recipe_manual_image02"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="370sp"
+        android:layout_height="270sp"
         android:layout_margin="15dp"
         android:src="@drawable/camera" />
 
     <TextView
         android:id="@+id/recipe_manual02"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_weight="1"
         android:text="요리 설명_02"
         android:textColor="@color/black"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/recipe_manual_image03"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="370sp"
+        android:layout_height="270sp"
         android:layout_margin="15dp"
-        android:src="@drawable/camera" />
+        android:src="@drawable/camera"/>
 
     <TextView
         android:id="@+id/recipe_manual03"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_weight="1"
         android:text="요리 설명_03"
         android:textColor="@color/black"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/recipe_manual_image04"
+        android:layout_width="370sp"
+        android:layout_height="270sp"
+        android:layout_margin="15dp"
+        android:src="@drawable/camera"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/recipe_manual04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="요리 설명_04"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/recipe_manual_image05"
+        android:layout_width="370sp"
+        android:layout_height="270sp"
+        android:layout_margin="15dp"
+        android:src="@drawable/camera"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/recipe_manual05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="요리 설명_05"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/recipe_manual_image06"
+        android:layout_width="370sp"
+        android:layout_height="270sp"
+        android:layout_margin="15dp"
+        android:src="@drawable/camera"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/recipe_manual06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="요리 설명_06"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
 </LinearLayout>
+</ScrollView>
