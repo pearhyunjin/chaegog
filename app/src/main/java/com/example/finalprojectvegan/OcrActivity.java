@@ -32,6 +32,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -384,7 +389,6 @@ public class OcrActivity extends AppCompatActivity {
 //                USER_ID = sh.getString("userName", "USER_NAME");
 //                int index = USER_ID.indexOf("@");
 //                USER_ID = USER_ID.substring(0, index);
-
 ;                if(!checkFit){
                     Log.e("OCRTEST", resultText + " - 채식유형에 부적합합니다.");
                     ocrTextView.setText(USER_ID + "님의 채식 유형에 맞지않는 제품입니다.");
