@@ -24,11 +24,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
@@ -62,10 +64,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LinearLayout mapInfoLayout;
         CheckBox getMapInfoBookmark;
 
+
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_map);
+
 
             // 식당 정보가 출력되는 곳
             getMapInfoName = findViewById(R.id.map_info_name);
@@ -182,10 +186,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mNaverMap = naverMap;
             mNaverMap.setLocationSource(mLocationSource);
 
-            naverMap.addOnLocationChangeListener(location ->
-                    Toast.makeText(this,
-                            location.getLatitude() + ", " + location.getLongitude(),
-                            Toast.LENGTH_SHORT).show());
+//            naverMap.addOnLocationChangeListener(location ->
+//                    Toast.makeText(this,
+//                            location.getLatitude() + ", " + location.getLongitude(),
+//                            Toast.LENGTH_SHORT).show());
+
+            UiSettings uiSettings = mNaverMap.getUiSettings();
+            uiSettings.setCompassEnabled(true);
+            uiSettings.setScaleBarEnabled(true);
+            uiSettings.setZoomControlEnabled(true);
+            uiSettings.setLocationButtonEnabled(true);
 
             // 권한 확인, onRequestPermissionsResult 콜백 메서드 호출
             ActivityCompat.requestPermissions(this, PERMISSION, PERMISSION_REQUEST_CODE);
