@@ -2,17 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="360dp"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
     android:id="@+id/ocrLayout"
     tools:context=".OcrActivity">
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:orientation="vertical"-->
-    <!--    android:id="@+id/ocrLayout"-->
-    <!--    tools:context=".OcrActivity"/>-->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -34,13 +30,6 @@
             android:textColor="@color/black" />
 
     </androidx.appcompat.widget.Toolbar>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-    </RelativeLayout>
 
     <TextView
         android:id="@+id/ocrTextView"
@@ -129,11 +118,11 @@
         android:src="@drawable/camera"
         android:visibility="gone" />
 
-
     <ImageView
         android:id="@+id/ocrimagepopup"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="30dp" />
 
     <TextView
@@ -147,44 +136,13 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
-        <!--        <Button-->
-        <!--            android:id="@+id/cameraBtn"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="50dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:fontFamily="@font/pretendardregular"-->
-        <!--            android:text="카메라" />-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/galleryBtn"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="50dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:fontFamily="@font/pretendardregular"-->
-        <!--            android:text="갤러리" />-->
-        <!--            <Button-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="50dp"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:id="@+id/cameraBtn"-->
-        <!--                android:layout_marginStart="10dp"-->
-        <!--                android:text="카메라"-->
-        <!--                android:visibility="visible"/>-->
-
-        <!--            <Button-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="50dp"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:id="@+id/galleryBtn"-->
-        <!--                android:text="갤러리"-->
-        <!--                android:visibility="visible"/>-->
-
         <Button
             android:id="@+id/goOcr"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:fontFamily="@font/pretendardregular"
+            android:textSize="16sp"
             android:text="스캔하기" />
 
     </LinearLayout>
