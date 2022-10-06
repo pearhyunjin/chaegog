@@ -84,12 +84,15 @@ public class MypageActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String user = firebaseUser.toString();
 
         getFirebaseProfileImage(firebaseUser);
 
@@ -98,11 +101,64 @@ public class MypageActivity extends AppCompatActivity {
         userVeganType = (TextView) findViewById(R.id.userVeganType);
         userAllergy = (TextView) findViewById(R.id.userAllergy);
 
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
 
+                            ArrayList<UserInfo> postUserList = new ArrayList<>();
 
-        userID.setText(USER_ID);
-        userVeganType.setText(USER_VEGAN_TYPE);
-        userAllergy.setText(USER_ALLERGY);
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+//                                String userID = firebaseUser.getDisplayName();
+//                                String userEmail = firebaseUser.getEmail();
+
+//                                boolean emailVerified = firebaseUser.isEmailVerified();
+
+                                String uid = firebaseUser.getUid();
+
+//                                Log.d("userID", userID);
+//                                Log.d("userEmail", userEmail);
+//                                Log.d("uid", uid);
+
+//                                Toast.makeText(getApplicationContext(), "firebaseUser : " + firebaseUser, Toast.LENGTH_LONG).show();
+
+//                                String user = firebaseUser.toString();
+
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                    postUserList.add(new UserInfo(
+                                            documentSnapshot.getData().get("userID").toString(),
+                                            documentSnapshot.getData().get("userEmail").toString(),
+                                            documentSnapshot.getData().get("userPassword").toString()));
+
+//                                TextView publisherTextView = cardView.findViewById(R.id.homefeed_item_publisher);
+//        publisherTextView.setText(mDataset.get(position).getPublisher());
+//                                String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
+//                                publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        USER_ID = documentSnapshot.getData().get("userID").toString();
+//                                        Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
+                                        userID.setText(USER_ID);
+                                    }
+//                                Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
+//        if (user == FirebaseAuth.getInstance().getCurrentUser().toString()) {
+//            publisherTextView.setText(user);
+//            Log.d("user", user);
+//        }
+                                }
+                            }
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
+
+//        userID.setText(USER_ID);
+//        userVeganType.setText(USER_VEGAN_TYPE);
+//        userAllergy.setText(USER_ALLERGY);
 
         Btn_Logout = findViewById(R.id.Btn_Logout);
 
