@@ -49,6 +49,7 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
     private ArrayList<WritePostInfo> mDataset;
 
     ImageView homefeed_item_imageView;
+    ImageView imageView_profile;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -132,25 +133,32 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
 
                             ArrayList<UserInfo> postUserList = new ArrayList<>();
 
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
 
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
-                                postUserList.add(new UserInfo(
-                                        documentSnapshot.getData().get("userID").toString(),
-                                        documentSnapshot.getData().get("userEmail").toString(),
-                                        documentSnapshot.getData().get("userPassword").toString()));
+                                String uid = firebaseUser.getUid();
 
-                                TextView publisherTextView = cardView.findViewById(R.id.homefeed_item_publisher);
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                    postUserList.add(new UserInfo(
+                                            documentSnapshot.getData().get("userID").toString(),
+                                            documentSnapshot.getData().get("userEmail").toString(),
+                                            documentSnapshot.getData().get("userPassword").toString()));
+
+                                    TextView publisherTextView = cardView.findViewById(R.id.homefeed_item_publisher);
+                                    ImageView imageView_profile = cardView.findViewById(R.id.imageView_profile);
 //        publisherTextView.setText(mDataset.get(position).getPublisher());
-                                String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
+//                                    String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
 //                                publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
-                                if (documentSnapshot.getId().equals(user)) {
-                                    publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
-                                }
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
+//                                        loadImage(uid);
+                                    }
 //        if (user == FirebaseAuth.getInstance().getCurrentUser().toString()) {
 //            publisherTextView.setText(user);
 //            Log.d("user", user);
 //        }
+                                }
                             }
 
                         } else {
@@ -168,6 +176,34 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
 ////            publisherTextView.setText(user);
 ////            Log.d("user", user);
 ////        }
+
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        imageView_profile = cardView.findViewById(R.id.imageView_profile);
+//
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageReference = storage.getReference();
+//        StorageReference pathReference = storageReference.child("users");
+//
+//        if (pathReference == null) {
+//            Toast.makeText(context, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(context, "저장소에 사진이 있습니다.", Toast.LENGTH_SHORT).show();
+//            StorageReference submitProfile = storageReference.child("users/" + firebaseUser.getUid() + "/profileImage.jpg");
+//            submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+////                    Glide.with(cardView).load(uri).into(imageView_profile);
+//                    Glide.with(context).load(uri).into(im)
+////                    Toast.makeText(context, "사진 출력", Toast.LENGTH_SHORT).show();
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//
+//                }
+//            });
+//        }
 
         TextView titleTextView = cardView.findViewById(R.id.homefeed_item_title);
         titleTextView.setText(mDataset.get(position).getTitle());
@@ -191,6 +227,33 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
 
 
     }
+
+//    public void loadImage(String a) {
+////        imageView_profile = (ImageView) findViewById(R.id.imageView_profile);
+//
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        a = firebaseUser.getUid();
+//
+//        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+//        StorageReference storageReference = firebaseStorage.getReference();
+//        StorageReference pathReference = storageReference.child("users");
+//        if (pathReference == null) {
+//            Toast.makeText(context, "저장소에 사진이 없습니다.", Toast.LENGTH_SHORT).show();
+//        } else {
+//            StorageReference submitProfile = storageReference.child("users/" + a + "/profileImage.jpg");
+//            submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    Glide.with(context).load(uri).centerCrop().override(300).into(imageView_profile);
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//
+//                }
+//            });
+//        }
+//    }
 
     @Override
     public int getItemCount() {

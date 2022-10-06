@@ -26,15 +26,17 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 app:cardCornerRadius="100dp">
 
                 <ImageView
-                    android:id="@+id/imageView_profile"
+                    android:id="@+id/imageView_profile2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
-                    android:src="#c8c8c8" />
+                    android:padding="10dp"
+                    android:src="@drawable/personimage" />
 
             </androidx.cardview.widget.CardView>
 
@@ -43,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/pretendardregular"
                 android:textColor="@color/black"
@@ -56,8 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="20dp"
                 android:fontFamily="@font/pretendardregular"
-                android:padding="5dp"
                 tools:text="2022-09-25" />
 
         </LinearLayout>
