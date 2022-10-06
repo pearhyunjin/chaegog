@@ -77,11 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/pretendardregular"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:padding="5dp"
             android:textStyle="bold"
             tools:text="타이틀" />
 
