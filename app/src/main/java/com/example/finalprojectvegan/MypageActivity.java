@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -38,6 +39,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -54,6 +58,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 import com.example.finalprojectvegan.R;
 //import com.example.finalprojectvegan.Camera2BasicFragment;
@@ -66,11 +71,18 @@ public class MypageActivity extends AppCompatActivity {
     private static final int CAMERA = 100;
     private static final int GALLERY = 101;
 
-    private Button Btn_Logout;
+    private TextView Btn_Logout;
+    TextView userID, userVeganType, userAllergy;
     private ImageView imageView_profile;
     InputImage image;
 
     ProgressDialog dialog;
+
+    String USER_ID;
+    String USER_VEGAN_TYPE;
+    String USER_ALLERGY;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +94,16 @@ public class MypageActivity extends AppCompatActivity {
         getFirebaseProfileImage(firebaseUser);
 
         imageView_profile = findViewById(R.id.imageView_profile);
+        userID = (TextView) findViewById(R.id.userID);
+        userVeganType = (TextView) findViewById(R.id.userVeganType);
+        userAllergy = (TextView) findViewById(R.id.userAllergy);
+
+
+
+        userID.setText(USER_ID);
+        userVeganType.setText(USER_VEGAN_TYPE);
+        userAllergy.setText(USER_ALLERGY);
+
         Btn_Logout = findViewById(R.id.Btn_Logout);
 
         Btn_Logout.setOnClickListener(new View.OnClickListener() {

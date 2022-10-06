@@ -43,9 +43,11 @@
         <entry key="..\:/Users/won/AndroidStudioProjects/FinalProjectVegan/app/src/main/res/menu/bottom_menu.xml" value="0.5234375" />
         <entry key="..\:/Users/won/Desktop/FinalProjectVegan/app/src/main/res/layout/fragment_frag_bookmark.xml" value="0.5234375" />
         <entry key="app/src/main/res/drawable/baseline_arrow_back_18.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/baseline_logout_24.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/custom_checkbox.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.123" />
         <entry key="app/src/main/res/drawable/ic_baseline_horizontal_rule_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_round_info_24.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/selector_map_info.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_bookmark.xml" value="0.15416666666666667" />
         <entry key="app/src/main/res/layout/activity_camera.xml" value="0.1" />
@@ -55,7 +57,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2037037037037037" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.16983695652173914" />
         <entry key="app/src/main/res/layout/activity_map_info.xml" value="0.25384615384615383" />
-        <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.14285714285714285" />
+        <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.2473190307617188" />
         <entry key="app/src/main/res/layout/activity_ocr.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/activity_ocr_image_view.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/activity_ocr_popup.xml" value="0.1" />
