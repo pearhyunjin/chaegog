@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="username"
-            android:textColor="@color/design_default_color_primary_dark"
+            android:textColor="@color/green"
             android:textStyle="bold" />
 
         <TextView

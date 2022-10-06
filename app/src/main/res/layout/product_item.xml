@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginStart="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:text="제조사"
-                android:textSize="11dp"
+                android:textSize="11sp"
                 android:textColor="@color/black"
                 android:id="@+id/ProductCompanyTv"/>
         </LinearLayout>
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="이름"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textColor="@color/black"
             android:id="@+id/ProductNameTv"/>
         <LinearLayout
