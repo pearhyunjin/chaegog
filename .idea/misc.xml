@@ -57,7 +57,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2037037037037037" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.16983695652173914" />
         <entry key="app/src/main/res/layout/activity_map_info.xml" value="0.25384615384615383" />
-        <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.2473190307617188" />
+        <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.19894561767578128" />
         <entry key="app/src/main/res/layout/activity_ocr.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/activity_ocr_image_view.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/activity_ocr_popup.xml" value="0.1" />
@@ -86,7 +86,7 @@
         <entry key="app/src/main/res/layout/fragment_frag_ocr.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_frag_ocr_popup.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.22313232421875" />
-        <entry key="app/src/main/res/layout/homefeed_item.xml" value="0.1131927490234375" />
+        <entry key="app/src/main/res/layout/homefeed_item.xml" value="0.26847958448456555" />
         <entry key="app/src/main/res/layout/product_item.xml" value="0.20471014492753623" />
         <entry key="app/src/main/res/layout/recipe_item.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.1408514492753623" />

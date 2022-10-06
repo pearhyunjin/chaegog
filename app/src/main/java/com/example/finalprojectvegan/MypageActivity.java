@@ -112,20 +112,8 @@ public class MypageActivity extends AppCompatActivity {
 
                             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (firebaseUser != null) {
-//                                String userID = firebaseUser.getDisplayName();
-//                                String userEmail = firebaseUser.getEmail();
-
-//                                boolean emailVerified = firebaseUser.isEmailVerified();
 
                                 String uid = firebaseUser.getUid();
-
-//                                Log.d("userID", userID);
-//                                Log.d("userEmail", userEmail);
-//                                Log.d("uid", uid);
-
-//                                Toast.makeText(getApplicationContext(), "firebaseUser : " + firebaseUser, Toast.LENGTH_LONG).show();
-
-//                                String user = firebaseUser.toString();
 
                                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                     Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
@@ -134,20 +122,10 @@ public class MypageActivity extends AppCompatActivity {
                                             documentSnapshot.getData().get("userEmail").toString(),
                                             documentSnapshot.getData().get("userPassword").toString()));
 
-//                                TextView publisherTextView = cardView.findViewById(R.id.homefeed_item_publisher);
-//        publisherTextView.setText(mDataset.get(position).getPublisher());
-//                                String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
-//                                publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
                                     if (documentSnapshot.getId().equals(uid)) {
                                         USER_ID = documentSnapshot.getData().get("userID").toString();
-//                                        Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
                                         userID.setText(USER_ID);
                                     }
-//                                Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
-//        if (user == FirebaseAuth.getInstance().getCurrentUser().toString()) {
-//            publisherTextView.setText(user);
-//            Log.d("user", user);
-//        }
                                 }
                             }
                         } else {
@@ -156,9 +134,67 @@ public class MypageActivity extends AppCompatActivity {
                     }
                 });
 
-//        userID.setText(USER_ID);
-//        userVeganType.setText(USER_VEGAN_TYPE);
-//        userAllergy.setText(USER_ALLERGY);
+        db.collection("userVeganType")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            ArrayList<UserVeganTypeInfo> postUserList = new ArrayList<>();
+
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+
+                                String uid = firebaseUser.getUid();
+
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                    postUserList.add(new UserVeganTypeInfo(
+                                            documentSnapshot.getData().get("veganType").toString()));
+
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        USER_VEGAN_TYPE = documentSnapshot.getData().get("veganType").toString();
+                                        userVeganType.setText(USER_VEGAN_TYPE);
+                                    }
+                                }
+                            }
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
+
+        db.collection("userVeganAllergy")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            ArrayList<UserVeganAllergyInfo> postUserList = new ArrayList<>();
+
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+
+                                String uid = firebaseUser.getUid();
+
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                    postUserList.add(new UserVeganAllergyInfo(
+                                            documentSnapshot.getData().get("userAllergy").toString()));
+
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        USER_ALLERGY = documentSnapshot.getData().get("userAllergy").toString();
+                                        userAllergy.setText(USER_ALLERGY);
+                                    }
+                                }
+                            }
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
 
         Btn_Logout = findViewById(R.id.Btn_Logout);
 
