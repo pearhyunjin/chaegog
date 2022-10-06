@@ -28,15 +28,6 @@ public class MapTabPhoto extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MapTabPhoto.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MapTabPhoto newInstance(String param1, String param2) {
         MapTabPhoto fragment = new MapTabPhoto();
         Bundle args = new Bundle();
@@ -58,7 +49,8 @@ public class MapTabPhoto extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map_tab_photo, container, false);
+        View view = inflater.inflate(R.layout.fragment_map_tab_photo, container, false);
+
+        return view;
     }
 }

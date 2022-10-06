@@ -50,15 +50,6 @@ public class MapTabInfo extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MapTabInfo.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MapTabInfo newInstance(String param1, String param2) {
         MapTabInfo fragment = new MapTabInfo();
         Bundle args = new Bundle();
@@ -98,38 +89,27 @@ public class MapTabInfo extends Fragment {
         time = bundle.getString("time");
         dayoff = bundle.getString("dayOff");
         category = bundle.getString("category");
-        menu = bundle.getString("menu");
+        menu = bundle.getString("menuFi");
         id = bundle.getString("userID");
         pk = bundle.getString("userPk");
         image = bundle.getString("image");
-
-        // 메뉴 텍스트 자르기
-        String arr[] = menu.split(",");
-        for(int i=0; i < arr.length; i++){
-            if(menuFi != null){
-                menuFi = menuFi + "\n" + arr[i];
-            }else{
-                menuFi = arr[i];
-            }
-        }
 
         getMapInfoDetailName.setText(name);
         getMapInfoDetailAddr.setText(addr);
         getMapInfoDetailTime.setText(time);
         getMapInfoDetailDayOff.setText(dayoff);
         getMapInfoDetailCategory.setText(category);
-        getMapInfoDetailMenu.setText(menuFi);
+        getMapInfoDetailMenu.setText(menu);
         Glide.with(this)
                 .load(image)
                 .apply(new RequestOptions().transform(new CenterCrop(),
                         new RoundedCorners(10)))
                 .into(getMapInfoDetailImage);
 
+        /*
         getMapInfoBookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userPK = pk;
-                String userID = id;
                 String storeName = name;
                 String storeAddr = addr;
                 String storeImage =  image;
@@ -145,8 +125,6 @@ public class MapTabInfo extends Fragment {
                                 boolean success = jsonObject.getBoolean("success");
                                 if (success) {
                                     Toast.makeText(getContext(), "북마크 추가", Toast.LENGTH_SHORT).show();
-                                    Log.d("bookmark", userPK);
-                                    Log.d("bookmark", userID);
                                     Log.d("bookmark", storeName);
                                     Log.d("bookmark", storeAddr);
                                     Log.d("bookmark", storeImage);
@@ -171,6 +149,7 @@ public class MapTabInfo extends Fragment {
             }
 
         });
+        */
 
         return view;
     }
