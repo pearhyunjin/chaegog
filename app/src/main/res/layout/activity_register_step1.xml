@@ -97,9 +97,9 @@
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/edit_register_name"
+        app:layout_constraintBottom_toTopOf="@+id/edit_register_id"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="닉네임" />
+        android:text="닉네임" />
 
     <EditText
         android:id="@+id/edit_register_email"
@@ -116,7 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_register_name" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_register_id" />
 
     <TextView
         android:id="@+id/textView4"
@@ -131,7 +131,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/edit_register_email"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="이메일" />
+        android:text="이메일" />
 
     <EditText
         android:id="@+id/edit_register_password"
@@ -163,7 +163,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/edit_register_password"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="비밀번호" />
+        android:text="비밀번호" />
 
     <EditText
         android:id="@+id/edit_password_check"
@@ -195,7 +195,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/edit_password_check"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="비밀번호 확인" />
+        android:text="비밀번호 확인" />
 
     <Button
         android:id="@+id/Btn_RegisterFirstToSecond"
