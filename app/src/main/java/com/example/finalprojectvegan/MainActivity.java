@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -65,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment_recipe;
     Fragment fragment_product;
     Fragment fragment_mypage;
-    Fragment fragment_bookmark;
     Fragment fragment_search;
 
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -130,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         fragment_recipe = new FragHomeRecipe();
         fragment_product = new FragHomeProduct();
         fragment_mypage = new FragMypage();
-        fragment_bookmark = new FragBookmark();
         fragment_search = new UserSearchFragment();
 
 
@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // 바텀 네비게이션
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -205,7 +204,9 @@ public class MainActivity extends AppCompatActivity {
 //                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_ocr).commitAllowingStateLoss();
                         return true;
                     case R.id.bookmark:
-                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
+//                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
+                        Intent bookmarkIntent = new Intent(MainActivity.this, BookmarkActivity.class);
+                        startActivity(bookmarkIntent);
                         return true;
                     case R.id.mypage:
                         SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();

@@ -107,7 +107,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         TextView type;
         TextView way;
         TextView name;
-        ImageView image, image2, manualImg01;
+        ImageView image, image2;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,9 +62,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         ingre = intent.getStringExtra("ingre");
 
         String ingreArr[] = ingre.split(",");
-        ingreArr[0] = ingreArr[0].trim();
         for(int i=0; i < ingreArr.length; i++){
-
             if(ingredient != null){
                 ingredient = ingredient + "\n" + ingreArr[i];
             }else{
@@ -84,12 +83,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
         manual_image06 = intent.getStringExtra("m_Image06");
         manual06 = intent.getStringExtra("manual06");
 
+        // 레시피 상세정보창 메인 이미지
         Glide.with(this)
                 .load(image)
                 .apply(new RequestOptions().transform(new CenterCrop(),
                         new RoundedCorners(10)))
                 .into(getRecipeImage);
 
+        // 레시피 과정
         Glide.with(this)
                 .load(manual_image01)
                 .apply(new RequestOptions().transform(new CenterCrop(),
@@ -165,8 +166,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
                             new RoundedCorners(10)))
                     .into(getRecipeManualImg04);
             getRecipeManual04.setText(manual04);
-        }else{
-
         }
 
         getRecipeName.setText(name);

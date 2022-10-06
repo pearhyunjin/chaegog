@@ -61,6 +61,9 @@ public class FragHomeRecipe extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    public static FragHomeRecipe newInstance() {
+        return new FragHomeRecipe();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
