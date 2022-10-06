@@ -174,11 +174,6 @@ public class MainActivity extends AppCompatActivity {
         // 바텀 네비게이션
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        // userID 전달
-        Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
-
-
         // 리스너 등록
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
@@ -194,17 +189,13 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.map:
                         // 액티비티로 띄움
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                        intent.putExtra("userID", userID);
                         startActivity(intent);
                         return true;
                     case R.id.ocr:
-                        Intent ocrintent = new Intent(MainActivity.this, OcrActivity.class);
-                        ocrintent.putExtra("userID", userID);
-                        startActivity(ocrintent);
-//                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_ocr).commitAllowingStateLoss();
+                        Intent ocrIntent = new Intent(MainActivity.this, OcrActivity.class);
+                        startActivity(ocrIntent);
                         return true;
                     case R.id.bookmark:
-//                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_bookmark).commitAllowingStateLoss();
                         Intent bookmarkIntent = new Intent(MainActivity.this, BookmarkActivity.class);
                         startActivity(bookmarkIntent);
                         return true;

@@ -3,10 +3,23 @@ package com.example.finalprojectvegan;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +27,14 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MapTabMenu extends Fragment {
+    TextView menuTextView;
+    String menu;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    MenuAdapter adapter;
+
+    private NaverMapItem menuList;
+    private List<NaverMapData> menuInfo;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,15 +49,6 @@ public class MapTabMenu extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MapTabMenu.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MapTabMenu newInstance(String param1, String param2) {
         MapTabMenu fragment = new MapTabMenu();
         Bundle args = new Bundle();
@@ -58,7 +70,20 @@ public class MapTabMenu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map_tab_menu, container, false);
+        View view = inflater.inflate(R.layout.fragment_map_tab_menu, container, false);
+        recyclerView = view.findViewById(R.id.menu_recyclerView);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        Bundle bundle = getArguments();
+        menu = bundle.getString("menu");
+        Log.d("MENU", menu);
+
+        String[] menuArr = menu.split(",");
+
+        adapter = new MenuAdapter(menuArr);
+        recyclerView.setAdapter(adapter);
+
+        return view;
     }
 }
