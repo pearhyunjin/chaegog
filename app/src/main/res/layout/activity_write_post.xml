@@ -19,14 +19,14 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginBottom="20dp"
             android:background="#fff8e1"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/black"
-            android:layout_marginBottom="20dp">
+            app:titleTextColor="@color/black">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,9 +43,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="30dp"
-            android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:dividerHeight="1dp"
             android:orientation="vertical">
@@ -83,14 +83,14 @@
                 android:hint="제목"
                 android:minHeight="48dp" />
 
-<!--            <View-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="2sp"-->
-<!--                android:layout_gravity="center_horizontal"-->
-<!--                android:backgroundTint="@color/tomato"-->
-<!--                android:background="@drawable/dividingline">-->
+            <!--            <View-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="2sp"-->
+            <!--                android:layout_gravity="center_horizontal"-->
+            <!--                android:backgroundTint="@color/tomato"-->
+            <!--                android:background="@drawable/dividingline">-->
 
-<!--            </View>-->
+            <!--            </View>-->
 
             <LinearLayout
                 android:id="@+id/linearLayout_Contents"

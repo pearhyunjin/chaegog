@@ -96,6 +96,7 @@ public class MapInfoActivity extends AppCompatActivity {
         pk = intent.getStringExtra("userPk");
         image = intent.getStringExtra("image");
 
+
         String arr[] = menu.split(",");
         for(int i=0; i < arr.length; i++){
             if(menuFi != null){

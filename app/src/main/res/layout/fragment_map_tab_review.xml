@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ff00ff"
     tools:context=".MapTabReview">
 
-    <!-- TODO: Update blank fragment layout -->
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="별점"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:isIndicator="true"
+            android:numStars="1"
+            android:rating="5"
+            android:stepSize="1"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="4.8"
+            android:textSize="18sp" />
+
     <TextView
+        android:id="@+id/review_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:text="리뷰작성"
+        android:textStyle="bold"/>
+
+    <FrameLayout
+        android:id="@+id/review_layout"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/review_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
 
 </LinearLayout>

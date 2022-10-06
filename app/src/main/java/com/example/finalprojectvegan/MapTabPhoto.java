@@ -3,10 +3,21 @@ package com.example.finalprojectvegan;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +25,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MapTabPhoto extends Fragment {
+    RecyclerView recyclerView;
+    GalleryAdapter adapter;
+    GridLayoutManager gridLayoutManager;
+
+    private BookmarkItem bookmarkList;
+    private List<BookmarkData> bookmarkInfo;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,7 +67,32 @@ public class MapTabPhoto extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_tab_photo, container, false);
+        bookmarkInfo = new ArrayList<>();
+        gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerView = view.findViewById(R.id.recyclerGridView);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
+
+        BookmarkApiInterface bookmarkApiInterface = NaverMapRequest.getClient().create(BookmarkApiInterface.class);
+        Call<BookmarkItem> call = bookmarkApiInterface.getBookmarkData();
+        call.enqueue(new Callback<BookmarkItem>() {
+            @Override
+            public void onResponse(Call<BookmarkItem> call, Response<BookmarkItem> response) {
+                bookmarkList = response.body();
+                bookmarkInfo = bookmarkList.USER_BOOKMARK;
+
+
+                adapter = new GalleryAdapter(getContext(), bookmarkInfo);
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<BookmarkItem> call, Throwable t) {
+                Log.d("bookmark1Fragment", t.toString());
+            }
+
+        });
         return view;
     }
 }
