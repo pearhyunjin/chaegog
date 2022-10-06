@@ -41,6 +41,7 @@ public class FragHomeFeed extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    ;
 
     public FragHomeFeed() {
         // Required empty public constructor
@@ -53,6 +54,9 @@ public class FragHomeFeed extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+    public static FragHomeFeed newInstance() {
+        return new FragHomeFeed();
     }
 
     @Override

@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -29,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -36,6 +39,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.ktx.Firebase;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
@@ -93,7 +99,7 @@ public class OcrActivity extends AppCompatActivity {
     String USER_ID; // 사용자 닉네임
     String USER_TYPE; // 사용자 채식주의 유형
 
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @RequiresApi(api = Build.VERSION_CODES.M)
 
     @Override
@@ -139,8 +145,6 @@ public class OcrActivity extends AppCompatActivity {
             }
         }
 
-
-
         // ocr 스캔하기 버튼 클릭시
         goOcr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,6 +179,26 @@ public class OcrActivity extends AppCompatActivity {
 //            }
 //        });
 
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<UserInfo> postUserList = new ArrayList<>();
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+//                                postUserList.add(new UserInfo(
+//                                        documentSnapshot.getData().get("userID").toString(),
+//                                        documentSnapshot.getData().get("userEmail").toString(),
+//                                        documentSnapshot.getData().get("userPassword").toString()));
+                                USER_ID = documentSnapshot.getData().get("userID").toString();
+                            }
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
     }
 
     @Override
@@ -329,14 +353,14 @@ public class OcrActivity extends AppCompatActivity {
                 .show();
     }
 
+
+
     // 비교
     public void compare(){
 
         checkFit = true;
         ocrTextView = findViewById(R.id.ocrTextView);
-//        USER_TYPE = sh2.getString("Type", "USER_TYPE");
-//        Log.e("type", USER_TYPE);
-        USER_TYPE = "페스코";
+        USER_TYPE = "비건";
         // 부적합한 원재료명을 넣을 리스트
         List<String> list1 = new ArrayList<>();
         List<String> list2 = new ArrayList<>();
@@ -366,6 +390,9 @@ public class OcrActivity extends AppCompatActivity {
                                     for (int k = 0; k < arrSize; k++) {
                                         OcrFoodStr = foodNameArr[k].trim();
                                         if (OcrResultStr.equals(OcrFoodStr)) {
+                                            list1.add(OcrFoodStr);
+                                            list2.add(OcrResultStr);
+                                            list1.retainAll(list2);
                                             checkFit = false;
                                         }
                                     }
@@ -379,6 +406,9 @@ public class OcrActivity extends AppCompatActivity {
                                     for (int k = 0; k < arrSize; k++) {
                                         OcrFoodStr = foodNameArr[k].trim();
                                         if (OcrResultStr.equals(OcrFoodStr)) {
+                                            list1.add(OcrFoodStr);
+                                            list2.add(OcrResultStr);
+                                            list1.retainAll(list2);
                                             checkFit = false;
                                         }
                                     }
@@ -391,6 +421,9 @@ public class OcrActivity extends AppCompatActivity {
                                     for (int k = 0; k < arrSize; k++) {
                                         OcrFoodStr = foodNameArr[k].trim();
                                         if (OcrResultStr.equals(OcrFoodStr)) {
+                                            list1.add(OcrFoodStr);
+                                            list2.add(OcrResultStr);
+                                            list1.retainAll(list2);
                                             checkFit = false;
                                         }
                                     }
@@ -403,6 +436,9 @@ public class OcrActivity extends AppCompatActivity {
                                     for (int k = 0; k < arrSize; k++) {
                                         OcrFoodStr = foodNameArr[k].trim();
                                         if (OcrResultStr.equals(OcrFoodStr)) {
+                                            list1.add(OcrFoodStr);
+                                            list2.add(OcrResultStr);
+                                            list1.retainAll(list2);
                                             checkFit = false;
                                         }
                                     }
@@ -436,11 +472,6 @@ public class OcrActivity extends AppCompatActivity {
                 List<String> newList = list1.stream().distinct().collect(Collectors.toList());
                 String n_ingre1 = newList.toString().replace("[","").replace("]","");
 
-                // 로그인할때 저장한 사용자의 이메일을 잘라서 불러옴(추후 닉네임으로 변경)
-//                SharedPreferences sh = getSharedPreferences("temp", MODE_PRIVATE);
-//                USER_ID = sh.getString("userName", "USER_NAME");
-//                int index = USER_ID.indexOf("@");
-//                USER_ID = USER_ID.substring(0, index);
 ;                if(!checkFit){
                     Log.e("OCRTEST", resultText + " - 채식유형에 부적합합니다.");
                     ocrTextView.setText(USER_ID + "님의 채식 유형에 맞지않는 제품입니다.");
