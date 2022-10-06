@@ -61,6 +61,9 @@ public class FragHomeProduct extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    public static FragHomeProduct newInstance() {
+        return new FragHomeProduct();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
