@@ -11,14 +11,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="637dp"
+        android:layout_height="679dp"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="20sp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
@@ -71,14 +74,14 @@
             android:id="@+id/homefeed_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/pretendardregular"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold"
             tools:text="타이틀" />
-
 
         <TextView
             android:id="@+id/homefeed_item_contents"
