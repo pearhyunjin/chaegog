@@ -71,7 +71,7 @@
         <entry key="app/src/main/res/layout/activity_register_step3.xml" value="0.2451202392578125" />
         <entry key="app/src/main/res/layout/activity_register_step4.xml" value="0.32437744140625" />
         <entry key="app/src/main/res/layout/activity_title.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_write_post.xml" value="0.16596374511718756" />
+        <entry key="app/src/main/res/layout/activity_write_post.xml" value="0.2495178222656251" />
         <entry key="app/src/main/res/layout/bookmark1_item.xml" value="0.17028985507246377" />
         <entry key="app/src/main/res/layout/fragment_camera2_basic.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_frag_bookmark.xml" value="0.17391304347826086" />
@@ -105,12 +105,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.2" />
-      </ProjectState>
-    </option>
   </component>
 </project>
