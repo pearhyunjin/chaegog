@@ -58,15 +58,17 @@
             </androidx.appcompat.widget.Toolbar>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:dividerHeight="1dp"
-                android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="1"
+            android:dividerHeight="1dp"
+            android:orientation="vertical">
 
 
                 <!--            <RelativeLayout-->
@@ -106,8 +108,15 @@
                 <!--                android:layout_gravity="center_horizontal"-->
                 <!--                android:backgroundTint="@color/tomato"-->
                 <!--                android:background="@drawable/dividingline">-->
+            <!--            <View-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="2sp"-->
+            <!--                android:layout_gravity="center_horizontal"-->
+            <!--                android:backgroundTint="@color/tomato"-->
+            <!--                android:background="@drawable/dividingline">-->
 
                 <!--            </View>-->
+            <!--            </View>-->
 
                 <LinearLayout
                     android:id="@+id/linearLayout_Contents"

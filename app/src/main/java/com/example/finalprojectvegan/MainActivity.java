@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Btn_addFeed = (FloatingActionButton) findViewById(R.id.Btn_addFeed);
-
         Btn_addFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
