@@ -47,6 +47,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.123" />
         <entry key="app/src/main/res/drawable/ic_baseline_horizontal_rule_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_map_info.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_bookmark.xml" value="0.15416666666666667" />
         <entry key="app/src/main/res/layout/activity_camera.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_crop_image.xml" value="0.11550151975683891" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.16757246376811594" />

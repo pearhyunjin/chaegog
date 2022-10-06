@@ -142,7 +142,7 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
 
                                 TextView publisherTextView = cardView.findViewById(R.id.homefeed_item_publisher);
 //        publisherTextView.setText(mDataset.get(position).getPublisher());
-                                String user = mDataset.get(position).getPublisher();
+                                String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
 //                                publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
                                 if (documentSnapshot.getId().equals(user)) {
                                     publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
