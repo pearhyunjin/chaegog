@@ -44,16 +44,7 @@ import retrofit2.Callback;
 public class MapInfoActivity extends AppCompatActivity {
     private Fragment fragment_info, fragment_menu, fragment_photo, fragment_review;
     private TabLayout tabs;
-
-    TextView getMapInfoDetailName, getMapInfoDetailAddr, getMapInfoDetailTime,
-            getMapInfoDetailCategory, getMapInfoDetailMenu, getMapInfoDetailDayOff;
-    ImageView getMapInfoDetailImage;
-    CheckBox getMapInfoBookmark;
-    String name, addr, time, dayoff, category, menu, pk, id, image;
-    boolean bookmark;
-    FirebaseAuth firebaseAuth;
-    LinearLayout info_layout;
-    Fragment selected;
+    String name, addr, time, dayoff, category, menu, pk, id, image,menuFi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,32 +57,20 @@ public class MapInfoActivity extends AppCompatActivity {
         fragment_review = new MapTabReview();
 
         tabs = findViewById(R.id.map_info_tabs);
-//        tabs.addTab(tabs.newTab().setText("정보"));
-//        tabs.addTab(tabs.newTab().setText("메뉴"));
-//        tabs.addTab(tabs.newTab().setText("사진"));
-//        tabs.addTab(tabs.newTab().setText("리뷰"));
 
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_info).commitAllowingStateLoss();
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-//                transaction.remove(fragment_info);
-//                selected = null;
                     if (position == 0)
-//                        selected = fragment_info;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_info).commitAllowingStateLoss();
                     else if (position == 1)
-//                        selected = fragment_menu;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_menu).commitAllowingStateLoss();
                     else if (position == 2)
-//                        selected = fragment_photo;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_photo).commitAllowingStateLoss();
                     else if (position == 3)
-//                        selected = fragment_review;
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment_review).commitAllowingStateLoss();
-//                    transaction.commitAllowingStateLoss();
 
             }
 
@@ -106,18 +85,6 @@ public class MapInfoActivity extends AppCompatActivity {
             }
         });
 
-
-//        firebaseAuth = FirebaseAuth.getInstance();
-//
-//        getMapInfoDetailName = findViewById(R.id.map_info_detail_name);
-//        getMapInfoDetailAddr = findViewById(R.id.map_info_detail_addr);
-//        getMapInfoDetailTime = findViewById(R.id.map_info_detail_time);
-//        getMapInfoDetailCategory = findViewById(R.id.map_info_detail_category);
-//        getMapInfoDetailMenu = findViewById(R.id.map_info_detail_menu);
-//        getMapInfoBookmark = findViewById(R.id.favorite_checkbox);
-//        getMapInfoDetailImage = findViewById(R.id.map_info_detail_image);
-//        getMapInfoDetailDayOff = findViewById(R.id.map_info_detail_dayoff);
-//
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         addr = intent.getStringExtra("addr");
@@ -125,10 +92,18 @@ public class MapInfoActivity extends AppCompatActivity {
         dayoff = intent.getStringExtra("dayOff");
         category = intent.getStringExtra("category");
         menu = intent.getStringExtra("menu");
-        bookmark = intent.getBooleanExtra("bookmark", bookmark);
         id = intent.getStringExtra("userID");
         pk = intent.getStringExtra("userPk");
         image = intent.getStringExtra("image");
+
+        String arr[] = menu.split(",");
+        for(int i=0; i < arr.length; i++){
+            if(menuFi != null){
+                menuFi = menuFi + "\n" + arr[i];
+            }else{
+                menuFi = arr[i];
+            }
+        }
 
         Bundle bundle = new Bundle();
 
@@ -138,10 +113,10 @@ public class MapInfoActivity extends AppCompatActivity {
         bundle.putString("time", time);
         bundle.putString("dayOff", dayoff);
         bundle.putString("category", category);
-        bundle.putString("userID", id);
         bundle.putString("menu", menu);
-        bundle.putString("userPk", pk);
+        bundle.putString("menuFi", menuFi);
         fragment_info.setArguments(bundle);
+        fragment_menu.setArguments(bundle);
 
 
 

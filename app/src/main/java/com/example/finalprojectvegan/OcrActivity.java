@@ -121,8 +121,8 @@ public class OcrActivity extends AppCompatActivity {
         recomm_image = findViewById(R.id.recomm_image);
 
 
-        Intent mainIntent = getIntent();
-        USER_ID = mainIntent.getStringExtra("userID");
+        // Intent mainIntent = getIntent();
+        // USER_ID = mainIntent.getStringExtra("userID");
 
         TextRecognizer recognizer = TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
 
@@ -185,14 +185,29 @@ public class OcrActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            ArrayList<UserInfo> postUserList = new ArrayList<>();
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+//                                String userID = firebaseUser.getDisplayName();
+//                                String userEmail = firebaseUser.getEmail();
+
+//                                boolean emailVerified = firebaseUser.isEmailVerified();
+
+                                String uid = firebaseUser.getUid();
+
+                                ArrayList<UserInfo> postUserList = new ArrayList<>();
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
 //                                postUserList.add(new UserInfo(
 //                                        documentSnapshot.getData().get("userID").toString(),
 //                                        documentSnapshot.getData().get("userEmail").toString(),
 //                                        documentSnapshot.getData().get("userPassword").toString()));
-                                USER_ID = documentSnapshot.getData().get("userID").toString();
+//                                USER_ID = documentSnapshot.getData().get("userID").toString();
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        USER_ID = documentSnapshot.getData().get("userID").toString();
+//                                    userID.setText(USER_ID);
+//                                    Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         } else {
                             Log.d("error", "Error getting documents", task.getException());

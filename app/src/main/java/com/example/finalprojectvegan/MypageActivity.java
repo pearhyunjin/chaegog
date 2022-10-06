@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -38,6 +39,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -54,6 +58,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 import com.example.finalprojectvegan.R;
 //import com.example.finalprojectvegan.Camera2BasicFragment;
@@ -66,22 +71,95 @@ public class MypageActivity extends AppCompatActivity {
     private static final int CAMERA = 100;
     private static final int GALLERY = 101;
 
-    private Button Btn_Logout;
+    private TextView Btn_Logout;
+    TextView userID, userVeganType, userAllergy;
     private ImageView imageView_profile;
     InputImage image;
 
     ProgressDialog dialog;
+
+    String USER_ID;
+    String USER_VEGAN_TYPE;
+    String USER_ALLERGY;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String user = firebaseUser.toString();
 
         getFirebaseProfileImage(firebaseUser);
 
         imageView_profile = findViewById(R.id.imageView_profile);
+        userID = (TextView) findViewById(R.id.userID);
+        userVeganType = (TextView) findViewById(R.id.userVeganType);
+        userAllergy = (TextView) findViewById(R.id.userAllergy);
+
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            ArrayList<UserInfo> postUserList = new ArrayList<>();
+
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+//                                String userID = firebaseUser.getDisplayName();
+//                                String userEmail = firebaseUser.getEmail();
+
+//                                boolean emailVerified = firebaseUser.isEmailVerified();
+
+                                String uid = firebaseUser.getUid();
+
+//                                Log.d("userID", userID);
+//                                Log.d("userEmail", userEmail);
+//                                Log.d("uid", uid);
+
+//                                Toast.makeText(getApplicationContext(), "firebaseUser : " + firebaseUser, Toast.LENGTH_LONG).show();
+
+//                                String user = firebaseUser.toString();
+
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                    postUserList.add(new UserInfo(
+                                            documentSnapshot.getData().get("userID").toString(),
+                                            documentSnapshot.getData().get("userEmail").toString(),
+                                            documentSnapshot.getData().get("userPassword").toString()));
+
+//                                TextView publisherTextView = cardView.findViewById(R.id.homefeed_item_publisher);
+//        publisherTextView.setText(mDataset.get(position).getPublisher());
+//                                String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
+//                                publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        USER_ID = documentSnapshot.getData().get("userID").toString();
+//                                        Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
+                                        userID.setText(USER_ID);
+                                    }
+//                                Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
+//        if (user == FirebaseAuth.getInstance().getCurrentUser().toString()) {
+//            publisherTextView.setText(user);
+//            Log.d("user", user);
+//        }
+                                }
+                            }
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
+
+//        userID.setText(USER_ID);
+//        userVeganType.setText(USER_VEGAN_TYPE);
+//        userAllergy.setText(USER_ALLERGY);
+
         Btn_Logout = findViewById(R.id.Btn_Logout);
 
         Btn_Logout.setOnClickListener(new View.OnClickListener() {

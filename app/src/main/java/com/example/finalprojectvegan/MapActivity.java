@@ -80,9 +80,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             getMapInfoBookmark = findViewById(R.id.favorite_checkbox);
             mapInfoButton = findViewById(R.id.map_info_button);
 
-            Intent intent = getIntent();
-            userID = intent.getStringExtra("userID");
-
             FragmentManager fm = getSupportFragmentManager();
             MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map_fragment);
             if (mapFragment == null) {
@@ -101,7 +98,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Log.d(TAG, "onMapReady");
 
             mapInfoLayout = findViewById(R.id.map_info_layout);
-            Fragment fragment_map_info = new MapTabInfo();
 
             NaverMapApiInterface naverMapApiInterface = NaverMapRequest.getClient().create(NaverMapApiInterface.class);
             Call<NaverMapItem> call = naverMapApiInterface.getMapData();
@@ -136,7 +132,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                              mapInfoCategory = naverMapInfo.get(finalI).getStoreCategory();
                                              mapInfoMenu = naverMapInfo.get(finalI).getStoreMenu();
                                              mapInfoBookmark = naverMapInfo.get(finalI).getStoreBookmark();
-                                             userPk = userID + finalI;
 
                                              mapInfoButton.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -150,8 +145,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                     intent.putExtra("dayOff", mapInfoDayoff);
                                                     intent.putExtra("category", mapInfoCategory);
                                                     intent.putExtra("menu", mapInfoMenu);
-                                                    intent.putExtra("userID", userID);
-                                                    intent.putExtra("userPk", userPk);
                                                     startActivity(intent);
 
                                                 }
