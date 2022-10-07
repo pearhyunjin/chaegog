@@ -18,25 +18,15 @@ public class WritePostInfo {
         this.createdAt = createdAt;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getContents() {
-        return contents;
-    }
+    public String getContents() { return contents; }
 
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
+    public void setContents(String contents) { this.contents = contents; }
 
-    public String getPublisher() {
-        return publisher;
-    }
+    public String getPublisher() { return publisher; }
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;

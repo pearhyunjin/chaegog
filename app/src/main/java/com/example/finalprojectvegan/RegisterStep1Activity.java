@@ -163,8 +163,6 @@ public class RegisterStep1Activity extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void unused) {
                                                         Toast.makeText(getApplicationContext(), "회원정보 등록 성공", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(RegisterStep2Activity.this, RegisterStep3Activity.class);
-//                                startActivity(intent);
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
