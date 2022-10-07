@@ -81,7 +81,6 @@ public class WritePostActivity extends AppCompatActivity {
         imageView_uploadPost = findViewById(R.id.imageView_uploadPost);
 
         Btn_uploadPost = findViewById(R.id.Btn_uploadPost);
-//        Btn_uploadImagePost = findViewById(R.id.Btn_uploadImagePost);
 
         Btn_uploadPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,29 +92,14 @@ public class WritePostActivity extends AppCompatActivity {
             }
         });
 
-//        Btn_uploadImagePost.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Intent.ACTION_PICK);
-//                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-//                intent.setType("image/*");
-//                startActivityForResult(intent, GALLERY);
-//            }
-//        });
-
         imageView_uploadPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(Intent.ACTION_PICK);
-//                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-//                intent.setType("image/*");
-//                startActivityForResult(intent, GALLERY);
 
                 Intent intent = new Intent(getBaseContext(), PopupActivity.class);
                 intent.putExtra("type", PopupType.SELECT);
                 intent.putExtra("gravity", PopupGravity.CENTER);
                 intent.putExtra("title", "사진을 불러올 기능을 선택하세요");
-//                intent.putExtra("content", "Popup Activity was made by Lakue");
                 intent.putExtra("buttonLeft", "카메라");
                 intent.putExtra("buttonRight", "갤러리");
                 startActivityForResult(intent, 2);
@@ -276,8 +260,8 @@ public class WritePostActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser != null) {
-            StorageReference mountainImageReference = storageReference.child("posts/" + firebaseUser.getUid() + "/postImage" + System.currentTimeMillis() + ".jpg");
-            UploadTask uploadTask = mountainImageReference.putBytes(bytes);
+            StorageReference imageReference = storageReference.child("posts/" + firebaseUser.getUid() + "/postImage" + System.currentTimeMillis() + ".jpg");
+            UploadTask uploadTask = imageReference.putBytes(bytes);
             uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -285,7 +269,7 @@ public class WritePostActivity extends AppCompatActivity {
                         Log.d("실패", "실패");
                         throw task.getException();
                     }
-                    return mountainImageReference.getDownloadUrl();
+                    return imageReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
@@ -300,7 +284,6 @@ public class WritePostActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     public byte[] bitmapToByteArray( Bitmap bitmap ) {
@@ -330,15 +313,12 @@ public class WritePostActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
                     }
                 });
-
     }
 }

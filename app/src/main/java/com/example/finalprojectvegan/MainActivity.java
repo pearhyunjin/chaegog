@@ -161,12 +161,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -177,16 +175,12 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Log.i(TAG, "바텀 네비게이션 클릭");
 
                 switch (item.getItemId()){
                     case R.id.homefeed:
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_homefeed).commitAllowingStateLoss();
-//                        Intent postintent = new Intent(MainActivity.this, PostActivity.class);
-//                        startActivity(postintent);
                         return true;
                     case R.id.map:
-                        // 액티비티로 띄움
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
                         return true;
@@ -202,11 +196,6 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
                         editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         editor.apply();
-
-//                        Intent mypageintent = new Intent(MainActivity.this, MypageActivity.class);
-//                        startActivity(mypageintent);
-
-//                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_mypage).commitAllowingStateLoss();
                         return true;
                 }
                 return true;
@@ -233,13 +222,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "마이페이지 클릭됨", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                 startActivity(intent);
-//                getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,fragment_search).commitAllowingStateLoss();
                 return true;
         }
         return true;
     }
 
-//    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//    CollectionReference productReference = db.collection("user").document(firebaseUser)
 }

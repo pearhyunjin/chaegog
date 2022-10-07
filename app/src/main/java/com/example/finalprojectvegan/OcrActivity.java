@@ -309,12 +309,7 @@ public class OcrActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Text visionText) {
                         Log.e("텍스트 인식", "성공");
-                        // Task completed successfully
                         resultText = visionText.getText();
-
-//                        getAlertDialog("[OCR] 사진 인식 결과",
-//                                String.valueOf(resultText),
-//                                "확인", "", "");
 
                         compare();
                     }
