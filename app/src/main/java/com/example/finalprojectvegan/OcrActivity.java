@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -119,6 +120,7 @@ public class OcrActivity extends AppCompatActivity {
         allergy_ingredient = findViewById(R.id.allergy_ingredient);
         recomm_text = findViewById(R.id.recomm_text);
         recomm_image = findViewById(R.id.recomm_image);
+
 
 
         // Intent mainIntent = getIntent();
@@ -521,6 +523,7 @@ public class OcrActivity extends AppCompatActivity {
 //                    galleryBtn.setVisibility(View.GONE);
 //                    cameraBtn.setVisibility(View.GONE);
                     goOcr.setVisibility(View.GONE);
+
                 }
 
             }

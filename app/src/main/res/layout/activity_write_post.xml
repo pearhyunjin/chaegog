@@ -7,154 +7,70 @@
     android:orientation="vertical"
     tools:context=".WritePostActivity">
 
-    <ScrollView
-        android:id="@+id/Scroll_View"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@color/yellow"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextColor="@color/black">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:text="새 게시물"
+            android:textColor="@color/black" />
+    </androidx.appcompat.widget.Toolbar>
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="20dp"
-                android:background="@color/yellow"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:titleTextColor="@color/black">
+    <ImageView
+        android:id="@+id/imageView_uploadPost"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#c8c8c8"
+        android:padding="70dp"
+        android:src="@drawable/ic_baseline_add_circle_24" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="새 게시물"
-                    android:textColor="@color/black" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="@drawable/dividingline"/>
 
-            </androidx.appcompat.widget.Toolbar>
+    <EditText
+        android:id="@+id/edit_post_title"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/pretendardregular"
+        android:hint="제목"
+        android:minHeight="48dp" />
 
+    <EditText
+        android:id="@+id/edit_post_contents"
+        android:layout_width="330dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/pretendardregular"
+        android:gravity="top"
+        android:hint="내용 입력"
+        android:lines="4"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="0dp"
-            android:layout_weight="1"
-            android:dividerHeight="1dp"
-            android:orientation="vertical">
+    <Button
+        android:id="@+id/Btn_uploadPost"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/pretendardregular"
+        android:text="공유"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
-
-                <!--            <RelativeLayout-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content" />-->
-
-                <ImageView
-                    android:id="@+id/imageView_uploadPost"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:backgroundTint="#c8c8c8"
-                    android:padding="70dp"
-                    android:src="@drawable/ic_baseline_add_circle_24" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1sp"
-                    android:background="@drawable/dividingline">
-                </View>
-
-                <EditText
-                    android:id="@+id/edit_post_title"
-                    android:layout_width="330dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/pretendardregular"
-                    android:hint="제목"
-                    android:minHeight="48dp" />
-
-                <!--            <View-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="2sp"-->
-                <!--                android:layout_gravity="center_horizontal"-->
-                <!--                android:backgroundTint="@color/tomato"-->
-                <!--                android:background="@drawable/dividingline">-->
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="2sp"-->
-            <!--                android:layout_gravity="center_horizontal"-->
-            <!--                android:backgroundTint="@color/tomato"-->
-            <!--                android:background="@drawable/dividingline">-->
-
-                <!--            </View>-->
-            <!--            </View>-->
-
-                <LinearLayout
-                    android:id="@+id/linearLayout_Contents"
-                    android:layout_width="330dp"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/edit_post_contents"
-                        android:layout_width="330dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/pretendardregular"
-                        android:gravity="top"
-                        android:hint="내용 입력"
-                        android:lines="4"/>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1sp"
-                        android:background="@drawable/dividingline">
-
-                    </View>
-
-                </LinearLayout>
-
-
-            <Button
-                android:id="@+id/Btn_uploadPost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="end"
-                android:backgroundTint="@color/green"
-                android:fontFamily="@font/pretendardregular"
-                android:text="공유"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-                <!--            <Button-->
-                <!--                android:id="@+id/Btn_uploadImagePost"-->
-                <!--                android:layout_width="330dp"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_gravity="center_horizontal"-->
-                <!--                android:layout_margin="10dp"-->
-                <!--                android:fontFamily="@font/pretendardregular"-->
-                <!--                android:text="사진" />-->
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

@@ -79,15 +79,34 @@
             android:textSize="16dp"
             android:textStyle="normal"
             tools:text="식당에 대한 리뷰입니다." />
-
         <ImageView
             android:id="@+id/review_item_imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="20dp"
-            android:background="#dfdfdf" />
+            android:background="#00ffffff" />
 
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:id="@+id/review_item_imageView"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="150dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_margin="20dp"-->
+<!--                android:background="#00dfdfdf" />-->
+<!--            <ImageView-->
+<!--                android:id="@+id/review_item_imageView2"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="150dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:background="#dfdfdf" />-->
+
+<!--        </LinearLayout>-->
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

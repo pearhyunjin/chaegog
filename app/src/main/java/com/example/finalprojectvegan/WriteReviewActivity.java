@@ -29,6 +29,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -161,7 +164,10 @@ public class WriteReviewActivity extends AppCompatActivity {
         try{
             InputStream in = getContentResolver().openInputStream(uri);
             bitmap = BitmapFactory.decodeStream(in);
-            Glide.with(WriteReviewActivity.this).load(uri).override(500).into(imageView_review1);
+            Glide.with(WriteReviewActivity.this)
+                    .load(uri).override(500)
+                    .apply(new RequestOptions().transform(new CenterCrop()))
+                    .into(imageView_review1);
             Log.e("uri", "uri : " + uri);
             bytes = bitmapToByteArray(bitmap);
         } catch (FileNotFoundException e){

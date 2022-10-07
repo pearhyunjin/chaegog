@@ -221,7 +221,12 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
 
 //        TextView imagePathTextView = cardView.findViewById(R.id.homefeed_item_imagePath);
 //        imagePathTextView.setText(mDataset.get(position).getImagePath());
-        Glide.with(cardView).load(url).override(800, 800).into(homefeed_item_imageView);
+        Glide.with(cardView)
+                .load(url)
+                .override(800, 800)
+                .apply(new RequestOptions().transform(new CenterCrop(),
+                        new RoundedCorners(10)))
+                .into(homefeed_item_imageView);
 //        Log.d("url", "url : " + imagePathTextView);
 //        loadImage();
 

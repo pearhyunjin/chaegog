@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -110,7 +113,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         review_item_createdAt.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(mDataset.get(position).getCreatedAt()));
 
         String url = mDataset.get(position).getImagePath1();
-        Glide.with(cardView).load(url).override(500, 500).into(review_item_imageView);
+        Glide.with(cardView)
+                .load(url)
+                .override(500, 500)
+                .apply(new RequestOptions().transform(new CenterCrop(),
+                new RoundedCorners(10)))
+                .into(review_item_imageView);
     }
 
     @Override
