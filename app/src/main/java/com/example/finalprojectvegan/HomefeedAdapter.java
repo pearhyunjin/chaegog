@@ -136,7 +136,7 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
                             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (firebaseUser != null) {
 
-                                String uid = firebaseUser.getUid();
+                                String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
 
                                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                     Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
@@ -150,10 +150,10 @@ public class HomefeedAdapter extends RecyclerView.Adapter<HomefeedAdapter.ViewHo
 //        publisherTextView.setText(mDataset.get(position).getPublisher());
 //                                    String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
 //                                publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
-//                                    if (documentSnapshot.getId().equals(uid)) {
+                                    if (documentSnapshot.getId().equals(user)) {
                                         publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
 //                                        loadImage(uid);
-//                                    }
+                                    }
 //        if (user == FirebaseAuth.getInstance().getCurrentUser().toString()) {
 //            publisherTextView.setText(user);
 //            Log.d("user", user);

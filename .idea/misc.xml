@@ -49,6 +49,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_horizontal_rule_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_round_info_24.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/selector_map_info.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/Mypage_item.xml" value="0.1802536231884058" />
         <entry key="app/src/main/res/layout/activity_bookmark.xml" value="0.15416666666666667" />
         <entry key="app/src/main/res/layout/activity_camera.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_crop_image.xml" value="0.11550151975683891" />
@@ -57,6 +58,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2037037037037037" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.16983695652173914" />
         <entry key="app/src/main/res/layout/activity_map_info.xml" value="0.25384615384615383" />
+        <entry key="app/src/main/res/layout/activity_my_feed.xml" value="0.17775436622509055" />
         <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.19894561767578128" />
         <entry key="app/src/main/res/layout/activity_ocr.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/activity_ocr_image_view.xml" value="0.12234042553191489" />
@@ -64,7 +66,7 @@
         <entry key="app/src/main/res/layout/activity_password_reset.xml" value="0.20774078369140628" />
         <entry key="app/src/main/res/layout/activity_post.xml" value="0.21290911506204047" />
         <entry key="app/src/main/res/layout/activity_profile_image.xml" value="0.1515625" />
-        <entry key="app/src/main/res/layout/activity_recipe_detail.xml" value="0.20471014492753623" />
+        <entry key="app/src/main/res/layout/activity_recipe_detail.xml" value="0.14027149321266968" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.24731903076171877" />
         <entry key="app/src/main/res/layout/activity_register_step1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register_step2.xml" value="0.17475891113281253" />
@@ -87,6 +89,8 @@
         <entry key="app/src/main/res/layout/fragment_frag_ocr_popup.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.22313232421875" />
         <entry key="app/src/main/res/layout/homefeed_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/myfeed_item.xml" value="0.197605922277696" />
+        <entry key="app/src/main/res/layout/mypage_item.xml" value="0.16816253662109376" />
         <entry key="app/src/main/res/layout/product_item.xml" value="0.20471014492753623" />
         <entry key="app/src/main/res/layout/recipe_item.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.1408514492753623" />
