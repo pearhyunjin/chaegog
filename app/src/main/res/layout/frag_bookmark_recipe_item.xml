@@ -1,73 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="360dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
     android:background="@color/white"
     tools:context=".FragBookmark3">
 
     <LinearLayout
+        android:id="@+id/graybox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_margin="15dp"
-        android:id="@+id/graybox">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="366dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="end"
             android:background="@color/gray_f5"
+            android:gravity="end"
             android:orientation="vertical">
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/bookmark_recipe_name"
-                    android:layout_width="330dp"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/pretendardregular"
                     android:padding="10dp"
                     android:text="레시피 이름"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <CheckBox
-                android:id="@+id/ProductFavorite"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="top"
-                android:layout_margin="10dp"
-                android:background="@drawable/custom_checkbox"
-                android:backgroundTint="@color/green"
-                android:button="@null" />
+                    android:id="@+id/ProductFavorite"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="top"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:backgroundTint="@color/green"
+                    android:button="@null" />
 
 
             </LinearLayout>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"/>
+                android:orientation="horizontal" />
 
-                <ImageView
-                    android:id="@+id/bookmarkImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="185dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/graybox"
-                    android:layout_margin="-10dp"
-                    android:layout_marginBottom="10dp"/>
+            <ImageView
+                android:id="@+id/recipe_image"
+                android:layout_width="316dp"
+                android:layout_height="181dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/graybox"
+                android:outlineSpotShadowColor="#6D6D6D"
+                tools:srcCompat="@tools:sample/avatars" />
 
-            </LinearLayout>
+            <!--            <ImageView-->
+            <!--                android:id="@+id/bookmarkImageView"-->
+            <!--                android:layout_width="365dp"-->
+            <!--                android:layout_height="185dp"-->
+            <!--                android:layout_gravity="center_horizontal"-->
+            <!--                android:layout_margin="-10dp"-->
+            <!--                android:layout_marginBottom="10dp"-->
+            <!--                android:background="@drawable/graybox" />-->
+
         </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 
 

@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/hssaemaul_regular"
         android:text="채곡채곡 3/4"
         android:textAlignment="center"
@@ -20,7 +20,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 
     <TextView
@@ -69,14 +70,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="-10dp">
+            android:layout_margin="10dp">
 
 
             <RadioButton
                 android:id="@+id/radio_Vegan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/selector_radio_button"
                 android:button="@null"
                 android:fontFamily="@font/pretendardregular"
@@ -89,7 +90,7 @@
                 android:id="@+id/radio_Lacto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/selector_radio_button"
                 android:button="@null"
                 android:fontFamily="@font/pretendardregular"
@@ -102,7 +103,7 @@
                 android:id="@+id/radio_Ovo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/selector_radio_button"
                 android:button="@null"
                 android:fontFamily="@font/pretendardregular"
@@ -115,7 +116,7 @@
                 android:id="@+id/radio_LactoOvo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/selector_radio_button"
                 android:button="@null"
                 android:fontFamily="@font/pretendardregular"
@@ -128,7 +129,7 @@
                 android:id="@+id/radio_Pollo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/selector_radio_button"
                 android:button="@null"
                 android:gravity="center"
@@ -139,7 +140,7 @@
                 android:id="@+id/radio_Pesco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/selector_radio_button"
                 android:button="@null"
                 android:fontFamily="@font/pretendardregular"
@@ -152,7 +153,7 @@
                 android:id="@+id/radio_etc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/selector_radio_button"
                 android:button="@null"
                 android:fontFamily="@font/pretendardregular"

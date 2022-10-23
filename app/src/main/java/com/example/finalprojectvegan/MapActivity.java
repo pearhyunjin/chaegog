@@ -59,6 +59,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LinearLayout mapInfoLayout;
         CheckBox getMapInfoBookmark;
 
+
+
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
