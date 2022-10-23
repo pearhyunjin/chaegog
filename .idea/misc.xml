@@ -78,7 +78,7 @@
         <entry key="app/src/main/res/layout/fragment_frag_bookmark1.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_frag_bookmark2.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_frag_bookmark3.xml" value="0.12234042553191489" />
-        <entry key="app/src/main/res/layout/fragment_frag_home_feed.xml" value="0.17391304347826086" />
+        <entry key="app/src/main/res/layout/fragment_frag_home_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_frag_home_product.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_frag_home_recipe.xml" value="0.12234042553191489" />
         <entry key="app/src/main/res/layout/fragment_frag_map.xml" value="0.17391304347826086" />
@@ -86,7 +86,7 @@
         <entry key="app/src/main/res/layout/fragment_frag_ocr.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_frag_ocr_popup.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.22313232421875" />
-        <entry key="app/src/main/res/layout/homefeed_item.xml" value="0.26847958448456555" />
+        <entry key="app/src/main/res/layout/homefeed_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/product_item.xml" value="0.20471014492753623" />
         <entry key="app/src/main/res/layout/recipe_item.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.1408514492753623" />

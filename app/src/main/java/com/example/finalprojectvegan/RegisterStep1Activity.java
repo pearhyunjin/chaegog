@@ -101,9 +101,9 @@ public class RegisterStep1Activity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if (success) {
-                                Toast.makeText(getApplicationContext(), "회원 정보 1단계 등록 완료", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterStep1Activity.this, RegisterStep2Activity.class);
-                                startActivity(intent);
+//                                Toast.makeText(getApplicationContext(), "회원 정보 1단계 등록 완료", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(RegisterStep1Activity.this, RegisterStep2Activity.class);
+//                                startActivity(intent);
 
                             } else {
                                 Toast.makeText(getApplicationContext(), "회원 정보 1단계 등록 실패", Toast.LENGTH_SHORT).show();

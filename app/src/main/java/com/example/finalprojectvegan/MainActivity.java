@@ -193,9 +193,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(bookmarkIntent);
                         return true;
                     case R.id.mypage:
-                        SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                        editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        editor.apply();
+                        getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment_mypage).commitAllowingStateLoss();
+//                        SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+//                        editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                        editor.apply();
                         return true;
                 }
                 return true;
