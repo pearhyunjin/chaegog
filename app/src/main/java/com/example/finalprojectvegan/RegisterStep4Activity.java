@@ -117,7 +117,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_memil:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "메밀", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 메밀");
+                        textView_select_allergy.append("메밀 ");
                         count++;
                     } else {
 
@@ -126,7 +126,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_mil:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "밀", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 밀");
+                        textView_select_allergy.append("밀 ");
                         count++;
                     } else {
 
@@ -135,7 +135,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_daedu:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "대두", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 대두");
+                        textView_select_allergy.append("대두 ");
                         count++;
                     } else {
 
@@ -144,7 +144,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_hodu:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "호두", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 호두");
+                        textView_select_allergy.append("호두 ");
                         count++;
                     } else {
 
@@ -153,7 +153,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_peanut:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "땅콩", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 땅콩");
+                        textView_select_allergy.append("땅콩 ");
                         count++;
                     } else {
 
@@ -162,7 +162,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_peach:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "복숭아", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 복숭아");
+                        textView_select_allergy.append("복숭아 ");
                         count++;
                     } else {
 
@@ -171,7 +171,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_tomato:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "토마토", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 토마토");
+                        textView_select_allergy.append("토마토 ");
                         count++;
                     } else {
 
@@ -180,7 +180,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_poultry:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "가금류", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 가금류");
+                        textView_select_allergy.append("가금류 ");
                         count++;
                     } else {
 
@@ -189,7 +189,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_milk:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "우유", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 우유");
+                        textView_select_allergy.append("우유 ");
                         count++;
                     } else {
 
@@ -198,7 +198,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_shrimp:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "새우", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 새우");
+                        textView_select_allergy.append("새우 ");
                         count++;
                     } else {
 
@@ -207,7 +207,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_mackerel:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "고등어", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 고등어");
+                        textView_select_allergy.append("고등어 ");
                         count++;
                     } else {
 
@@ -216,7 +216,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_mussel:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "홍합", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 홍합");
+                        textView_select_allergy.append("홍합 ");
                         count++;
                     } else {
 
@@ -225,7 +225,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_abalone:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "전복", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 전복");
+                        textView_select_allergy.append("전복 ");
                         count++;
                     } else {
 
@@ -234,7 +234,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_oyster:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "굴", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 굴");
+                        textView_select_allergy.append("굴 ");
                         count++;
                     } else {
 
@@ -243,7 +243,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_shellfish:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "조개류", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 조개류");
+                        textView_select_allergy.append("조개류 ");
                         count++;
                     } else {
 
@@ -252,7 +252,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_crab:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "게", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 게");
+                        textView_select_allergy.append("게 ");
                         count++;
                     } else {
 
@@ -261,7 +261,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_squid:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "오징어", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 오징어");
+                        textView_select_allergy.append("오징어 ");
                         count++;
                     } else {
 
@@ -270,7 +270,7 @@ public class RegisterStep4Activity extends AppCompatActivity {
                 case R.id.checkbox_sulfurous:
                     if (checked) {
                         Toast.makeText(getApplicationContext(), "아황산", Toast.LENGTH_SHORT).show();
-                        textView_select_allergy.append(" 아황산");
+                        textView_select_allergy.append("아황산 ");
                         count++;
                     } else {
 

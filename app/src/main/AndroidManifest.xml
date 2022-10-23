@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectVegan"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:name=".KakaoApplication">
         <activity
             android:name=".WriteReviewActivity"
             android:exported="false" />
@@ -92,6 +93,18 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakao3f92264bac3809194a24cb15484ee0e4" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

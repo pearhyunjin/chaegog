@@ -78,13 +78,13 @@ public class RegisterStep3Activity extends AppCompatActivity {
         Btn_RegisterThirdToFourth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (textView_select_VeganType == null) {
-                    Toast.makeText(getApplicationContext(), "선택해주세요", Toast.LENGTH_SHORT).show();
-                } else {
-                    profileUpload();
-                }
+//                if (textView_select_VeganType == null) {
+////                    Toast.makeText(getApplicationContext(), "선택해주세요", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    profileUpload();
+//                }
 
-//                profileUpload();
+                profileUpload();
             }
         });
     }
@@ -116,6 +116,8 @@ public class RegisterStep3Activity extends AppCompatActivity {
                             }
                         });
             }
+        } else {
+            Toast.makeText(getApplicationContext(), "선택해주세요", Toast.LENGTH_SHORT).show();
         }
     }
 

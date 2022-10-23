@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +23,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,18 +34,32 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity {
 
     // 변수 선언
     private EditText edit_login_email, edit_login_password;
-    private Button Btn_Login, Btn_Register;
+    private Button Btn_Login, Btn_Register, Btn_LoginKakao;
     private TextView Btn_PasswordReset;
 
     private FirebaseAuth firebaseAuth;
+    DatabaseReference reference;
+
+    ProgressDialog pd;
 
     // 뒤로가기 버튼 클릭시 앱 종료
     @Override
@@ -62,7 +83,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Log.d("getKeyHash", "" + getKeyHash(LoginActivity.this));
+
         SharedPreferences sh = getSharedPreferences("temp", MODE_PRIVATE);
+
+
 
         // 변수 초기화
         edit_login_email = findViewById(R.id.edit_login_email);
@@ -70,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         Btn_Login = findViewById(R.id.Btn_Login);
         Btn_Register = findViewById(R.id.Btn_Register);
         Btn_PasswordReset = findViewById(R.id.Btn_PasswordReset);
+        Btn_LoginKakao = findViewById(R.id.Btn_LoginKakao);
 
         firebaseAuth = FirebaseAuth.getInstance(); // 초기화
 
@@ -183,5 +210,133 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Btn_LoginKakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
+                } else {
+                    UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
+                }
+            }
+        });
     }
+
+    public static String getKeyHash(final Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+            if (packageInfo == null)
+                return null;
+
+            for (Signature signature : packageInfo.signatures) {
+                try {
+                    MessageDigest md = MessageDigest.getInstance("SHA");
+                    md.update(signature.toByteArray());
+                    return android.util.Base64.encodeToString(md.digest(), android.util.Base64.NO_WRAP);
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+        @Override
+        public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+            updateKakaoLoginUi();
+            return null;
+        }
+    };
+
+    private void updateKakaoLoginUi() {
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable throwable) {
+                if (user != null) {
+                    Log.d("Kakao", "ID : " + user.getId());
+                    Log.d("Kakao", "EMAIL : " + user.getKakaoAccount().getEmail());
+                    Log.d("Kakao", "ninkname : " + user.getKakaoAccount().getProfile().getNickname());
+                    Intent intent = new Intent(LoginActivity.this, RegisterStep2Activity.class);
+//                    intent.putExtra("userID", user.getId());
+//                    intent.putExtra("userEmail", user.getKakaoAccount().getEmail());
+                    startActivity(intent);
+//                    register(user.getKakaoAccount().getEmail(), user.getKakaoAccount().getProfile().getNickname());
+                } else {
+
+                }
+                return null;
+            }
+        });
+    }
+//
+//    private void register (String userEmail, String userID) {
+//        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+//                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//
+//                            // Firebase 아이디 정보 변수에 담기.
+//                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+//                            String id = firebaseUser.getUid();
+//
+//                            // reference 초기화. child로 "Users"만들고, 그 안에 또 "userid"만든다..?
+//                            reference = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+//
+//                            // HashMap 에 유저정보 담는다.
+//                            HashMap<String, Object> hashMap = new HashMap<>();
+//                            hashMap.put("id", id);
+//                            hashMap.put("userID", userID.toLowerCase());
+//                            hashMap.put("userEmail", userEmail);
+//                            hashMap.put("bio", "");
+//                            hashMap.put("imageurl", "https://w7.pngwing.com/pngs/858/581/png-transparent-profile-icon-user-computer-icons-system-chinese-wind-title-column-miscellaneous-service-logo.png");
+//
+//                            // DB에 자료 담기
+//                            reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//
+//                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//                                        UserInfo userInfo = new UserInfo(userEmail, userID);
+//
+//                                        db.collection("user").document(firebaseUser.getUid()).set(userInfo)
+//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                    @Override
+//                                                    public void onSuccess(Void unused) {
+//                                                        Toast.makeText(getApplicationContext(), "회원정보 등록 성공", Toast.LENGTH_SHORT).show();
+//                                                    }
+//                                                })
+//                                                .addOnFailureListener(new OnFailureListener() {
+//                                                    @Override
+//                                                    public void onFailure(@NonNull Exception e) {
+//                                                        Toast.makeText(getApplicationContext(), "회원정보 등록 실패", Toast.LENGTH_SHORT).show();
+//                                                        Log.d("tag", "Error writing document", e);
+//                                                    }
+//                                                });
+//
+//                                        // 처리중 화면 종료
+//                                        pd.dismiss();
+//                                        Intent intent = new Intent(LoginActivity.this, RegisterStep2Activity.class);
+//                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                        startActivity(intent);
+//                                    }
+//                                }
+//                            });
+//
+//                        } else {
+//
+//                            // 유저입력 정보가 유효하지 않을경우
+//                            pd.dismiss();
+//                            Toast.makeText(LoginActivity.this, "You can't register with Kakao", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
 }

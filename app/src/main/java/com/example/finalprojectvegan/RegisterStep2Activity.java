@@ -71,9 +71,9 @@ public class RegisterStep2Activity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if (success) {
-                                Toast.makeText(getApplicationContext(), "회원 정보 2단계 등록 완료", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterStep2Activity.this, RegisterStep3Activity.class);
-                                startActivity(intent);
+//                                Toast.makeText(getApplicationContext(), "회원 정보 2단계 등록 완료", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(RegisterStep2Activity.this, RegisterStep3Activity.class);
+//                                startActivity(intent);
 
                             } else {
                                 Toast.makeText(getApplicationContext(), "회원 정보 2단계 등록 실패", Toast.LENGTH_SHORT).show();
@@ -86,10 +86,13 @@ public class RegisterStep2Activity extends AppCompatActivity {
                     }
                 };
 
-                if (textView_select_type == null) {
-                    Toast.makeText(getApplicationContext(), "선택해주세요", Toast.LENGTH_SHORT).show();
-                } else {
+                if (userVeganCategory != null) {
                     profileUpload();
+//                    Toast.makeText(RegisterStep2Activity.this, "계기를 선택해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+//                    profileUpload();
+                    Toast.makeText(RegisterStep2Activity.this, "계기를 선택해주세요", Toast.LENGTH_SHORT).show();
+
                 }
 
 //                profileUpload();
@@ -120,7 +123,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "환경", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 환경");
                     } else {
-
+                        textView_select_type.setText("");
                     }
                     break;
                 case R.id.checkbox_animal:
@@ -128,7 +131,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "동물권", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 동물권");
                     } else {
-
+                        textView_select_type.setText("");
                     }
                     break;
                 case R.id.checkbox_health:
@@ -136,7 +139,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "건강", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 건강");
                     } else {
-
+                        textView_select_type.setText("");
                     }
                     break;
                 case R.id.checkbox_religion:
@@ -144,7 +147,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "종교", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 종교");
                     } else {
-
+                        textView_select_type.setText("");
                     }
                     break;
                 case R.id.checkbox_etc:
@@ -152,9 +155,11 @@ public class RegisterStep2Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "기타", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 기타");
                     } else {
-
+                        textView_select_type.setText("");
                     }
                     break;
+                default:
+
             }
         }
     };
@@ -186,6 +191,8 @@ public class RegisterStep2Activity extends AppCompatActivity {
                             }
                         });
             }
+        } else {
+            Toast.makeText(getApplicationContext(), "선택해주세요", Toast.LENGTH_SHORT).show();
         }
     }
 }
