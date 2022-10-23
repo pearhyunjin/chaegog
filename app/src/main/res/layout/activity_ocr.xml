@@ -9,28 +9,28 @@
     android:id="@+id/ocrLayout"
     tools:context=".OcrActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff8e1"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/black">
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#fff8e1"-->
+<!--        android:minHeight="?attr/actionBarSize"-->
+<!--        android:theme="?attr/actionBarTheme"-->
+<!--        android:visibility="visible"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:titleTextColor="@color/black">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/pretendardregular"
-            android:text="식품성분표 분석"
-            android:textColor="@color/black" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:fontFamily="@font/pretendardregular"-->
+<!--            android:text="식품성분표 분석"-->
+<!--            android:textColor="@color/black" />-->
 
-    </androidx.appcompat.widget.Toolbar>
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
     <TextView
         android:id="@+id/ocrTextView"
@@ -60,10 +60,10 @@
         android:id="@+id/y_ingredient_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFF8E1"
+        android:background="@color/yellow_light"
         android:gravity="center"
         android:text="USER_ID님의 채식유형에\n적합한 제품입니다."
-        android:textColor="#81C784"
+        android:textColor="@color/green_light"
         android:textSize="27dp"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -73,9 +73,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:text="원재료명"
         android:textColor="#424242"
         android:textSize="22dp"
+        android:background="@drawable/review_border"
         android:visibility="gone" />
 
     <TextView
@@ -95,8 +97,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:text="원재료명"
+        android:layout_marginEnd="15dp"
+        android:text="알러지 유발 원재료명"
         android:textColor="#424242"
+        android:background="@drawable/review_border"
         android:textSize="22dp"
         android:visibility="gone" />
 
@@ -114,9 +118,9 @@
 
     <ImageView
         android:id="@+id/recomm_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/camera"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/hhh"
         android:visibility="gone" />
 
     <ImageView

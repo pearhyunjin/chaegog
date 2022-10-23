@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -111,6 +112,20 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
         TextView review_item_createdAt = cardView.findViewById(R.id.review_item_createdAt);
         review_item_createdAt.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(mDataset.get(position).getCreatedAt()));
+
+        RatingBar review_ratingbar = cardView.findViewById(R.id.review_ratingbar);
+        String rating = mDataset.get(position).getRating();
+        Log.d("rating_bar", rating);
+        float review_rating = Float.parseFloat(rating);
+        review_ratingbar.setRating(review_rating);
+
+
+        // 진행중..
+
+//        RatingBar review_ratingbar2 = cardView.findViewById(R.id.ratingBar2);
+//        TextView review_textView = cardView.findViewById(R.id.review_textView);
+//        float rating_even = review_rating / mDataset.size();
+//        Log.e("rating_even", rating_even + "");
 
         String url = mDataset.get(position).getImagePath1();
         Glide.with(cardView)

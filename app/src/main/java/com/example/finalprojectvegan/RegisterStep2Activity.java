@@ -117,7 +117,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.checkbox_environment:
                     if (checked) {
-                        Toast.makeText(getApplicationContext(), "환경", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "환경", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 환경");
                     } else {
 
@@ -125,7 +125,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                     break;
                 case R.id.checkbox_animal:
                     if (checked) {
-                        Toast.makeText(getApplicationContext(), "동물권", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "동물권", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 동물권");
                     } else {
 
@@ -133,7 +133,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                     break;
                 case R.id.checkbox_health:
                     if (checked) {
-                        Toast.makeText(getApplicationContext(), "건강", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "건강", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 건강");
                     } else {
 
@@ -141,7 +141,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                     break;
                 case R.id.checkbox_religion:
                     if (checked) {
-                        Toast.makeText(getApplicationContext(), "종교", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "종교", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 종교");
                     } else {
 
@@ -149,7 +149,7 @@ public class RegisterStep2Activity extends AppCompatActivity {
                     break;
                 case R.id.checkbox_etc:
                     if (checked) {
-                        Toast.makeText(getApplicationContext(), "기타", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "기타", Toast.LENGTH_SHORT).show();
                         textView_select_type.append(" 기타");
                     } else {
 

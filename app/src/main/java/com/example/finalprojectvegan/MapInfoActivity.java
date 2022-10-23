@@ -118,6 +118,7 @@ public class MapInfoActivity extends AppCompatActivity {
         bundle.putString("menuFi", menuFi);
         fragment_info.setArguments(bundle);
         fragment_menu.setArguments(bundle);
+        fragment_review.setArguments(bundle);
 
 
 

@@ -68,19 +68,24 @@ public class WriteReviewActivity extends AppCompatActivity {
     String name;
     final int PICTURE_REQUEST_CODE = 100;
     private static final int GALLERY = 101;
+    String rating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_review);
 
-        ratingBar = findViewById(R.id.ratingBar);
+
         imageView_review1 = findViewById(R.id.image_review1);
         imageView_review2 = findViewById(R.id.image_review2);
         imageView_review3 = findViewById(R.id.image_review3);
         Btn_uploadReview = findViewById(R.id.Btn_uploadReview);
         editText_review = findViewById(R.id.edit_review);
         restaurant_name_review = findViewById(R.id.restaurant_name_review);
+
+        Intent intent = getIntent();
+        name = intent.getStringExtra("name");
+        restaurant_name_review.setText(name);
 
         Btn_uploadReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,7 +284,9 @@ public class WriteReviewActivity extends AppCompatActivity {
 
         if (review.length() > 0) {
             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            WriteReviewInfo writeReviewInfo = new WriteReviewInfo(review, firebaseUser.getUid(), uri.toString(), new Date());
+            ratingBar = findViewById(R.id.ratingBar);
+            rating = ratingBar.getRating() + "";
+            WriteReviewInfo writeReviewInfo = new WriteReviewInfo(rating,name, review, firebaseUser.getUid(), uri.toString(), new Date());
             uploader(writeReviewInfo);
         } else {
             Toast.makeText(this, "리뷰를 입력해주세요", Toast.LENGTH_SHORT).show();
