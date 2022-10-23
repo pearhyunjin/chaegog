@@ -90,16 +90,15 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/pretendardregular"
         android:lineSpacingExtra="2sp"
+        android:text="닉네임"
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/edit_register_id"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="닉네임" />
+        app:layout_constraintStart_toStartOf="@+id/edit_register_id" />
 
     <EditText
         android:id="@+id/edit_register_email"
@@ -122,16 +121,15 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/pretendardregular"
         android:lineSpacingExtra="2sp"
+        android:text="이메일"
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/edit_register_email"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="이메일" />
+        app:layout_constraintStart_toStartOf="@+id/edit_register_email" />
 
     <EditText
         android:id="@+id/edit_register_password"
@@ -186,16 +184,15 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/pretendardregular"
         android:lineSpacingExtra="2sp"
+        android:text="비밀번호 확인"
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/edit_password_check"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="비밀번호 확인" />
+        app:layout_constraintStart_toStartOf="@+id/edit_password_check" />
 
     <Button
         android:id="@+id/Btn_RegisterFirstToSecond"

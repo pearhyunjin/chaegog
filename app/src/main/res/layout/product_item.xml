@@ -50,7 +50,7 @@
                 android:background="@drawable/custom_checkbox"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="2dp"
-
+                android:backgroundTint="@color/green"
                 android:id="@+id/ProductFavorite"/>
         </LinearLayout>
     </LinearLayout>

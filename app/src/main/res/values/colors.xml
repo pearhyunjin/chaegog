@@ -12,9 +12,11 @@
     <color name="yellow_light">#FFF8E1</color>
     <color name="tomato">#ff6f60</color>
     <color name="tomato_juice">#ffa18e</color>
+    <color name="black_1b">#1B1B1B</color>
     <color name="black_42">#424242</color>
     <color name="gray_6d">#6D6D6D</color>
     <color name="gray_9b">#9B9B9B</color>
+    <color name="black_df">#DFDFDF</color>
     <color name="gray_f5">#F5F5F5</color>
     <color name="yellow">#fff8e1</color>
 </resources>
