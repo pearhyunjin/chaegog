@@ -32,7 +32,9 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
     private Context context;
     private ArrayList<WritePostInfo> mDataset;
 
-    ImageView homefeed_item_imageView;
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+    ImageView mypage_item_imageView;
     ImageView imageView_profile2;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,9 +72,9 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
 //            String uid = user.getUid();
 //        }
 
-        CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.homefeed_item, parent, false);
+        CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.mypage_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(cardView);
-        homefeed_item_imageView = cardView.findViewById(R.id.homefeed_item_imageView);
+        mypage_item_imageView = cardView.findViewById(R.id.mypage_item_imageView);
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,29 +117,66 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            ArrayList<UserInfo> postUserList = new ArrayList<>();
+//                            ArrayList<UserInfo> postUserList = new ArrayList<>();
 
-                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (firebaseUser != null) {
 
                                 String uid = firebaseUser.getUid();
+                                String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
 
                                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                     Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
-                                    postUserList.add(new UserInfo(
-                                            documentSnapshot.getData().get("userID").toString(),
-                                            documentSnapshot.getData().get("userEmail").toString(),
-                                            documentSnapshot.getData().get("userPassword").toString()));
 
-                                    TextView publisherTextView = cardView.findViewById(R.id.homefeed_item_publisher);
+//                                    postUserList.add(new UserInfo(
+//                                            documentSnapshot.getData().get("userID").toString(),
+//                                            documentSnapshot.getData().get("userEmail").toString(),
+//                                            documentSnapshot.getData().get("userPassword").toString()));
+
+//                                    TextView publisherTextView = cardView.findViewById(R.id.mypage_item_publisher);
                                     ImageView imageView_profile2 = cardView.findViewById(R.id.imageView_profile2);
 //        publisherTextView.setText(mDataset.get(position).getPublisher());
 //                                    String user = mDataset.get(holder.getAdapterPosition()).getPublisher();
 //                                publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
-//                                    if (documentSnapshot.getId().equals(uid)) {
-                                        publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
+                                    if (documentSnapshot.getId().equals(user)) {
+                                        if (documentSnapshot.getId().equals(uid)) {
+                                            ArrayList<UserInfo> postUserList = new ArrayList<>();
+
+                                            postUserList.add(new UserInfo(
+                                                    documentSnapshot.getData().get("userID").toString(),
+                                                    documentSnapshot.getData().get("userEmail").toString(),
+                                                    documentSnapshot.getData().get("userPassword").toString()));
+
+                                            cardView.setVisibility(View.VISIBLE);
+                                            ViewGroup.LayoutParams params = cardView.getLayoutParams();
+                                            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                                            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                            cardView.setLayoutParams(params);
+
+//                                            publisherTextView.setText(documentSnapshot.getData().get("userID").toString());
+
+                                            TextView titleTextView = cardView.findViewById(R.id.mypage_item_title);
+                                            titleTextView.setText(mDataset.get(holder.getAdapterPosition()).getTitle());
+
+                                            TextView createdAtTextView = cardView.findViewById(R.id.mypage_item_createdAt);
+                                            createdAtTextView.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(mDataset.get(holder.getAdapterPosition()).getCreatedAt()));
+
+                                            TextView contentsTextView = cardView.findViewById(R.id.mypage_item_contents);
+                                            contentsTextView.setText(mDataset.get(holder.getAdapterPosition()).getContents());
+
+                                            String url = mDataset.get(holder.getAdapterPosition()).getImagePath();
+
+                                            Glide.with(cardView).load(url).override(800, 800).into(mypage_item_imageView);
+
 //                                        loadImage(uid);
-//                                    }
+                                        } else {
+                                            cardView.setVisibility(View.GONE);
+                                            ViewGroup.LayoutParams params = cardView.getLayoutParams();
+                                            params.height = 0;
+                                            params.width = 0;
+                                            cardView.setLayoutParams(params);
+                                        }
+                                    }
 //        if (user == FirebaseAuth.getInstance().getCurrentUser().toString()) {
 //            publisherTextView.setText(user);
 //            Log.d("user", user);
@@ -189,25 +228,19 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
 //            });
 //        }
 
-        TextView titleTextView = cardView.findViewById(R.id.homefeed_item_title);
-        titleTextView.setText(mDataset.get(position).getTitle());
-
-        TextView createdAtTextView = cardView.findViewById(R.id.homefeed_item_createdAt);
-        createdAtTextView.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(mDataset.get(position).getCreatedAt()));
-
-        TextView contentsTextView = cardView.findViewById(R.id.homefeed_item_contents);
-        contentsTextView.setText(mDataset.get(position).getContents());
-
-        String url = mDataset.get(position).getImagePath();
-//        Glide.with(holder.cardView)
-//                .load(url)
-//                .into(holder.homefeed_item_imageView);
-
-//        TextView imagePathTextView = cardView.findViewById(R.id.homefeed_item_imagePath);
-//        imagePathTextView.setText(mDataset.get(position).getImagePath());
-        Glide.with(cardView).load(url).override(800, 800).into(homefeed_item_imageView);
-//        Log.d("url", "url : " + imagePathTextView);
-//        loadImage();
+//        TextView titleTextView = cardView.findViewById(R.id.homefeed_item_title);
+//        titleTextView.setText(mDataset.get(position).getTitle());
+//
+//        TextView createdAtTextView = cardView.findViewById(R.id.homefeed_item_createdAt);
+//        createdAtTextView.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(mDataset.get(position).getCreatedAt()));
+//
+//        TextView contentsTextView = cardView.findViewById(R.id.homefeed_item_contents);
+//        contentsTextView.setText(mDataset.get(position).getContents());
+//
+//        String url = mDataset.get(position).getImagePath();
+//
+//        Glide.with(cardView).load(url).override(800, 800).into(homefeed_item_imageView);
+////        loadImage();
 
 
     }
