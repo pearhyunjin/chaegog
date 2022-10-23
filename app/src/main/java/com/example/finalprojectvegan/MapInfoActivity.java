@@ -119,6 +119,7 @@ public class MapInfoActivity extends AppCompatActivity {
         fragment_info.setArguments(bundle);
         fragment_menu.setArguments(bundle);
         fragment_review.setArguments(bundle);
+        fragment_photo.setArguments(bundle);
 
 
 

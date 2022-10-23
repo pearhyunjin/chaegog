@@ -13,15 +13,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
     private Context context;
     private List<BookmarkData> bookmarkList;
+    private ArrayList<WriteReviewInfo> mDataset;
 
-    public GalleryAdapter(Context context, List<BookmarkData> bookmarkList) {
+    public GalleryAdapter(Context context, ArrayList<WriteReviewInfo> mDataset) {
         this.context = context;
-        this.bookmarkList = bookmarkList;
+        this.mDataset = mDataset;
     }
     @NonNull
     @Override
@@ -33,8 +35,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull GalleryAdapter.ViewHolder holder, int position) {
 
-
-        String imgURL = bookmarkList.get(position).getStoreImage();
+        String imgURL = mDataset.get(position).getImagePath1();
         Glide.with(holder.itemView)
                 .load(imgURL)
                 .override(150,150)
@@ -45,7 +46,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     @Override
     public int getItemCount() {
 
-        return bookmarkList.size();
+        return mDataset.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

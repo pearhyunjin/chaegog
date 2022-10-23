@@ -117,10 +117,6 @@ public class OcrActivity extends AppCompatActivity {
         recomm_text = findViewById(R.id.recomm_text);
         recomm_image = findViewById(R.id.recomm_image);
 
-
-        // Intent mainIntent = getIntent();
-        // USER_ID = mainIntent.getStringExtra("userID");
-
         TextRecognizer recognizer = TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
 
         Intent intent = new Intent(getBaseContext(), PopupActivity.class);
@@ -446,7 +442,7 @@ public class OcrActivity extends AppCompatActivity {
             public void onResponse(Call<FoodIngreItem> call, Response<FoodIngreItem> response) {
                 foodList = response.body();
                 foodInfo = foodList.FoodIngredient;
-
+                if(resultText != null){
                 for(int i=0; i < foodInfo.size(); i++){
                     foodInfoGroup = foodInfo.get(i).getFoodGroup();
                     foodInfoName = foodInfo.get(i).getFoodName();
@@ -454,25 +450,6 @@ public class OcrActivity extends AppCompatActivity {
                     String resultArr[] = resultText.split(",");
                     int arrSize = foodNameArr.length;
                     int resultSize = resultArr.length;
-
-                    // 알러지
-//                    if(USER_VEGAN_ALLERGY.contains("밀")){
-//                        for(int j=0; j < resultSize; j++) {
-//                            OcrResultStr = resultArr[j].trim();
-//                            String allergyArr[] = USER_VEGAN_ALLERGY.split(" ");
-//                            USER_VEGAN_ALLERGY = USER_VEGAN_ALLERGY.trim();
-//                            String allergy;
-//                            for (int k = 0; k < allergyArr.length; k++) {
-//                                allergy = allergyArr[k].trim();
-//                                if (OcrResultStr.matches("(.*)" + USER_VEGAN_ALLERGY + "(.*)")) {
-//                                    list1.add(allergy);
-//                                    list2.add(OcrResultStr);
-//
-//                                    checkFit = false;
-//                                }
-//                            }
-//                        }
-//                    }
 
                     // 알러지
                         for(int j=0; j < resultSize; j++) {
@@ -490,91 +467,93 @@ public class OcrActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                switch (USER_VEGAN_TYPE){
-                        case "비건":
-                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("우유 및 그 제품") || foodInfoGroup.equals("난류")){
-                                for(int j=0; j < resultSize; j++) {
-                                    OcrResultStr = resultArr[j].trim();
-                                    for (int k = 0; k < arrSize; k++) {
-                                        OcrFoodStr = foodNameArr[k].trim();
-                                        if (OcrResultStr.equals(OcrFoodStr)) {
-                                            list1.add(OcrFoodStr);
-                                            list2.add(OcrResultStr);
-                                            list1.retainAll(list2); // 교집합 구하기
-                                            checkFit = false;
-                                        }
+                switch (USER_VEGAN_TYPE) {
+                    case "비건":
+                        if (foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("우유 및 그 제품") || foodInfoGroup.equals("난류")) {
+                            for (int j = 0; j < resultSize; j++) {
+                                OcrResultStr = resultArr[j].trim();
+                                for (int k = 0; k < arrSize; k++) {
+                                    OcrFoodStr = foodNameArr[k].trim();
+                                    if (OcrResultStr.equals(OcrFoodStr)) {
+                                        list1.add(OcrFoodStr);
+                                        list2.add(OcrResultStr);
+                                        list1.retainAll(list2); // 교집합 구하기
+                                        checkFit = false;
                                     }
                                 }
                             }
-                            break;
-                        case "락토":
-                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("난류"))  {
-                                for(int j=0; j < resultSize; j++) {
-                                    OcrResultStr = resultArr[j].trim();
-                                    for (int k = 0; k < arrSize; k++) {
-                                        OcrFoodStr = foodNameArr[k].trim();
-                                        if (OcrResultStr.equals(OcrFoodStr)) {
-                                            list1.add(OcrFoodStr);
-                                            list2.add(OcrResultStr);
-                                            list1.retainAll(list2);
-                                            checkFit = false;
-                                        }
+                        }
+                        break;
+                    case "락토":
+                        if (foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("난류")) {
+                            for (int j = 0; j < resultSize; j++) {
+                                OcrResultStr = resultArr[j].trim();
+                                for (int k = 0; k < arrSize; k++) {
+                                    OcrFoodStr = foodNameArr[k].trim();
+                                    if (OcrResultStr.equals(OcrFoodStr)) {
+                                        list1.add(OcrFoodStr);
+                                        list2.add(OcrResultStr);
+                                        list1.retainAll(list2);
+                                        checkFit = false;
                                     }
                                 }
                             }
-                        case "오보":
-                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("우유 및 그 제품")){
-                                for(int j=0; j < resultSize; j++) {
-                                    OcrResultStr = resultArr[j].trim();
-                                    for (int k = 0; k < arrSize; k++) {
-                                        OcrFoodStr = foodNameArr[k].trim();
-                                        if (OcrResultStr.equals(OcrFoodStr)) {
-                                            list1.add(OcrFoodStr);
-                                            list2.add(OcrResultStr);
-                                            list1.retainAll(list2);
-                                            checkFit = false;
-                                        }
+                        }
+                    case "오보":
+                        if (foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("우유 및 그 제품")) {
+                            for (int j = 0; j < resultSize; j++) {
+                                OcrResultStr = resultArr[j].trim();
+                                for (int k = 0; k < arrSize; k++) {
+                                    OcrFoodStr = foodNameArr[k].trim();
+                                    if (OcrResultStr.equals(OcrFoodStr)) {
+                                        list1.add(OcrFoodStr);
+                                        list2.add(OcrResultStr);
+                                        list1.retainAll(list2);
+                                        checkFit = false;
                                     }
                                 }
                             }
-                        case "락토오보":
-                            if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품")) {
-                                for(int j=0; j < resultSize; j++) {
-                                    OcrResultStr = resultArr[j].trim();
-                                    for (int k = 0; k < arrSize; k++) {
-                                        OcrFoodStr = foodNameArr[k].trim();
-                                        if (OcrResultStr.equals(OcrFoodStr)) {
-                                            list1.add(OcrFoodStr);
-                                            list2.add(OcrResultStr);
-                                            list1.retainAll(list2);
-                                            checkFit = false;
-                                        }
+                        }
+                    case "락토오보":
+                        if (foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품")) {
+                            for (int j = 0; j < resultSize; j++) {
+                                OcrResultStr = resultArr[j].trim();
+                                for (int k = 0; k < arrSize; k++) {
+                                    OcrFoodStr = foodNameArr[k].trim();
+                                    if (OcrResultStr.equals(OcrFoodStr)) {
+                                        list1.add(OcrFoodStr);
+                                        list2.add(OcrResultStr);
+                                        list1.retainAll(list2);
+                                        checkFit = false;
                                     }
                                 }
                             }
-                            break;
-                        case "페스코":
-                            if(foodInfoGroup.equals("육류 및 그 제품")) {
-                                for(int j=0; j < resultSize; j++) {
-                                    OcrResultStr = resultArr[j].trim();
-                                    for (int k = 0; k < arrSize; k++) {
-                                        OcrFoodStr = foodNameArr[k].trim();
-                                        if (OcrResultStr.equals(OcrFoodStr)) {
-                                            list1.add(OcrFoodStr);
-                                            list2.add(OcrResultStr);
-                                            list1.retainAll(list2);
-                                            checkFit = false;
-                                        }
+                        }
+                        break;
+                    case "페스코":
+                        if (foodInfoGroup.equals("육류 및 그 제품")) {
+                            for (int j = 0; j < resultSize; j++) {
+                                OcrResultStr = resultArr[j].trim();
+                                for (int k = 0; k < arrSize; k++) {
+                                    OcrFoodStr = foodNameArr[k].trim();
+                                    if (OcrResultStr.equals(OcrFoodStr)) {
+                                        list1.add(OcrFoodStr);
+                                        list2.add(OcrResultStr);
+                                        list1.retainAll(list2);
+                                        checkFit = false;
                                     }
                                 }
                             }
-                            break;
+                        }
+                        break;
 //                        case "폴로":
 //                            break;
-                        default:
-
+                    default:
+                }
                     }
 
+                }else{
+                    checkFit = true;
                 }
 
 
@@ -612,7 +591,7 @@ public class OcrActivity extends AppCompatActivity {
                     recomm_image.setVisibility(View.VISIBLE);
 
                 }else{
-                    Log.d("OCRTEST", OcrFoodStr);
+                    //Log.d("OCRTEST", OcrFoodStr);
                     Log.d("OCRTEST", resultText + " - 채식유형에 적합합니다.");
                     y_ingredient_text.setText(USER_ID + "님에게\n적합한 제품입니다.");
                     y_ingredient_text.setVisibility(View.VISIBLE);
@@ -635,17 +614,4 @@ public class OcrActivity extends AppCompatActivity {
         });
     }
 
-    public void allergy(){
-        String resultArr[] = resultText.split(",");
-        int resultSize = resultArr.length;
-
-        if(USER_VEGAN_ALLERGY.contains("밀")){
-            for(int j=0; j < resultSize; j++) {
-                OcrResultStr = resultArr[j].trim();
-                if (OcrResultStr.contains(USER_VEGAN_ALLERGY)) {
-
-                }
-            }
-        }
-    }
 }
