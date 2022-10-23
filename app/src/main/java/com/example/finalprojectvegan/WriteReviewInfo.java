@@ -4,16 +4,19 @@ import java.util.Date;
 
 public class WriteReviewInfo {
 
-    private int rating;
+    private String rating;
     private String review;
+    private String name;
     private String publisher;
     private String imagePath1;
     private String imagePath2;
     private String imagePath3;
     private Date createdAt;
 
-    public WriteReviewInfo(String review, String publisher, String imagePath1, Date createdAt) {
+    public WriteReviewInfo(String rating, String name, String review, String publisher, String imagePath1, Date createdAt) {
+        this.name = name;
         this.review = review;
+        this.rating = rating;
         this.publisher = publisher;
         this.imagePath1 = imagePath1;
         this.imagePath2 = imagePath2;
@@ -21,11 +24,19 @@ public class WriteReviewInfo {
         this.createdAt = createdAt;
     }
 
-    public int getRating() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

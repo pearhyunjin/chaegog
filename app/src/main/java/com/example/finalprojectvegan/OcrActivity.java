@@ -8,14 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,12 +35,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.ktx.Firebase;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -97,8 +91,10 @@ public class OcrActivity extends AppCompatActivity {
     String OcrFoodStr;
     String OcrResultStr;
     boolean checkFit; // flag 변수
+    boolean checkFitTwo;
     String USER_ID; // 사용자 닉네임
-    String USER_TYPE; // 사용자 채식주의 유형
+    String USER_VEGAN_TYPE; // 사용자 채식주의 유형
+    String USER_VEGAN_ALLERGY; // 사용자 알러지 타입
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -120,7 +116,6 @@ public class OcrActivity extends AppCompatActivity {
         allergy_ingredient = findViewById(R.id.allergy_ingredient);
         recomm_text = findViewById(R.id.recomm_text);
         recomm_image = findViewById(R.id.recomm_image);
-
 
 
         // Intent mainIntent = getIntent();
@@ -216,6 +211,68 @@ public class OcrActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        db.collection("userVeganType")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            ArrayList<UserVeganTypeInfo> postUserList = new ArrayList<>();
+
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+
+                                String uid = firebaseUser.getUid();
+
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                    postUserList.add(new UserVeganTypeInfo(
+                                            documentSnapshot.getData().get("veganType").toString()));
+
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        USER_VEGAN_TYPE = documentSnapshot.getData().get("veganType").toString();
+                                    }
+                                }
+                            }
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
+
+        // 알러지
+        db.collection("userVeganAllergy")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            ArrayList<UserVeganAllergyInfo> postUserList = new ArrayList<>();
+
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+
+                                String uid = firebaseUser.getUid();
+
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                    Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                                    postUserList.add(new UserVeganAllergyInfo(
+                                            documentSnapshot.getData().get("userAllergy").toString()));
+
+                                    if (documentSnapshot.getId().equals(uid)) {
+                                        USER_VEGAN_ALLERGY = documentSnapshot.getData().get("userAllergy").toString();
+                                    }
+                                }
+                            }
+                        } else {
+                            Log.d("error", "Error getting documents", task.getException());
+                        }
+                    }
+                });
+
     }
 
     @Override
@@ -371,11 +428,15 @@ public class OcrActivity extends AppCompatActivity {
     public void compare(){
 
         checkFit = true;
+        checkFitTwo = true;
         ocrTextView = findViewById(R.id.ocrTextView);
-        USER_TYPE = "비건";
         // 부적합한 원재료명을 넣을 리스트
         List<String> list1 = new ArrayList<>();
         List<String> list2 = new ArrayList<>();
+
+        List<String> list3 = new ArrayList<>();
+        List<String> list4 = new ArrayList<>();
+
 
         FoodIngreApiInterface apiInterface = NaverMapRequest.getClient().create(FoodIngreApiInterface.class);
         Call<FoodIngreItem> call = apiInterface.getFoodIngredientData();
@@ -394,7 +455,42 @@ public class OcrActivity extends AppCompatActivity {
                     int arrSize = foodNameArr.length;
                     int resultSize = resultArr.length;
 
-                    switch (USER_TYPE){
+                    // 알러지
+//                    if(USER_VEGAN_ALLERGY.contains("밀")){
+//                        for(int j=0; j < resultSize; j++) {
+//                            OcrResultStr = resultArr[j].trim();
+//                            String allergyArr[] = USER_VEGAN_ALLERGY.split(" ");
+//                            USER_VEGAN_ALLERGY = USER_VEGAN_ALLERGY.trim();
+//                            String allergy;
+//                            for (int k = 0; k < allergyArr.length; k++) {
+//                                allergy = allergyArr[k].trim();
+//                                if (OcrResultStr.matches("(.*)" + USER_VEGAN_ALLERGY + "(.*)")) {
+//                                    list1.add(allergy);
+//                                    list2.add(OcrResultStr);
+//
+//                                    checkFit = false;
+//                                }
+//                            }
+//                        }
+//                    }
+
+                    // 알러지
+                        for(int j=0; j < resultSize; j++) {
+                            OcrResultStr = resultArr[j].trim();
+                            String allergyArr[] = USER_VEGAN_ALLERGY.split(" ");
+                            USER_VEGAN_ALLERGY = USER_VEGAN_ALLERGY.trim();
+                            String allergy;
+                            for (int k = 0; k < allergyArr.length; k++) {
+                                allergy = allergyArr[k].trim();
+                                if (OcrResultStr.matches("(.*)" + USER_VEGAN_ALLERGY + "(.*)")) {
+                                    list3.add(allergy);
+                                    list4.add(OcrResultStr);
+                                    //list3.retainAll(list4);
+                                    checkFit = false;
+                                }
+                            }
+                        }
+                switch (USER_VEGAN_TYPE){
                         case "비건":
                             if(foodInfoGroup.equals("육류 및 그 제품") || foodInfoGroup.equals("어패류 및 그 제품") || foodInfoGroup.equals("우유 및 그 제품") || foodInfoGroup.equals("난류")){
                                 for(int j=0; j < resultSize; j++) {
@@ -404,7 +500,7 @@ public class OcrActivity extends AppCompatActivity {
                                         if (OcrResultStr.equals(OcrFoodStr)) {
                                             list1.add(OcrFoodStr);
                                             list2.add(OcrResultStr);
-                                            list1.retainAll(list2);
+                                            list1.retainAll(list2); // 교집합 구하기
                                             checkFit = false;
                                         }
                                     }
@@ -481,14 +577,22 @@ public class OcrActivity extends AppCompatActivity {
 
                 }
 
+
+                Log.d("userAllergy", "유저 알러지 정보 : " + USER_VEGAN_ALLERGY);
+
+
                 List<String> newList = list1.stream().distinct().collect(Collectors.toList());
                 String n_ingre1 = newList.toString().replace("[","").replace("]","");
 
-;                if(!checkFit){
-                    Log.e("OCRTEST", resultText + " - 채식유형에 부적합합니다.");
-                    ocrTextView.setText(USER_ID + "님의 채식 유형에 맞지않는 제품입니다.");
+                List<String> newList2 = list4.stream().distinct().collect(Collectors.toList());
+                String n_ingre2 = newList2.toString().replace("[","").replace("]","");
+
+                if(!checkFit){
+                    Log.d("OCRTEST", resultText + " - 채식유형에 부적합합니다.");
+                    ocrTextView.setText(USER_ID + "님에게 맞지않는 제품입니다.");
                     ocrTextView.setTextSize(20);
                     n_ingredient.setText(n_ingre1);
+                    allergy_ingredient.setText(n_ingre2);
 
                     View ocrLayout = findViewById(R.id.ocrLayout);
                     ocrLayout.setBackgroundColor(Color.parseColor("#FFF8E1"));
@@ -508,8 +612,9 @@ public class OcrActivity extends AppCompatActivity {
                     recomm_image.setVisibility(View.VISIBLE);
 
                 }else{
-                    Log.e("OCRTEST", resultText + " - 채식유형에 적합합니다.");
-                    y_ingredient_text.setText(USER_ID + "님의 채식 유형에\n적합한 제품입니다.");
+                    Log.d("OCRTEST", OcrFoodStr);
+                    Log.d("OCRTEST", resultText + " - 채식유형에 적합합니다.");
+                    y_ingredient_text.setText(USER_ID + "님에게\n적합한 제품입니다.");
                     y_ingredient_text.setVisibility(View.VISIBLE);
 
                     // 숨기기
@@ -528,5 +633,19 @@ public class OcrActivity extends AppCompatActivity {
                 Log.d("FoodIngreItem", t.toString());
             }
         });
+    }
+
+    public void allergy(){
+        String resultArr[] = resultText.split(",");
+        int resultSize = resultArr.length;
+
+        if(USER_VEGAN_ALLERGY.contains("밀")){
+            for(int j=0; j < resultSize; j++) {
+                OcrResultStr = resultArr[j].trim();
+                if (OcrResultStr.contains(USER_VEGAN_ALLERGY)) {
+
+                }
+            }
+        }
     }
 }

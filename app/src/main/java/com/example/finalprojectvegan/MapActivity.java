@@ -1,11 +1,7 @@
 package com.example.finalprojectvegan;
-
-
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
@@ -18,19 +14,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
@@ -64,7 +59,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LinearLayout mapInfoLayout;
         CheckBox getMapInfoBookmark;
 
-
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
@@ -91,11 +85,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             mLocationSource =
                     new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
+
+
         }
 
         @Override
         public void onMapReady (@NonNull NaverMap naverMap){
             Log.d(TAG, "onMapReady");
+
 
             mapInfoLayout = findViewById(R.id.map_info_layout);
 
@@ -204,6 +201,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     .into(getMapInfoImage);
         }
 
+        private int getDistance(double lat1, double lnt1, double lat2, double lnt2) {
+            double dLat = Math.toRadians(lat2 - lat1);
+            double dLnt = Math.toRadians(lnt2 - lnt1);
+            double a = Math.sin(dLat/2)* Math.sin(dLat/2)+ Math.cos(Math.toRadians(lat1))* Math.cos(Math.toRadians(lat2))* Math.sin(dLnt/2)* Math.sin(dLnt/2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            double d = (6372.8 * 1000) * c * 1000;
+            return (int)d;
+        }
+
         @Override
         public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -215,6 +221,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //                    mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 //                }
 //            }
+
             if (mLocationSource.onRequestPermissionsResult(
                     requestCode, permissions, grantResults)) {
                 if (!mLocationSource.isActivated()) { // 권한 거부됨
