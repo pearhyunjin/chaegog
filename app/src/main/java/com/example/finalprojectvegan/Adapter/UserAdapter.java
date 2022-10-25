@@ -1,6 +1,7 @@
 package com.example.finalprojectvegan.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.example.finalprojectvegan.FragMypage;
 import com.example.finalprojectvegan.Model.User;
 import com.example.finalprojectvegan.R;
+import com.example.finalprojectvegan.RoadingActivity;
+import com.example.finalprojectvegan.RoadingFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -79,13 +82,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 // Editor를 사용해서 내부저장소에 사용자 정보를 담아 넘긴다. (클릭된 사용자의 정보)
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("profileid", user.getId());
-                editor.apply();
-
-                // FragmentActivity로 Context를 형 변환해서 FragMypage로 replace한다.
+//                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+//                editor.putString("profileid", user.getId());
+//                editor.apply();
+//
+//                // FragmentActivity로 Context를 형 변환해서 FragMypage로 replace한다.
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,
-                        new FragMypage()).commit();
+                        new RoadingFragment()).commit();
+
+
             }
         });
 

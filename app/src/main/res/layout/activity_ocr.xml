@@ -116,12 +116,20 @@
         android:textSize="16dp"
         android:visibility="gone" />
 
-    <ImageView
-        android:id="@+id/recomm_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/hhh"
-        android:visibility="gone" />
+<!--    <ImageView-->
+<!--        android:id="@+id/recomm_image"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:src="@drawable/hhh"-->
+<!--        android:visibility="gone" />-->
+    <TextView
+        android:id="@+id/recomm_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="추천 제품이 없습니다"
+        android:textSize="16sp"
+        android:fontFamily="@font/pretendardregular" />
 
     <ImageView
         android:id="@+id/ocrimagepopup"

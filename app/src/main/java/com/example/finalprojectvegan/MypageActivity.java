@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ public class MypageActivity extends AppCompatActivity {
     TextView userID, userVeganType, userAllergy;
     private ImageView imageView_profile;
     InputImage image;
+    Button changedetail;
 
     ProgressDialog dialog;
 
@@ -93,6 +95,15 @@ public class MypageActivity extends AppCompatActivity {
         userID = (TextView) findViewById(R.id.userID);
         userVeganType = (TextView) findViewById(R.id.userVeganType);
         userAllergy = (TextView) findViewById(R.id.userAllergy);
+        changedetail = (Button) findViewById(R.id.changedetail);
+
+        changedetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MypageActivity.this, RoadingActivity.class);
+                startActivity(intent);
+            }
+        });
 
         db.collection("user")
                 .get()
