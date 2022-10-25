@@ -1,6 +1,8 @@
 package com.example.finalprojectvegan;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RecipeDetailActivity extends AppCompatActivity {
     private Intent intent;
@@ -69,6 +78,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 ingredient = ingreArr[i];
             }
         }
+
         // 레시피 이미지, 설명 받아오기
         manual_image01 = intent.getStringExtra("m_Image01");
         manual01 = intent.getStringExtra("manual01");
@@ -86,11 +96,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
         // 레시피 상세정보창 메인 이미지
         Glide.with(this)
                 .load(image)
+
                 .apply(new RequestOptions().transform(new CenterCrop(),
                         new RoundedCorners(10)))
                 .into(getRecipeImage);
 
         // 레시피 과정
+        getRecipeManualImg01.setVisibility(View.VISIBLE);
+        getRecipeManual01.setVisibility(View.VISIBLE);
         Glide.with(this)
                 .load(manual_image01)
                 .apply(new RequestOptions().transform(new CenterCrop(),
@@ -98,6 +111,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 .into(getRecipeManualImg01);
         getRecipeManual01.setText(manual01);
 
+        getRecipeManualImg02.setVisibility(View.VISIBLE);
+        getRecipeManual02.setVisibility(View.VISIBLE);
         Glide.with(this)
                 .load(manual_image02)
                 .apply(new RequestOptions().transform(new CenterCrop(),
@@ -105,6 +120,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 .into(getRecipeManualImg02);
         getRecipeManual02.setText(manual02);
 
+        getRecipeManualImg03.setVisibility(View.VISIBLE);
+        getRecipeManual03.setVisibility(View.VISIBLE);
         Glide.with(this)
                 .load(manual_image03)
                 .apply(new RequestOptions().transform(new CenterCrop(),

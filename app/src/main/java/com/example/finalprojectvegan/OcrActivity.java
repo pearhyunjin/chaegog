@@ -51,8 +51,9 @@ import com.lakue.lakuepopupactivity.PopupActivity;
 import com.lakue.lakuepopupactivity.PopupGravity;
 import com.lakue.lakuepopupactivity.PopupResult;
 import com.lakue.lakuepopupactivity.PopupType;
+import com.yalantis.ucrop.view.CropImageView;
 
-
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -100,6 +101,8 @@ public class OcrActivity extends AppCompatActivity {
     String USER_VEGAN_TYPE; // 사용자 채식주의 유형
     String USER_VEGAN_ALLERGY; // 사용자 알러지 타입
 
+    ActivityResultLauncher<String> mGetContent;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @RequiresApi(api = Build.VERSION_CODES.M)
 
@@ -127,7 +130,6 @@ public class OcrActivity extends AppCompatActivity {
         intent.putExtra("type", PopupType.SELECT);
         intent.putExtra("gravity", PopupGravity.CENTER);
         intent.putExtra("title", "사진을 불러올 기능을 선택하세요");
-//                intent.putExtra("content", "Popup Activity was made by Lakue");
         intent.putExtra("buttonLeft", "카메라");
         intent.putExtra("buttonRight", "갤러리");
         startActivityForResult(intent, 2);
@@ -156,26 +158,7 @@ public class OcrActivity extends AppCompatActivity {
             }
         });
 
-        // 카메라 버튼 클릭시
-//        cameraBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                activityResultPicture.launch(intent);
-//            }
-//        });
-//
-//        galleryBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                intent = new Intent(Intent.ACTION_PICK);
-//                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-//                intent.setType("image/*");
-//                startActivityForResult(intent, GALLERY);
-//            }
-//        });
-
+        // 사용자 정보
         db.collection("user")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -184,25 +167,14 @@ public class OcrActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (firebaseUser != null) {
-//                                String userID = firebaseUser.getDisplayName();
-//                                String userEmail = firebaseUser.getEmail();
-
-//                                boolean emailVerified = firebaseUser.isEmailVerified();
 
                                 String uid = firebaseUser.getUid();
 
                                 ArrayList<UserInfo> postUserList = new ArrayList<>();
                                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                     Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
-//                                postUserList.add(new UserInfo(
-//                                        documentSnapshot.getData().get("userID").toString(),
-//                                        documentSnapshot.getData().get("userEmail").toString(),
-//                                        documentSnapshot.getData().get("userPassword").toString()));
-//                                USER_ID = documentSnapshot.getData().get("userID").toString();
                                     if (documentSnapshot.getId().equals(uid)) {
                                         USER_ID = documentSnapshot.getData().get("userID").toString();
-//                                    userID.setText(USER_ID);
-//                                    Toast.makeText(getApplicationContext(), "userID : " + USER_ID, Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -212,6 +184,7 @@ public class OcrActivity extends AppCompatActivity {
                     }
                 });
 
+        // 채식 유형
         db.collection("userVeganType")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -273,6 +246,16 @@ public class OcrActivity extends AppCompatActivity {
                     }
                 });
 
+        mGetContent=registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                Intent intent1 = new Intent(OcrActivity.this, CropperActivity.class);
+                intent1.putExtra("DATA", result.toString());
+                startActivityForResult(intent1, 101);
+            }
+        });
+
+
     }
 
     @Override
@@ -283,34 +266,36 @@ public class OcrActivity extends AppCompatActivity {
             if (requestCode == 2) {
                 PopupResult result = (PopupResult) data.getSerializableExtra("result");
                 if (result == PopupResult.LEFT) {
-                    // 작성 코드
+                    // 카메라
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activityResultPicture.launch(intent);
 
                 } else if (result == PopupResult.RIGHT) {
-                    // 작성 코드
-                    intent = new Intent(Intent.ACTION_PICK);
-                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                    intent.setType("image/*");
-                    startActivityForResult(intent, GALLERY);
+                    // 갤러리
+//                    intent = new Intent(Intent.ACTION_PICK);
+//                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//                    intent.setType("image/*");
+//                    startActivityForResult(intent, GALLERY);
+                    mGetContent.launch("image/*");
                 }
             }
 
-            else if(requestCode == GALLERY) {
-                Uri uri = data.getData();
-                setImage(uri);
-
+//            else if(requestCode == GALLERY) {
+//                Uri uri = data.getData();
+//                setImage(uri);
+//            }
+        } else if(resultCode == -2 && requestCode == 101){
+            Log.d("resultcode", resultCode + "");
+            String result = data.getStringExtra("RESULT");
+            Uri resultUri = null;
+            if(result != null){
+                resultUri = Uri.parse(result);
+                Log.d("RESULT", result);
             }
+            setImage(resultUri);
+
         }
-
-        // 갤러리
-//        else if(requestCode == GALLERY && resultCode == RESULT_OK) {
-//            Uri uri = data.getData();
-//            setImage(uri);
-//
-//        }
     }
-
     // 카메라 실행시
     ActivityResultLauncher<Intent> activityResultPicture = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -327,23 +312,6 @@ public class OcrActivity extends AppCompatActivity {
                 }
             }
     );
-
-
-    // 갤러리 실행시
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if(requestCode == CAMERA && resultCode == RESULT_OK) {
-//
-//        }
-//        else if(requestCode == GALLERY && resultCode == RESULT_OK) {
-//            Uri uri = data.getData();
-//            setImage(uri);
-//
-//        }
-//
-//    }
 
     // 갤러리 이미지 이미지뷰에
     private void setImage(Uri uri) {
@@ -422,9 +390,7 @@ public class OcrActivity extends AppCompatActivity {
                 .show();
     }
 
-
-
-    // 비교
+    // OCR 판단
     public void compare(){
 
         checkFit = true;
@@ -563,7 +529,6 @@ public class OcrActivity extends AppCompatActivity {
 
                 Log.d("userAllergy", "유저 알러지 정보 : " + USER_VEGAN_ALLERGY);
 
-
                 List<String> newList = list1.stream().distinct().collect(Collectors.toList());
                 String n_ingre1 = newList.toString().replace("[","").replace("]","");
 
@@ -582,8 +547,6 @@ public class OcrActivity extends AppCompatActivity {
 
                     // 숨기기
                     ocrImage.setVisibility(View.GONE);
-//                    galleryBtn.setVisibility(View.GONE);
-//                    cameraBtn.setVisibility(View.GONE);
                     goOcr.setVisibility(View.GONE);
 
                     // 보여주기
@@ -595,7 +558,6 @@ public class OcrActivity extends AppCompatActivity {
                     recomm_image.setVisibility(View.VISIBLE);
 
                 }else{
-                    //Log.d("OCRTEST", OcrFoodStr);
                     Log.d("OCRTEST", resultText + " - 채식유형에 적합합니다.");
                     y_ingredient_text.setText(USER_ID + "님에게\n적합한 제품입니다.");
                     y_ingredient_text.setVisibility(View.VISIBLE);
@@ -603,8 +565,6 @@ public class OcrActivity extends AppCompatActivity {
                     // 숨기기
                     ocrTextView.setVisibility(View.GONE);
                     ocrImage.setVisibility(View.GONE);
-//                    galleryBtn.setVisibility(View.GONE);
-//                    cameraBtn.setVisibility(View.GONE);
                     goOcr.setVisibility(View.GONE);
 
                 }
