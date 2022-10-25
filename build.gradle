@@ -1,6 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     dependencies {
+        repositories {
+            jcenter()
+            maven { url "https://jitpack.io" }
+        }
         // Add the dependency for the Google services Gradle plugin
         classpath 'com.google.gms:google-services:4.3.13'
 
