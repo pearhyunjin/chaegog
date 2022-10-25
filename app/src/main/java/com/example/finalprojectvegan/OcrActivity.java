@@ -84,6 +84,7 @@ public class OcrActivity extends AppCompatActivity {
     TextView allergy_text;
     TextView allergy_ingredient;
     TextView recomm_text;
+    TextView recomm_textView;
     TextView y_ingredient_text;
     ImageView recomm_image; // 추후 리사이클러뷰로 구현해야함.
 
@@ -119,7 +120,8 @@ public class OcrActivity extends AppCompatActivity {
         allergy_text = findViewById(R.id.allergy_text);
         allergy_ingredient = findViewById(R.id.allergy_ingredient);
         recomm_text = findViewById(R.id.recomm_text);
-        recomm_image = findViewById(R.id.recomm_image);
+        recomm_textView = findViewById(R.id.recomm_textView);
+//        recomm_image = findViewById(R.id.recomm_image);
 
         TextRecognizer recognizer = TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
 

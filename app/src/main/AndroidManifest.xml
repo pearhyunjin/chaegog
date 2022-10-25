@@ -27,6 +27,9 @@
         android:theme="@style/Theme.FinalProjectVegan"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".RoadingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyFeedActivity"
             android:exported="false" />
         <activity

@@ -1,5 +1,8 @@
 package com.example.finalprojectvegan;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -53,7 +56,7 @@ public class FragMypage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView userID, userVeganType, userAllergy;
+    TextView userID, userVeganType, userAllergy, textView_notice;
     ImageView imageView_profile;
 
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,6 +65,8 @@ public class FragMypage extends Fragment {
     String USER_ID;
     String USER_VEGAN_TYPE;
     String USER_ALLERGY;
+
+    String uid;
 
     public FragMypage() {
         // Required empty public constructor
@@ -95,6 +100,7 @@ public class FragMypage extends Fragment {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        textView_notice = view.findViewById(R.id.textView_notice);
         imageView_profile = view.findViewById(R.id.imageView_profile);
         userID = view.findViewById(R.id.userID);
         userVeganType = view.findViewById(R.id.userVeganType);
@@ -147,7 +153,7 @@ public class FragMypage extends Fragment {
                             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (firebaseUser != null) {
 
-                                String uid = firebaseUser.getUid();
+                                uid = firebaseUser.getUid();
 
                                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                     Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
@@ -206,9 +212,7 @@ public class FragMypage extends Fragment {
 
                             ArrayList<WritePostInfo> postList = new ArrayList<>();
 
-                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-                            String uid = firebaseUser.getUid();
+                            if (firebaseUser != null) {
 
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 Log.d("success", documentSnapshot.getId() + " => " + documentSnapshot.getData());
@@ -227,14 +231,46 @@ public class FragMypage extends Fragment {
 //                                    RecyclerView.Adapter mAdapter = new MypageAdapter(getActivity(), postList);
 //                                    recyclerView.setAdapter(mAdapter);
 //                                }
+//                                if (documentSnapshot.getData().get("contents").toString() == "") {
+//                                    textView_notice.setVisibility(View.VISIBLE);
+//                                }
+
+//                                textView_notice.setVisibility(View.VISIBLE);
+
+//                                if (documentSnapshot.getId().equals(uid)) {
+//                                    if (documentSnapshot.getData().get("contents") == null) {
+//                                        textView_notice.setVisibility(VISIBLE);
+//                                    } else {
+//                                        textView_notice.setVisibility(GONE);
+//                                    }
+//                                }
                             }
 
-                            RecyclerView recyclerView = view.findViewById(R.id.mypage_recyclerView);
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                textView_notice.setVisibility(GONE);
 
-                            RecyclerView.Adapter mAdapter = new MypageAdapter(getActivity(), postList);
-                            recyclerView.setAdapter(mAdapter);
+                                RecyclerView recyclerView = view.findViewById(R.id.mypage_recyclerView);
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                                RecyclerView.Adapter mAdapter = new MypageAdapter(getActivity(), postList);
+                                recyclerView.setAdapter(mAdapter);
+
+
+//                                if (documentSnapshot.getData().get("contents") == null) {
+//                                    textView_notice.setVisibility(View.VISIBLE);
+//                                } else {
+//                                    textView_notice.setVisibility(View.GONE);
+//                                }
+                            }
+
+//                            RecyclerView recyclerView = view.findViewById(R.id.mypage_recyclerView);
+//                            recyclerView.setHasFixedSize(true);
+//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//
+//                            RecyclerView.Adapter mAdapter = new MypageAdapter(getActivity(), postList);
+//                            recyclerView.setAdapter(mAdapter);
+
+                            textView_notice.setVisibility(VISIBLE);
 
                         } else {
                             Log.d("error", "Error getting documents", task.getException());
