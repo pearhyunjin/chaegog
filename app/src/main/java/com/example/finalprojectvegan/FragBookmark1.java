@@ -11,9 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.finalprojectvegan.Model.BookmarkData;
+import com.example.finalprojectvegan.Model.BookmarkItem;
 
 import java.util.ArrayList;
 import java.util.List;

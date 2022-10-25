@@ -1,5 +1,7 @@
 package com.example.finalprojectvegan;
 
+import com.example.finalprojectvegan.Model.BookmarkItem;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 

@@ -1,4 +1,4 @@
-package com.example.finalprojectvegan;
+package com.example.finalprojectvegan.Model;
 
 import android.widget.Toast;
 

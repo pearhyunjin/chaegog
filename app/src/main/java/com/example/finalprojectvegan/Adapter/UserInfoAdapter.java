@@ -1,4 +1,4 @@
-package com.example.finalprojectvegan;
+package com.example.finalprojectvegan.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,11 +12,10 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.finalprojectvegan.R;
+import com.example.finalprojectvegan.Model.UserInfo;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHolder>{
 

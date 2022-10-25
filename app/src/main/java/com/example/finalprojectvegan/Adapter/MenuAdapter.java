@@ -1,7 +1,5 @@
-package com.example.finalprojectvegan;
+package com.example.finalprojectvegan.Adapter;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.example.finalprojectvegan.R;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder>{
     private String[] menuName;

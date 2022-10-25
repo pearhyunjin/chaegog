@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.finalprojectvegan.Adapter.RecipeAdapter;
+import com.example.finalprojectvegan.Model.RecipeData;
+import com.example.finalprojectvegan.Model.RecipeItem;
+
 import org.xml.sax.SAXException;
 
 import java.io.IOException;

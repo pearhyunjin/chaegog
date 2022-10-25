@@ -12,14 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.checkerframework.checker.units.qual.A;
+import com.example.finalprojectvegan.Adapter.MenuAdapter;
+import com.example.finalprojectvegan.Model.NaverMapData;
+import com.example.finalprojectvegan.Model.NaverMapItem;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.

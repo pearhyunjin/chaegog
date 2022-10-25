@@ -27,8 +27,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
+import com.example.finalprojectvegan.Model.FoodIngreData;
+import com.example.finalprojectvegan.Model.FoodIngreItem;
+import com.example.finalprojectvegan.Model.UserInfo;
+import com.example.finalprojectvegan.Model.UserVeganAllergyInfo;
+import com.example.finalprojectvegan.Model.UserVeganTypeInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
