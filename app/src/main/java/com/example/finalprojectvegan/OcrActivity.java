@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -102,6 +103,7 @@ public class OcrActivity extends AppCompatActivity {
     String USER_VEGAN_ALLERGY; // 사용자 알러지 타입
 
     ActivityResultLauncher<String> mGetContent;
+    ActivityResultLauncher<String> mGetContent2;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -270,6 +272,7 @@ public class OcrActivity extends AppCompatActivity {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activityResultPicture.launch(intent);
 
+
                 } else if (result == PopupResult.RIGHT) {
                     // 갤러리
 //                    intent = new Intent(Intent.ACTION_PICK);
@@ -285,6 +288,17 @@ public class OcrActivity extends AppCompatActivity {
 //                setImage(uri);
 //            }
         } else if(resultCode == -2 && requestCode == 101){
+            Log.d("resultcode", resultCode + "");
+            String result = data.getStringExtra("RESULT");
+            Uri resultUri = null;
+            if(result != null){
+                resultUri = Uri.parse(result);
+                Log.d("RESULT", result);
+            }
+            setImage(resultUri);
+
+        }
+        else if(resultCode == -3 && requestCode == 102){
             Log.d("resultcode", resultCode + "");
             String result = data.getStringExtra("RESULT");
             Uri resultUri = null;
@@ -312,6 +326,7 @@ public class OcrActivity extends AppCompatActivity {
                 }
             }
     );
+
 
     // 갤러리 이미지 이미지뷰에
     private void setImage(Uri uri) {

@@ -2,12 +2,14 @@ package com.example.finalprojectvegan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -59,7 +61,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         ImageButton mapInfoButton;
         LinearLayout mapInfoLayout;
         CheckBox getMapInfoBookmark;
-
+        View map_fragment;
 
 
         @Override
@@ -98,6 +100,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
             mapInfoLayout = findViewById(R.id.map_info_layout);
+            map_fragment = findViewById(R.id.map_fragment);
 
             NaverMapApiInterface naverMapApiInterface = NaverMapRequest.getClient().create(NaverMapApiInterface.class);
             Call<NaverMapItem> call = naverMapApiInterface.getMapData();
@@ -159,6 +162,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                              // visibility가 gone으로 되어있던 정보창 레이아웃을 visible로 변경
                                              mapInfoLayout.setVisibility(View.VISIBLE);
+
+                                             map_fragment.setOnTouchListener(new View.OnTouchListener() {
+                                                 @Override
+                                                 public boolean onTouch(View view, MotionEvent motionEvent) {
+                                                         mapInfoLayout.setVisibility(View.GONE);
+                                                     return false;
+                                                 }
+                                             });
 
                                              return false;
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.yalantis.ucrop.UCrop;
 
@@ -55,6 +56,5 @@ public class CropperActivity extends AppCompatActivity {
         } else if(resultCode == UCrop.RESULT_ERROR) {
             final Throwable cropError = UCrop.getError(data);
         }
-
     }
 }
