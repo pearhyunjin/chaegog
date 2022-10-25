@@ -64,7 +64,7 @@
         android:gravity="center"
         android:text="USER_ID님의 채식유형에\n적합한 제품입니다."
         android:textColor="@color/green_light"
-        android:textSize="27dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         android:visibility="gone" />
 
@@ -76,7 +76,7 @@
         android:layout_marginEnd="15dp"
         android:text="원재료명"
         android:textColor="#424242"
-        android:textSize="22dp"
+        android:textSize="16dp"
         android:background="@drawable/review_border"
         android:visibility="gone" />
 
@@ -101,7 +101,7 @@
         android:text="알러지 유발 원재료명"
         android:textColor="#424242"
         android:background="@drawable/review_border"
-        android:textSize="22dp"
+        android:textSize="16dp"
         android:visibility="gone" />
 
     <TextView

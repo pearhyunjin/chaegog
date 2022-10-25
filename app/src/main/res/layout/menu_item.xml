@@ -14,10 +14,9 @@
         android:fontFamily="@font/pretendardregular"
         android:padding="10dp"
         android:textAlignment="@id/menu_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:gravity="center_vertical"
-        android:background="@drawable/graybox"
-        android:backgroundTint="@color/green_light"/>
+        android:background="@drawable/menuboarder"/>
 
     <View
         android:layout_width="match_parent"

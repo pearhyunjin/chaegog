@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="vertical"
+    android:background="@color/tomato"
     android:id="@+id/activity_map_info"
     tools:context=".MapInfoActivity">
     <TextView
@@ -13,7 +14,9 @@
         android:layout_height="wrap_content"
         android:text="가게정보"
         android:textSize="15dp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/pretendardregular"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:layout_margin="20dp"
         android:layout_gravity="center"/>
 
@@ -26,6 +29,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardregular"
             android:id="@+id/tab_info"
             android:textColor="@color/black"
             android:text="정보" />
@@ -33,6 +37,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardregular"
             android:id="@+id/tab_menu"
             android:textColor="@color/black"
             android:text="메뉴" />
@@ -40,6 +45,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardregular"
             android:id="@+id/tab_picture"
             android:textColor="@color/black"
             android:text="사진" />
@@ -48,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tab_review"
+            android:fontFamily="@font/pretendardregular"
             android:textColor="@color/black"
             android:text="리뷰" />
     </com.google.android.material.tabs.TabLayout>

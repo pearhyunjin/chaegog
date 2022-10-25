@@ -23,14 +23,16 @@
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:text="제조사"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/pretendardregular"
                 android:id="@+id/ProductCompanyTv"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendardregular"
             android:text="이름"
             android:textSize="14sp"
             android:textColor="@color/black"
@@ -42,7 +44,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:fontFamily="@font/pretendardregular"/>
             <CheckBox
                 android:layout_width="25dp"
                 android:layout_height="25dp"

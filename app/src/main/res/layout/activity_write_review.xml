@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="비건식당"
+        android:fontFamily="@font/pretendardregular"
         android:textSize="16sp"
         android:textColor="@color/black" />
 
@@ -44,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="별점"
+        android:fontFamily="@font/pretendardregular"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp"
@@ -64,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="사진 등록"
+        android:fontFamily="@font/pretendardregular"
         android:layout_marginTop="8dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp"
@@ -106,6 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="리뷰"
+        android:fontFamily="@font/pretendardregular"
         android:layout_marginTop="8dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp"
@@ -119,7 +123,8 @@
         android:gravity="top"
         android:hint="해당 식당에 대한 리뷰를 적어주세요."
         android:lines="10"
-        android:background="@drawable/review_border"/>
+        android:background="@drawable/review_border"
+        android:backgroundTint="@color/gray_f5"/>
 
     <Button
         android:id="@+id/Btn_uploadReview"

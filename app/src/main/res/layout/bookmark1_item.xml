@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/recyclerView_items"
-    android:layout_width="match_parent"
+    android:layout_width="360dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_margin="5dp"
@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/bookmarkNameTv"
-                android:layout_width="184dp"
+                android:layout_width="163dp"
                 android:layout_height="wrap_content"
                 android:autoSizePresetSizes="@array/autosize_text_sizes"
                 android:autoSizeTextType="uniform"
@@ -36,11 +36,11 @@
                 android:id="@+id/bookmarkFavorite"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
+                android:autoSizeTextType="uniform"
                 android:background="@drawable/custom_checkbox"
                 android:button="@null"
-                android:checked="true"
-                android:autoSizeTextType="uniform"
-                android:autoSizePresetSizes="@array/autosize_text_sizes"/>
+                android:checked="true" />
         </LinearLayout>
 
         <TextView
@@ -48,10 +48,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="주소"
-            android:textColor="@color/black"
+            android:autoSizePresetSizes="@array/autosize_text_sizes"
             android:autoSizeTextType="uniform"
-            android:autoSizePresetSizes="@array/autosize_text_sizes" />
+            android:text="주소"
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -61,20 +61,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
+                android:autoSizeTextType="uniform"
                 android:text="영업시간 "
                 android:textColor="@color/black"
-                android:autoSizeTextType="uniform"
-                android:autoSizePresetSizes="@array/autosize_text_sizes"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/bookmarkTimeTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="영업시간"
-                android:textColor="@color/black"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
                 android:autoSizeTextType="uniform"
-                android:autoSizePresetSizes="@array/autosize_text_sizes" />
+                android:text="영업시간"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,20 +85,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
+                android:autoSizeTextType="uniform"
                 android:text="휴무일 "
                 android:textColor="@color/black"
-                android:autoSizeTextType="uniform"
-                android:autoSizePresetSizes="@array/autosize_text_sizes"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/bookmarkDayOffTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="휴무일"
-                android:textColor="@color/black"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
                 android:autoSizeTextType="uniform"
-                android:autoSizePresetSizes="@array/autosize_text_sizes" />
+                android:text="휴무일"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
