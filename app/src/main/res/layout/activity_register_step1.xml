@@ -152,16 +152,15 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/pretendardregular"
         android:lineSpacingExtra="2sp"
+        android:text="비밀번호"
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/edit_register_password"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="비밀번호" />
+        app:layout_constraintStart_toStartOf="@+id/edit_register_password" />
 
     <EditText
         android:id="@+id/edit_password_check"
